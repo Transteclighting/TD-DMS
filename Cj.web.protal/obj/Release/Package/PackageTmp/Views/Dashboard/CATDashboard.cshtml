@@ -1,0 +1,1201 @@
+﻿@{
+    ViewBag.Title = "CAT Dashboard | CJ Web Portal";
+}
+
+@section extra_style {
+    <link href="~/Content/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/3.3.3/css/fixedColumns.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.9/css/fixedHeader.bootstrap4.min.css">
+    <style>
+        .sm-chart{
+           height: 200px;
+        }
+    </style>
+}
+
+@section breadcrumb{
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"><a href="/">Dashboard</a></li>
+            <li class="breadcrumb-item" aria-current="page">@Html.ActionLink("CAT ", ViewContext.RouteData.Values["Action"].ToString(), ViewContext.RouteData.Values["controller"].ToString())</li>
+        </ol>
+    </nav>
+}
+<div class="row">
+    <div id="accordion" class="col-12">
+        <div class="card">
+            <div class="card-header panel-heading bg-gradient-primary text-white m-0 p-0" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-link text-white w-100 text-left" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Sales
+                    </button>
+                </h5>
+            </div>
+
+            <div id="collapseOne" class="collapse show row" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="col-xl-4 col-lg-4">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">TYear vs LYear | Values (in million)</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-area" id="ptyearvslyearsales">
+                                <canvas id="tyearvslyearsales"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">TYear vs LYear | NOI</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-area" id="ptvslnoi">
+                                <canvas id="tvslnoi"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">TYear vs LYear | Qty</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-area" id="ptvslqty">
+                                <canvas id="tvslqty"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">TYear National sales | Values (in million)</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-area" id="pnationalwisesales">
+                                <canvas id="nationalwisesales"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">TYear National sales | Qty</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-area" id="pnationalwiseqty">
+                                <canvas id="nationalwiseqty"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-lg-3">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Category-1 Sales | Values (in million)</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-bar sm-chart" id="pcat1">
+                                <canvas id="cat1"></canvas>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">TYear vs LYear | Category-1 | Values (in million)</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-bar sm-chart" id="plvstcat1">
+                                <canvas id="lvstcat1"></canvas>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">TYear vs LYear | Category-1 | Qty</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-bar sm-chart" id="plvstqtycat1">
+                                <canvas id="lvstqtycat1"></canvas>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">TYear vs LYear | Category-1 | NOI</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-bar sm-chart" id="plvstnoicat1">
+                                <canvas id="lvstnoicat1"></canvas>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-lg-3">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Category-2 Sales | Values (in million)</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-bar sm-chart" id="pcat2">
+                                <canvas id="cat2"></canvas>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-xl-3 col-lg-3">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">TYear vs LYear | Category-2 | Values (in million)</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-bar sm-chart" id="plvstcat2">
+                                <canvas id="lvstcat2"></canvas>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-xl-3 col-lg-3">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">TYear vs LYear | Category-2 | Qty</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-bar sm-chart" id="plvstqtycat2">
+                                <canvas id="lvstqtycat2"></canvas>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-xl-3 col-lg-3">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">TYear vs LYear | Category-2 | NOI</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-bar sm-chart" id="plvstnoicat2">
+                                <canvas id="lvstnoicat2"></canvas>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-xl-12 col-lg-12">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">PG wise Sales | Values (in million)</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-bar" id="ppgwisesales">
+                                <canvas id="pgwisesales"></canvas>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-xl-4 col-lg-4">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">TYear vs LYear | PG | Values (in million)</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-bar" id="ppgwisesalesval">
+                                <canvas id="pgwisesalesval"></canvas>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-xl-4 col-lg-4">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">TYear vs LYear | PG | Qty</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-bar" id="ppgwisesalesqty">
+                                <canvas id="pgwisesalesqty"></canvas>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-xl-4 col-lg-4">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">TYear vs LYear | PG | NOI</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-bar" id="ppgwisesalesnoi">
+                                <canvas id="pgwisesalesnoi"></canvas>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow mb-4">
+                <!-- Card Body -->
+                <div class="card-body">
+                    <table class="table table-bordered" style="width:100%" id="dataTable">
+                        <thead>
+                            <tr>
+                                <th> TMonth </th>
+                                <th> AreaName </th>
+                                <th> TerritoryName </th>
+                                <th> ShowroomCode </th>
+                                <th> PGCategory </th>
+                                <th> PGName </th>
+                                <th> TyearTargetQty </th>
+                                <th> TyearTargetValue </th>
+                                <th> TyearSalesQty </th>
+                                <th> TyearNetsale </th>
+                                <th> LyearSalesQty </th>
+                                <th> LyearNetsale </th>
+                                <th> TyearNOI </th>
+                                <th> LyearNOI </th>
+
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section extra_script {
+    <!-- Page level plugins -->
+    <script src="~/Content/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Content/datatables/dataTables.bootstrap4.min.js"></script>
+    <!-- Page level custom scripts -->
+    <script src="~/Content/datatables/datatables-custom.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedcolumns/3.3.3/js/dataTables.fixedColumns.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedheader/3.1.9/js/dataTables.fixedHeader.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script>
+        function loadCharts() {
+            Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+            Chart.defaults.global.defaultFontColor = '#858796';
+            //chart colours
+            const colors = {
+                first: {
+                    fill: '#8fa8c869',
+                    stroke: '#4e73df',
+                },
+                second: {
+                    fill: '#5d9bf7',
+                    stroke: '#8fa8c869',
+                },
+                third: {
+                    fill: '#91f5de',
+                    stroke: '#1cc88a',
+                },
+            };
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("loadCATChart")',
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+
+                    //pg wise
+                    let pgtyearnetsale = [];
+                    let pgtYearTargetAmount = [];
+                    let pg = [];
+                    let pgTargetQty = [];
+                    let pgSalesQty = [];
+                    let pgtyearnoi = [];
+                    let pgLyearnetsale = [];
+                    let pgLyearSalesQty = [];
+                    let pgLyearnoi = [];
+
+                    for (var i = 0; i < data.PGwiseChartModel.length; i++) {
+                        pgtyearnetsale.push(data.PGwiseChartModel[i].TyearNetsale);
+                        pgtYearTargetAmount.push(data.PGwiseChartModel[i].TyearTargetValue);
+                        pg.push(data.PGwiseChartModel[i].PGCategory);
+                        pgLyearnetsale.push(data.PGwiseChartModel[i].LyearNetsale);
+                        pgtyearnoi.push(data.PGwiseChartModel[i].TyearNOI);
+                        pgLyearnoi.push(data.PGwiseChartModel[i].LyearNOI);
+                        pgTargetQty.push(data.PGwiseChartModel[i].TyearTargetQty);
+                        pgSalesQty.push(data.PGwiseChartModel[i].TyearSalesQty);
+                        pgLyearSalesQty.push(data.PGwiseChartModel[i].LyearSalesQty);
+                    }
+                    $('#pgwisesales').remove(); // this is my <canvas> element
+                    $('#ppgwisesales').append('<canvas id="pgwisesales"><canvas>');
+                    var pgctxchart = document.getElementById("pgwisesales").getContext("2d");
+                    const pgchart = new Chart(pgctxchart, {
+                        type: 'bar',
+                        data: {
+                            labels: pg,
+                            datasets: [{
+                                label: "Target",
+                                fill: true,
+                                backgroundColor: "#8fa8c869",
+                                pointBackgroundColor: '#4e73df',
+                                borderColor: '#4e73df',
+                                pointHighlightStroke: '#4e73df',
+                                data: pgtYearTargetAmount,
+                            }, {
+                                label: "Actual",
+                                fill: true,
+                                backgroundColor: '#5d9bf7',
+                                pointBackgroundColor: '#8fa8c869',
+                                borderColor: '#8fa8c869',
+                                pointHighlightStroke: '#8fa8c869',
+                                borderCapStyle: 'butt',
+                                data: pgtyearnetsale,
+                            }],
+                        },
+                        options: {
+                            maintainAspectRatio: false,
+                            scaleShowValues: true,
+                            scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        autoSkip: false
+                                    }
+                                }]
+                            },
+                            animation: {
+                                duration: 750,
+                            },
+                        }
+                    });
+
+                                        
+                    $('#pgwisesalesval').remove(); // this is my <canvas> element
+                    $('#ppgwisesalesval').append('<canvas id="pgwisesalesval"><canvas>');
+                    var pgwisesalesvalctxchart = document.getElementById("pgwisesalesval").getContext("2d");
+                    const pgwisesalesvalchart = new Chart(pgwisesalesvalctxchart, {
+                        type: 'bar',
+                        data: {
+                            labels: pg,
+                            datasets: [{
+                                label: "TYear",
+                                fill: true,
+                                backgroundColor: "#8fa8c869",
+                                pointBackgroundColor: '#4e73df',
+                                borderColor: '#4e73df',
+                                pointHighlightStroke: '#4e73df',
+                                data: pgtyearnetsale,
+                            }, {
+                                label: "LYear",
+                                fill: true,
+                                backgroundColor: '#5d9bf7',
+                                pointBackgroundColor: '#8fa8c869',
+                                borderColor: '#8fa8c869',
+                                pointHighlightStroke: '#8fa8c869',
+                                borderCapStyle: 'butt',
+                                data: pgLyearnetsale,
+                            }],
+                        },
+                        options: {
+                            maintainAspectRatio: false,
+                            scaleShowValues: true,
+                            scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        autoSkip: false
+                                    }
+                                }]
+                            },
+                            animation: {
+                                duration: 750,
+                            },
+                        }
+                    });
+                    
+                    $('#pgwisesalesqty').remove(); // this is my <canvas> element
+                    $('#ppgwisesalesqty').append('<canvas id="pgwisesalesqty"><canvas>');
+                    var pgwisesalesqtyctxchart = document.getElementById("pgwisesalesqty").getContext("2d");
+                    const pgwisesalesqtychart = new Chart(pgwisesalesqtyctxchart, {
+                        type: 'bar',
+                        data: {
+                            labels: pg,
+                            datasets: [{
+                                label: "TYear",
+                                fill: true,
+                                backgroundColor: "#8fa8c869",
+                                pointBackgroundColor: '#4e73df',
+                                borderColor: '#4e73df',
+                                pointHighlightStroke: '#4e73df',
+                                data: pgSalesQty,
+                            }, {
+                                label: "LYear",
+                                fill: true,
+                                backgroundColor: '#5d9bf7',
+                                pointBackgroundColor: '#8fa8c869',
+                                borderColor: '#8fa8c869',
+                                pointHighlightStroke: '#8fa8c869',
+                                borderCapStyle: 'butt',
+                                data: pgLyearSalesQty,
+                            }],
+                        },
+                        options: {
+                            maintainAspectRatio: false,
+                            scaleShowValues: true,
+                            scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        autoSkip: false
+                                    }
+                                }]
+                            },
+                            animation: {
+                                duration: 750,
+                            },
+                        }
+                    });
+                    
+                    $('#pgwisesalesnoi').remove(); // this is my <canvas> element
+                    $('#ppgwisesalesnoi').append('<canvas id="pgwisesalesnoi"><canvas>');
+                    var pgwisesalesnoictxchart = document.getElementById("pgwisesalesnoi").getContext("2d");
+                    const pgwisesalesnoichart = new Chart(pgwisesalesnoictxchart, {
+                        type: 'bar',
+                        data: {
+                            labels: pg,
+                            datasets: [{
+                                label: "TYear",
+                                fill: true,
+                                backgroundColor: "#8fa8c869",
+                                pointBackgroundColor: '#4e73df',
+                                borderColor: '#4e73df',
+                                pointHighlightStroke: '#4e73df',
+                                data: pgtyearnoi,
+                            }, {
+                                label: "LYear",
+                                fill: true,
+                                backgroundColor: '#5d9bf7',
+                                pointBackgroundColor: '#8fa8c869',
+                                borderColor: '#8fa8c869',
+                                pointHighlightStroke: '#8fa8c869',
+                                borderCapStyle: 'butt',
+                                data: pgLyearnoi,
+                            }],
+                        },
+                        options: {
+                            maintainAspectRatio: false,
+                            scaleShowValues: true,
+                            scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        autoSkip: false
+                                    }
+                                }]
+                            },
+                            animation: {
+                                duration: 750,
+                            },
+                        }
+                    });
+
+                    let cat1tyearnetsale = [];
+                    let cat1tYearTargetAmount = [];
+                    let cat1 = [];
+                    let cat1TargetQty = [];
+                    let cat1SalesQty = [];
+                    let cat1tyearnoi = [];
+                    let cat1Lyearnetsale = [];
+                    let cat1LyearSalesQty = [];
+                    let cat1Lyearnoi = [];
+                    for (var i = 0; i < data.Cat1ChartModel.length; i++) {
+                        cat1tyearnetsale.push(data.Cat1ChartModel[i].TyearNetsale);
+                        cat1tYearTargetAmount.push(data.Cat1ChartModel[i].TyearTargetValue);
+                        cat1.push(data.Cat1ChartModel[i].PGCategory);
+                        cat1Lyearnetsale.push(data.Cat1ChartModel[i].LyearNetsale);
+                        cat1tyearnoi.push(data.Cat1ChartModel[i].TyearNOI);
+                        cat1Lyearnoi.push(data.Cat1ChartModel[i].LyearNOI);
+                        cat1TargetQty.push(data.Cat1ChartModel[i].TyearTargetQty);
+                        cat1SalesQty.push(data.Cat1ChartModel[i].TyearSalesQty);
+                        cat1LyearSalesQty.push(data.Cat1ChartModel[i].LyearSalesQty);
+                    }
+                    $('#cat1').remove(); // this is my <canvas> element
+                    $('#pcat1').append('<canvas id="cat1"><canvas>');
+                    var cat1ctxchart = document.getElementById("cat1").getContext("2d");
+                    const cat1chart = new Chart(cat1ctxchart, {
+                        type: 'bar',
+                        data: {
+                            labels: cat1,
+                            datasets: [{
+                                label: "Target",
+                                fill: true,
+                                backgroundColor: "#8fa8c869",
+                                pointBackgroundColor: '#4e73df',
+                                borderColor: '#4e73df',
+                                pointHighlightStroke: '#4e73df',
+                                data: cat1tYearTargetAmount,
+                            }, {
+                                label: "Actual",
+                                fill: true,
+                                backgroundColor: '#5d9bf7',
+                                pointBackgroundColor: '#8fa8c869',
+                                borderColor: '#8fa8c869',
+                                pointHighlightStroke: '#8fa8c869',
+                                borderCapStyle: 'butt',
+                                data: cat1tyearnetsale,
+                            }],
+                        },
+                        options: {
+                            maintainAspectRatio: false,
+                            scaleShowValues: true,
+                            scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        autoSkip: false
+                                    }
+                                }]
+                            },
+                            animation: {
+                                duration: 750,
+                            },
+                        }
+                    });
+                    
+                    $('#lvstcat1').remove(); // this is my <canvas> element
+                    $('#plvstcat1').append('<canvas id="lvstcat1"><canvas>');
+                    var lvstcat1ctxchart = document.getElementById("lvstcat1").getContext("2d");
+                    const lvstcat1chart = new Chart(lvstcat1ctxchart, {
+                        type: 'bar',
+                        data: {
+                            labels: cat1,
+                            datasets: [{
+                                label: "TYear",
+                                fill: true,
+                                backgroundColor: "#8fa8c869",
+                                pointBackgroundColor: '#4e73df',
+                                borderColor: '#4e73df',
+                                pointHighlightStroke: '#4e73df',
+                                data: cat1tyearnetsale,
+                            }, {
+                                label: "LYear",
+                                fill: true,
+                                backgroundColor: '#5d9bf7',
+                                pointBackgroundColor: '#8fa8c869',
+                                borderColor: '#8fa8c869',
+                                pointHighlightStroke: '#8fa8c869',
+                                borderCapStyle: 'butt',
+                                data: cat1Lyearnetsale,
+                            }],
+                        },
+                        options: {
+                            maintainAspectRatio: false,
+                            scaleShowValues: true,
+                            scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        autoSkip: false
+                                    }
+                                }]
+                            },
+                            animation: {
+                                duration: 750,
+                            },
+                        }
+                    });
+                    
+                    $('#lvstqtycat1').remove(); // this is my <canvas> element
+                    $('#plvstqtycat1').append('<canvas id="lvstqtycat1"><canvas>');
+                    var lvstqtycat1ctxchart = document.getElementById("lvstqtycat1").getContext("2d");
+                    const lvstqtycat1chart = new Chart(lvstqtycat1ctxchart, {
+                        type: 'bar',
+                        data: {
+                            labels: cat1,
+                            datasets: [{
+                                label: "TYear",
+                                fill: true,
+                                backgroundColor: "#8fa8c869",
+                                pointBackgroundColor: '#4e73df',
+                                borderColor: '#4e73df',
+                                pointHighlightStroke: '#4e73df',
+                                data: cat1SalesQty,
+                            }, {
+                                label: "LYear",
+                                fill: true,
+                                backgroundColor: '#5d9bf7',
+                                pointBackgroundColor: '#8fa8c869',
+                                borderColor: '#8fa8c869',
+                                pointHighlightStroke: '#8fa8c869',
+                                borderCapStyle: 'butt',
+                                data: cat1LyearSalesQty,
+                            }],
+                        },
+                        options: {
+                            maintainAspectRatio: false,
+                            scaleShowValues: true,
+                            scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        autoSkip: false
+                                    }
+                                }]
+                            },
+                            animation: {
+                                duration: 750,
+                            },
+                        }
+                    });
+                    
+                    $('#lvstnoicat1').remove(); // this is my <canvas> element
+                    $('#plvstnoicat1').append('<canvas id="lvstnoicat1"><canvas>');
+                    var lvstnoicat1ctxchart = document.getElementById("lvstnoicat1").getContext("2d");
+                    const lvstnoicat1chart = new Chart(lvstnoicat1ctxchart, {
+                        type: 'bar',
+                        data: {
+                            labels: cat1,
+                            datasets: [{
+                                label: "TYear",
+                                fill: true,
+                                backgroundColor: "#8fa8c869",
+                                pointBackgroundColor: '#4e73df',
+                                borderColor: '#4e73df',
+                                pointHighlightStroke: '#4e73df',
+                                data: cat1tyearnoi,
+                            }, {
+                                label: "LYear",
+                                fill: true,
+                                backgroundColor: '#5d9bf7',
+                                pointBackgroundColor: '#8fa8c869',
+                                borderColor: '#8fa8c869',
+                                pointHighlightStroke: '#8fa8c869',
+                                borderCapStyle: 'butt',
+                                data: cat1Lyearnoi,
+                            }],
+                        },
+                        options: {
+                            maintainAspectRatio: false,
+                            scaleShowValues: true,
+                            scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        autoSkip: false
+                                    }
+                                }]
+                            },
+                            animation: {
+                                duration: 750,
+                            },
+                        }
+                    });
+
+                    let cat2tyearnetsale = [];
+                    let cat2tYearTargetAmount = [];
+                    let cat2 = [];
+                    let cat2TargetQty = [];
+                    let cat2SalesQty = [];
+                    let cat2tyearnoi = [];
+                    let cat2Lyearnetsale = [];
+                    let cat2LyearSalesQty = [];
+                    let cat2Lyearnoi = [];
+                    for (var i = 0; i < data.Cat2ChartModel.length; i++) {
+                        cat2tyearnetsale.push(data.Cat2ChartModel[i].TyearNetsale);
+                        cat2tYearTargetAmount.push(data.Cat2ChartModel[i].TyearTargetValue);
+                        cat2.push(data.Cat2ChartModel[i].PGCategory);
+                        cat2Lyearnetsale.push(data.Cat2ChartModel[i].LyearNetsale);
+                        cat2tyearnoi.push(data.Cat2ChartModel[i].TyearNOI);
+                        cat2Lyearnoi.push(data.Cat2ChartModel[i].LyearNOI);
+                        cat2TargetQty.push(data.Cat2ChartModel[i].TyearTargetQty);
+                        cat2SalesQty.push(data.Cat2ChartModel[i].TyearSalesQty);
+                        cat2LyearSalesQty.push(data.Cat2ChartModel[i].LyearSalesQty);
+                    }
+                    $('#cat2').remove(); // this is my <canvas> element
+                    $('#pcat2').append('<canvas id="cat2"><canvas>');
+                    var cat2ctxchart = document.getElementById("cat2").getContext("2d");
+                    const cat2chart = new Chart(cat2ctxchart, {
+                        type: 'bar',
+                        data: {
+                            labels: cat2,
+                            datasets: [{
+                                label: "Target",
+                                fill: true,
+                                backgroundColor: "#8fa8c869",
+                                pointBackgroundColor: '#4e73df',
+                                borderColor: '#4e73df',
+                                pointHighlightStroke: '#4e73df',
+                                data: cat2tYearTargetAmount,
+                            }, {
+                                label: "Actual",
+                                fill: true,
+                                backgroundColor: '#5d9bf7',
+                                pointBackgroundColor: '#8fa8c869',
+                                borderColor: '#8fa8c869',
+                                pointHighlightStroke: '#8fa8c869',
+                                borderCapStyle: 'butt',
+                                data: cat2tyearnetsale,
+                            }],
+                        },
+                        options: {
+                            maintainAspectRatio: false,
+                            scaleShowValues: true,
+                            scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        autoSkip: false
+                                    }
+                                }]
+                            },
+                            animation: {
+                                duration: 750,
+                            },
+                        }
+                    });
+
+                    $('#lvstcat2').remove(); // this is my <canvas> element
+                    $('#plvstcat2').append('<canvas id="lvstcat2"><canvas>');
+                    var lvstcat2ctxchart = document.getElementById("lvstcat2").getContext("2d");
+                    const lvstcat2chart = new Chart(lvstcat2ctxchart, {
+                        type: 'bar',
+                        data: {
+                            labels: cat2,
+                            datasets: [{
+                                label: "TYear",
+                                fill: true,
+                                backgroundColor: "#8fa8c869",
+                                pointBackgroundColor: '#4e73df',
+                                borderColor: '#4e73df',
+                                pointHighlightStroke: '#4e73df',
+                                data: cat2tyearnetsale,
+                            }, {
+                                label: "LYear",
+                                fill: true,
+                                backgroundColor: '#5d9bf7',
+                                pointBackgroundColor: '#8fa8c869',
+                                borderColor: '#8fa8c869',
+                                pointHighlightStroke: '#8fa8c869',
+                                borderCapStyle: 'butt',
+                                data: cat2Lyearnetsale,
+                            }],
+                        },
+                        options: {
+                            maintainAspectRatio: false,
+                            scaleShowValues: true,
+                            scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        autoSkip: false
+                                    }
+                                }]
+                            },
+                            animation: {
+                                duration: 750,
+                            },
+                        }
+                    });
+
+                    $('#lvstqtycat2').remove(); // this is my <canvas> element
+                    $('#plvstqtycat2').append('<canvas id="lvstqtycat2"><canvas>');
+                    var lvstqtycat2ctxchart = document.getElementById("lvstqtycat2").getContext("2d");
+                    const lvstqtycat2chart = new Chart(lvstqtycat2ctxchart, {
+                        type: 'bar',
+                        data: {
+                            labels: cat2,
+                            datasets: [{
+                                label: "TYear",
+                                fill: true,
+                                backgroundColor: "#8fa8c869",
+                                pointBackgroundColor: '#4e73df',
+                                borderColor: '#4e73df',
+                                pointHighlightStroke: '#4e73df',
+                                data: cat2SalesQty,
+                            }, {
+                                label: "LYear",
+                                fill: true,
+                                backgroundColor: '#5d9bf7',
+                                pointBackgroundColor: '#8fa8c869',
+                                borderColor: '#8fa8c869',
+                                pointHighlightStroke: '#8fa8c869',
+                                borderCapStyle: 'butt',
+                                data: cat2LyearSalesQty,
+                            }],
+                        },
+                        options: {
+                            maintainAspectRatio: false,
+                            scaleShowValues: true,
+                            scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        autoSkip: false
+                                    }
+                                }]
+                            },
+                            animation: {
+                                duration: 750,
+                            },
+                        }
+                    });
+
+                    $('#lvstnoicat2').remove(); // this is my <canvas> element
+                    $('#plvstnoicat2').append('<canvas id="lvstnoicat2"><canvas>');
+                    var lvstnoicat2ctxchart = document.getElementById("lvstnoicat2").getContext("2d");
+                    const lvstnoicat2chart = new Chart(lvstnoicat2ctxchart, {
+                        type: 'bar',
+                        data: {
+                            labels: cat2,
+                            datasets: [{
+                                label: "TYear",
+                                fill: true,
+                                backgroundColor: "#8fa8c869",
+                                pointBackgroundColor: '#4e73df',
+                                borderColor: '#4e73df',
+                                pointHighlightStroke: '#4e73df',
+                                data: cat2tyearnoi,
+                            }, {
+                                label: "LYear",
+                                fill: true,
+                                backgroundColor: '#5d9bf7',
+                                pointBackgroundColor: '#8fa8c869',
+                                borderColor: '#8fa8c869',
+                                pointHighlightStroke: '#8fa8c869',
+                                borderCapStyle: 'butt',
+                                data: cat2Lyearnoi,
+                            }],
+                        },
+                        options: {
+                            maintainAspectRatio: false,
+                            scaleShowValues: true,
+                            scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        autoSkip: false
+                                    }
+                                }]
+                            },
+                            animation: {
+                                duration: 750,
+                            },
+                        }
+                    });
+
+                    let nat = [];
+                    let natTargetQty = [];
+                    let natSalesQty = [];
+
+                    let nattyearnetsale = [];
+                    let nattYearTargetAmount = [];
+                    let nattyearnoi = [];
+
+                    let natLyearnetsale = [];
+                    let natLyearSalesQty = [];
+                    let natLyearnoi = [];
+
+
+                    nattyearnetsale.push(data.NationalwiseChartModel.TyearNetsale);
+                    natLyearnetsale.push(data.NationalwiseChartModel.LyearNetsale);
+
+                    nattYearTargetAmount.push(data.NationalwiseChartModel.TyearTargetValue);
+
+                    nattyearnoi.push(data.NationalwiseChartModel.TyearNOI);
+                    natLyearnoi.push(data.NationalwiseChartModel.LyearNOI);
+
+
+                    nat.push(data.NationalwiseChartModel.AreaName);
+                    natTargetQty.push(data.NationalwiseChartModel.TyearTargetQty);
+                    natSalesQty.push(data.NationalwiseChartModel.TyearSalesQty);
+                    natLyearSalesQty.push(data.NationalwiseChartModel.LyearSalesQty);
+
+
+                    $('#tyearvslyearsales').remove(); // this is my <canvas> element
+                    $('#ptyearvslyearsales').append('<canvas id="tyearvslyearsales"><canvas>');
+                    var tlctxchart = document.getElementById("tyearvslyearsales").getContext("2d");
+                    const tlchart = new Chart(tlctxchart, {
+                        type: 'bar',
+                        data: {
+                            labels: nat,
+                            datasets: [{
+                                label: "TYear",
+                                fill: true,
+                                backgroundColor: "#8fa8c869",
+                                pointBackgroundColor: '#4e73df',
+                                borderColor: '#4e73df',
+                                pointHighlightStroke: '#4e73df',
+                                data: nattyearnetsale,
+                            }, {
+                                label: "LYear",
+                                fill: true,
+                                backgroundColor: '#5d9bf7',
+                                pointBackgroundColor: '#8fa8c869',
+                                borderColor: '#8fa8c869',
+                                pointHighlightStroke: '#8fa8c869',
+                                borderCapStyle: 'butt',
+                                data: natLyearnetsale,
+                            }],
+                        },
+                        options: {
+                            maintainAspectRatio: false,
+                            scaleShowValues: true,
+                            scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        autoSkip: false
+                                    }
+                                }]
+                            },
+                            animation: {
+                                duration: 750,
+                            },
+                        }
+                    });
+
+                    
+                    $('#tvslnoi').remove(); // this is my <canvas> element
+                    $('#ptvslnoi').append('<canvas id="tvslnoi"><canvas>');
+                    var tvslnoictxchart = document.getElementById("tvslnoi").getContext("2d");
+                    const tvslnoichart = new Chart(tvslnoictxchart, {
+                        type: 'bar',
+                        data: {
+                            labels: nat,
+                            datasets: [{
+                                label: "TYear",
+                                fill: true,
+                                backgroundColor: "#8fa8c869",
+                                pointBackgroundColor: '#4e73df',
+                                borderColor: '#4e73df',
+                                pointHighlightStroke: '#4e73df',
+                                data: nattyearnoi,
+                            }, {
+                                label: "LYear",
+                                fill: true,
+                                backgroundColor: '#5d9bf7',
+                                pointBackgroundColor: '#8fa8c869',
+                                borderColor: '#8fa8c869',
+                                pointHighlightStroke: '#8fa8c869',
+                                borderCapStyle: 'butt',
+                                data: natLyearnoi,
+                            }],
+                        },
+                        options: {
+                            maintainAspectRatio: false,
+                            scaleShowValues: true,
+                            scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        autoSkip: false
+                                    }
+                                }]
+                            },
+                            animation: {
+                                duration: 750,
+                            },
+                        }
+                    });
+                    
+                    $('#tvslqty').remove(); // this is my <canvas> element
+                    $('#ptvslqty').append('<canvas id="tvslqty"><canvas>');
+                    var tvslqtyctxchart = document.getElementById("tvslqty").getContext("2d");
+                    const tvslqtychart = new Chart(tvslqtyctxchart, {
+                        type: 'bar',
+                        data: {
+                            labels: nat,
+                            datasets: [{
+                                label: "TYear",
+                                fill: true,
+                                backgroundColor: "#8fa8c869",
+                                pointBackgroundColor: '#4e73df',
+                                borderColor: '#4e73df',
+                                pointHighlightStroke: '#4e73df',
+                                data: natSalesQty,
+                            }, {
+                                label: "LYear",
+                                fill: true,
+                                backgroundColor: '#5d9bf7',
+                                pointBackgroundColor: '#8fa8c869',
+                                borderColor: '#8fa8c869',
+                                pointHighlightStroke: '#8fa8c869',
+                                borderCapStyle: 'butt',
+                                data: natLyearSalesQty,
+                            }],
+                        },
+                        options: {
+                            maintainAspectRatio: false,
+                            scaleShowValues: true,
+                            scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        autoSkip: false
+                                    }
+                                }]
+                            },
+                            animation: {
+                                duration: 750,
+                            },
+                        }
+                    });
+
+                    $('#nationalwisesales').remove(); // this is my <canvas> element
+                    $('#pnationalwisesales').append('<canvas id="nationalwisesales"><canvas>');
+                    var natctxChart = document.getElementById("nationalwisesales").getContext("2d");
+                    const natChart = new Chart(natctxChart, {
+                        type: 'pie',
+                        data: {
+                            labels: ["Target", "Actual"],
+                            datasets: [{
+                                label: "National",
+                                fill: true,
+                                backgroundColor: ["#8fa8c869", '#5d9bf7'],
+                                data: [nattYearTargetAmount, nattyearnetsale],
+                            }
+                            ],
+                        },
+                        options: {
+                            maintainAspectRatio: false,
+                            scaleShowValues: true,
+                            scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        autoSkip: false
+                                    }
+                                }]
+                            },
+                            animation: {
+                                duration: 750,
+                            },
+                        }
+                    });
+
+                    $('#nationalwiseqty').remove(); // this is my <canvas> element
+                    $('#pnationalwiseqty').append('<canvas id="nationalwiseqty"><canvas>');
+                    var natqtyctxChart = document.getElementById("nationalwiseqty").getContext("2d");
+                    const natqtyChart = new Chart(natqtyctxChart, {
+                        type: 'pie',
+                        data: {
+                            labels: ["Target", "Actual"],
+                            datasets: [{
+                                label: "National",
+                                fill: true,
+                                backgroundColor: ["#8fa8c869", '#5d9bf7'],
+                                data: [natTargetQty, natSalesQty],
+                            }
+                            ],
+                        },
+                        options: {
+                            maintainAspectRatio: false,
+                            scaleShowValues: true,
+                            scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        autoSkip: false
+                                    }
+                                }]
+                            },
+                            animation: {
+                                duration: 750,
+                            },
+                        }
+                    });
+
+
+
+                    if ($.fn.dataTable.isDataTable('#dataTable')) {
+                        table.destroy();
+                    }
+                    var jsonString = JSON.stringify(data.Data)
+                    table = $('#dataTable').DataTable({
+                        "scrollX": true,
+                        "responsive": false,
+                        "pagingType": "full_numbers",
+                        "pageLength": 10,
+                        scrollCollapse: true,
+                        fixedColumns: true,
+                        "language": {
+                            paginate: {
+                                next: '<i class="fa fa-fw fa-chevron-right">',
+                                previous: '<i class="fa fa-fw fa-chevron-left">',
+                                first: '<i class="fa fa-angle-double-left"></i>',
+                                last: '<i class="fa fa-angle-double-right"></i>'
+                            },
+                        },
+                        "initComplete": function (settings, json) {
+                            closeloadermodal();
+                            $("#loadingIcon").addClass("d-none");
+                        },
+                        "data": data.Data,
+                        "columns": [
+                        { "data": "TMonth", "name": "TMonth" },
+                        { "data": "AreaName", "name": "AreaName" },
+                        { "data": "TerritoryName", "name": "TerritoryName" },
+                        { "data": "ShowroomCode", "name": "ShowroomCode" },
+                        { "data": "PGCategory", "name": "PGCategory" },
+                        { "data": "PGName", "name": "PGName" },
+                        { "data": "TyearTargetQty", "name": "TyearTargetQty" },
+                        { "data": "TyearTargetValue", "name": "TyearTargetValue" },
+                        { "data": "TyearSalesQty", "name": "TyearSalesQty" },
+                        { "data": "TyearNetsale", "name": "TyearNetsale" },
+                        { "data": "LyearSalesQty", "name": "LyearSalesQty" },
+                        { "data": "LyearNetsale", "name": "LyearNetsale" },
+                        { "data": "TyearNOI", "name": "TyearNOI" },
+                        { "data": "LyearNOI", "name": "LyearNOI" }
+                        ],
+                    });
+
+                    closeloadermodal();
+
+                },
+                error: function () {
+                    alert("Error");
+                    closeloadermodal();
+                }
+            });
+        }
+        function loadtable() {
+
+        };
+        $(function () {
+            loadermodal();
+            loadtable();
+            loadCharts();
+            $("#filter").click(function () {
+                $("#loadingIcon").removeClass("d-none");
+                loadermodal();
+                loadtable();
+            });
+        });
+    </script>
+    <!-- Bootstrap DatePicker -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" type="text/css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js" type="text/javascript"></script>
+    <!-- Bootstrap DatePicker -->
+}

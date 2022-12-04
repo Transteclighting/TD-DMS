@@ -1,0 +1,322 @@
+﻿
+@{
+    ViewBag.Title = "303 | Sales Performance";
+    Layout = "~/Views/Shared/_Layout_DashboardReport.cshtml";
+}
+<style>
+    /*the container must be positioned relative:*/
+    .custom-select {
+        position: relative;
+        font-family: Arial;
+    }
+
+        .custom-select select {
+            display: none; /*hide original SELECT element:*/
+        }
+
+    .select-selected {
+        background-color: #99FFCC;
+    }
+        /*style the arrow inside the select element:*/
+        .select-selected:after {
+            position: absolute;
+            content: "";
+            top: 20px;
+            right: 25px;
+            width: 0;
+            height: 0;
+            border: 6px solid transparent;
+            border-color: #fff transparent transparent transparent;
+        }
+        /*point the arrow upwards when the select box is open (active):*/
+        .select-selected.select-arrow-active:after {
+            border-color: transparent transparent #fff transparent;
+            top: 7px;
+        }
+
+    /*style the items (options), including the selected item:*/
+    .select-items div, .select-selected {
+        color: black;
+        border: 1px solid transparent;
+        border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+        cursor: pointer;
+        user-select: none;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    /*style items (options):*/
+    .select-items {
+        position: absolute;
+        background-color: #99FFCC;
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 99;
+        padding: 15px;
+        border-radius: 5px;
+    }
+
+    /*hide the items when the select box is closed:*/
+    .select-hide {
+        display: none;
+    }
+
+    .select-items div:hover, .same-as-selected {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    .btn {
+        /*padding: 10px;*/
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 6px 12px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+    }
+
+    .btn {
+        background-color: darkblue;
+        color: white;
+        border: 2px solid darkblue;
+    }
+
+        .btn:hover {
+            background-color: #4CAF50;
+            color: white;
+            border: 2px solid #4CAF50;
+        }
+
+    .table .table-head {
+        font-size: 12px;
+        color: white;
+        font-weight: bolder;
+        background-color: darkblue;
+        border: 1px solid black;
+    }
+
+    .table caption {
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        color: blue;
+        text-align: center;
+        font-size: 15px;
+        background-color: #A3FAE1;
+        font-weight: bolder;
+        border: 1px solid black;
+    }
+
+    #tbl_Value tbody tr:first-child td {
+        background-color: #fc4a3c;
+    }
+
+    .table .trcls {
+        font-size: 13px;
+        color: black;
+        font-weight: normal;
+        background-color: white;
+        border: 1px solid black;
+        padding: 2px 2px;
+        text-align: left;
+    }
+
+    .white-screen {
+        position: relative;
+    }
+
+    #divLoader {
+        position: absolute;
+        top: 50%;
+        left: 40%;
+        margin: -50px 0px 0px -50px;
+    }
+</style>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-3">
+            @Html.DropDownList("RegionName", (SelectList)ViewBag.RegionList, "--Select Region--", htmlAttributes: new { @class = "form-control RegionName", style = "width: 98%", id = "RegionName" })
+        </div>
+        <div class="col-md-3">
+            @Html.DropDownList("Area", (SelectList)ViewBag.AreaList, "-- Select Area --", htmlAttributes: new { @class = "form-control Area", style = "width: 98%", id = "Area" })
+        </div>
+        <div class="col-md-3">
+            @Html.DropDownList("Territory", (SelectList)ViewBag.TerritoryList, "-- Select Territory --", htmlAttributes: new { @class = "form-control Territory", style = "width: 98%", id = "Territory" })
+        </div>
+        <div class="col-md-2">
+            <input type="Date" id="datetimepicker1" />
+        </div>
+    </div>
+
+
+    <div class="row mt-3 pl-3">
+        <div id="btn_Value" class="btn">Value(3031)</div>
+        <div class="btn">Volume(3032)</div>
+        <div class="btn">KPI(3033)</div>
+        <div id="btn_attendance" class="btn attendance">Attendance (3034)</div>
+    </div>
+    <div id="divLoader" style="display:none;"><img height="200px" width="200px" src="~/Content/img/Loader 4.gif" alt="Loader" /></div>
+    <div class="row col-12 mt-3 pl-3">
+        <table class="table table-bordered" id="tbl_Attn">
+            <caption>Attendance Report</caption>
+            <tr class="table-head">
+                <th class="text-center">Code</th>
+                <th class="text-center">Name</th>
+                <th class="text-center">Territory</th>
+                <th class="text-center">Designation</th>
+                <th class="text-center">Today Check In</th>
+                <th class="text-center">Status</th>
+                <th class="text-center">Today First Visit</th>
+                <th class="text-center">Today last Visit</th>
+                <th class="text-center">Working Hour</th>
+            </tr>
+            <tbody id="Attendance"></tbody>
+        </table>
+        <table class="table table-bordered" id="tbl_Value">
+            <caption>Value Report</caption>
+            <tr class="table-head">
+                <th class="text-center">Name</th>
+                <th class="text-center">TD Target</th>
+                <th class="text-center">TD Order</th>
+                <th class="text-center">TD Del</th>
+                <th class="text-center">LD Order</th>
+                <th class="text-center">LD Delivery</th>
+                <th class="text-center">MTD Order</th>
+                <th class="text-center">MTD Del</th>
+                <th class="text-center">CM Target</th>
+                <th class="text-center">CM Sales</th>
+                <th class="text-center">LM Sales</th>
+                <th class="text-center">LM MTD Sales</th>
+                <th class="text-center">LY SM Sales</th>
+                <th class="text-center">YTD Target</th>
+                <th class="text-center">YTD Sales</th>
+                <th class="text-center">LY YTD Sales</th>
+            </tr>
+            <tbody id="ValueReport"></tbody>
+        </table>
+    </div>
+}
+
+@section scripts {
+
+    <script>
+
+        $(document).ready(function () {
+            $('#tbl_Value').show();
+            $('#tbl_Attn').hide();
+        });
+
+        $(document).ready(function () {
+            @*$.ajax({
+                type: "GET",
+                url: "@Url.Action("GetRegion", "SalesPerformance")",
+                data: "{}",
+                success: function (data) {
+                    var s = '<option value="0">Select Region</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        s += '<option value="' + data[i].Id + '">' + data[i].Text + '</option>';
+                    }
+                    $("#RegionName").html(s);
+                }
+            });*@
+        });
+        /*========================Region Change==========================*/
+        $('#RegionName').change(function () {
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("GetArea", "SalesPerformance")",
+                data: { RegionName: $("#RegionName option:selected").text() },
+                success: function (data) {
+                    $('#Area').empty();
+                    var s = '<option value="">Select  Area</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        s += '<option value="' + data[i].Id + '">' + data[i].Text + '</option>';
+                    }
+                    $("#Area").html(s);
+                }
+            });
+        });
+        /*================Area Change===================================== */
+        $('#Area').change(function () {
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("GetTerritory", "SalesPerformance")",
+                data: { ParentID: $("#Area option:selected").val() },
+                success: function (data) {
+                    $('#Territory').empty();
+                    var s = '<option value="">Select  Territory</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        s += '<option value="' + data[i].Id + '">' + data[i].Text + '</option>';
+                    }
+                    $("#Territory").html(s);
+                }
+            });
+        });
+        /*==============Attendance Button Click=============================*/
+        $('#btn_attendance').click(function () {
+            $('#tbl_Value').hide();
+            $('#tbl_Attn').show();
+            var RegionID = $("#RegionName option:selected").val();
+            var Region = "";
+            if (RegionID != "") {
+                Region = $("#RegionName option:selected").text();
+            }
+            var Area = $("#Area option:selected").val();
+            var Territory = $("#Territory option:selected").val();
+            var jsnFormatData = { Region: Region, Area: Area, Territory: Territory };
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("AttendanceClick", "SalesPerformance")',
+                data: JSON.stringify(jsnFormatData),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    var output = data.map(i => "<tr class='trcls'><td>" + i.DSRCode + "</td><td>" + i.DSRName + "</td><td>" + i.TerritoryName + "</td><td>" + i.Designation + "</td><td>" + i.TDAtten + "</td><td>" + i.TD_ISLATE + "</td><td>" + i.TD_FV + "</td><td>" + i.TD_LV + "</td><td>" + i.TDWH + "</td></tr>");
+                    $("#Attendance").html(output);
+                    // Row = document.getElementById("somerow1");
+                    // Cells = Row.getElementsByTagName("td");
+                }
+            });
+        });
+
+
+
+        /*==============Value Button Click=============================*/
+        $('#btn_Value').click(function () {
+            $('#divLoader').show();
+            $('#tbl_Value').show();
+            $('#tbl_Attn').hide();
+            var RegionID = $("#RegionName option:selected").val();
+            var Region = "";
+            if (RegionID != "") {
+                Region = $("#RegionName option:selected").text();
+            }
+            var Area = $("#Area option:selected").val();
+            var Territory = $("#Territory option:selected").val();
+            var jsnFormatData = { Region: Region, Area: Area, Territory: Territory };
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("ValueClick", "SalesPerformance")',
+                data: JSON.stringify(jsnFormatData),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    var output = data.map(i => "<tr class='trcls'><td>" + i.Name + "</td><td>" + i.TDTarget + "</td><td>" + i.TDOrder + "</td><td>" + i.TDDel + "</td><td>" + i.LDOrder + "</td><td>" + i.LDDelivery + "</td><td>" + i.MTDOrder + "</td><td>" + i.MTDDel + "</td><td>" + i.CMTarget + "</td><td>" + i.CMSales + "</td><td>" + i.LMSales + "</td><td>" + i.LMMTDSales + "</td><td>" + i.LYSMSales + "</td><td>" + i.YTDTGT + "</td><td>" + i.YTDSales + "</td><td>" + i.LYYTDSales + "</td></tr>");
+                    $("#ValueReport").html(output);
+                    //var Row = document.getElementById("somerow");
+                    //var Cells = Row.getElementsByTagName("td");
+                },
+                complete: function () {
+                    $('#divLoader').hide();
+                }
+            });
+        });
+    </script>
+
+}

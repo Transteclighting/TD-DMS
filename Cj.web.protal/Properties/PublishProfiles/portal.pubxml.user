@@ -1,0 +1,783 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\zahid.hasan\Desktop\Cj.portal</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Antlr3.Runtime.dll">
+      <publishTime>05/26/2022 12:58:51</publishTime>
+    </File>
+    <File Include="bin/Cj.web.protal.dll">
+      <publishTime>07/05/2022 13:16:14</publishTime>
+    </File>
+    <File Include="bin/CrystalDecisions.CrystalReports.Engine.dll">
+      <publishTime>04/18/2017 04:39:20</publishTime>
+    </File>
+    <File Include="bin/CrystalDecisions.ReportAppServer.CommLayer.dll">
+      <publishTime>04/18/2017 04:39:22</publishTime>
+    </File>
+    <File Include="bin/CrystalDecisions.ReportAppServer.CommonObjectModel.dll">
+      <publishTime>04/18/2017 04:39:22</publishTime>
+    </File>
+    <File Include="bin/CrystalDecisions.ReportAppServer.CubeDefModel.dll">
+      <publishTime>04/18/2017 04:39:22</publishTime>
+    </File>
+    <File Include="bin/CrystalDecisions.ReportAppServer.DataSetConversion.dll">
+      <publishTime>04/18/2017 04:39:22</publishTime>
+    </File>
+    <File Include="bin/CrystalDecisions.ReportAppServer.Prompting.dll">
+      <publishTime>04/18/2017 04:39:22</publishTime>
+    </File>
+    <File Include="bin/CrystalDecisions.ReportAppServer.XmlSerialize.dll">
+      <publishTime>04/18/2017 04:39:22</publishTime>
+    </File>
+    <File Include="bin/CrystalDecisions.ReportSource.dll">
+      <publishTime>04/18/2017 04:39:22</publishTime>
+    </File>
+    <File Include="bin/CrystalDecisions.Shared.dll">
+      <publishTime>04/18/2017 04:39:22</publishTime>
+    </File>
+    <File Include="bin/CrystalDecisions.Web.dll">
+      <publishTime>04/18/2017 04:39:22</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>05/26/2022 12:58:51</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.SqlServer.dll">
+      <publishTime>05/26/2022 12:58:51</publishTime>
+    </File>
+    <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
+      <publishTime>05/26/2022 12:58:51</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>05/26/2022 12:58:52</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>05/26/2022 12:58:52</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.exe">
+      <publishTime>05/26/2022 12:58:52</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll">
+      <publishTime>05/26/2022 12:58:52</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll">
+      <publishTime>05/26/2022 12:58:52</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.dll">
+      <publishTime>05/26/2022 12:58:52</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll">
+      <publishTime>05/26/2022 12:58:52</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CSharp.Core.targets">
+      <publishTime>05/26/2022 12:58:52</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.VisualBasic.Core.targets">
+      <publishTime>05/26/2022 12:58:52</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Collections.Immutable.dll">
+      <publishTime>05/26/2022 12:58:52</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Reflection.Metadata.dll">
+      <publishTime>05/26/2022 12:58:52</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.exe">
+      <publishTime>05/26/2022 12:58:52</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe">
+      <publishTime>05/26/2022 12:58:52</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe.config">
+      <publishTime>05/26/2022 12:58:52</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>05/26/2022 12:58:51</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>05/26/2022 12:58:51</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>05/26/2022 12:58:51</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.WebHost.dll">
+      <publishTime>05/26/2022 12:58:51</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>05/26/2022 12:58:51</publishTime>
+    </File>
+    <File Include="bin/System.Web.Optimization.dll">
+      <publishTime>05/26/2022 12:58:51</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>05/26/2022 12:58:51</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>05/26/2022 12:58:51</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>05/26/2022 12:58:51</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>05/26/2022 12:58:51</publishTime>
+    </File>
+    <File Include="bin/WebGrease.dll">
+      <publishTime>05/26/2022 12:58:52</publishTime>
+    </File>
+    <File Include="Content/all.css">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/all.min.css">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/bootstrap.css">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/bootstrap.css.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/bootstrap.min.css">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/bootstrap.min.css.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/Chart.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/chart/Chart.bundle.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/chart/Chart.bundle.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/chart/Chart.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/chart/Chart.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/datatables/datatables-custom.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/datatables/dataTables.bootstrap4.css">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/datatables/dataTables.bootstrap4.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/datatables/dataTables.bootstrap4.min.css">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/datatables/dataTables.bootstrap4.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/datatables/jquery.dataTables.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/datatables/jquery.dataTables.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/c3_renderers.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/c3_renderers.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/c3_renderers.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/c3_renderers.min.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/d3_renderers.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/d3_renderers.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/d3_renderers.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/d3_renderers.min.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/export_renderers.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/export_renderers.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/export_renderers.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/export_renderers.min.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/gchart_renderers.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/gchart_renderers.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/gchart_renderers.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/gchart_renderers.min.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.cs.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.cs.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.cs.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.cs.min.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.css">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.da.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.da.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.da.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.da.min.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.de.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.de.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.de.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.de.min.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.es.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.es.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.es.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.es.min.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.fr.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.fr.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.fr.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.fr.min.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.it.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.it.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.it.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.it.min.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.jp.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.jp.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.jp.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.jp.min.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.min.css">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.min.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.nl.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.nl.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.nl.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.nl.min.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.pl.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.pl.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.pl.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.pl.min.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.pt.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.pt.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.pt.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.pt.min.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.ru.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.ru.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.ru.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.ru.min.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.sq.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.sq.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.sq.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.sq.min.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.tr.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.tr.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.tr.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.tr.min.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.zh.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.zh.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.zh.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot.zh.min.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot_spec.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot_spec.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot_spec.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/pivot_spec.min.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/plotly_renderers.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/plotly_renderers.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/plotly_renderers.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/plotly_renderers.min.js.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/dist/tips_data.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/ext/d3.v3.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/ext/jquery-1.8.3.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/ext/jquery-ui-1.9.2.custom.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/ext/jquery.ui.touch-punch.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/ext/pivot.css">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/font-awesome.css">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/images/markers-matte%402x.png">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/images/markers-matte.png">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/images/markers-plain.png">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/images/markers-shadow%402x.png">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/images/markers-shadow.png">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/images/markers-soft%402x.png">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/images/markers-soft.png">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/img/bg.png">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/img/bg2.jpg">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/img/bg3.jpg">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/img/cj.ico">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/img/Data_report.svg">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/img/popup-bg.png">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/img/Under construction-amico.svg">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/img/Under construction-bro.svg">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/img/Under construction-cuate.svg">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/img/undraw_Agreement_re_d4dv.svg">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/img/undraw_business_deal_cpi9.svg">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/img/undraw_Business_decisions_re_84ag.svg">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/img/undraw_Metrics_re_6g90.svg">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/img/undraw_Pitching_re_fpgk.svg">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/img/undraw_profile.svg">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/img/undraw_Report_re_kp7y.svg">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/img/undraw_under_construction_-46-pa.svg">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/leaflet.awesome-markers.css">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/leaflet.awesome-markers.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/leaflet.awesome-markers.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/Login/style.css">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/MakeInvoice/makeInvoiceStyle.css">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/reset.css">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/sb-admin-2.css">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/Site.css">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Content/world.json">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="favicon.ico">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.eot">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.svg">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.ttf">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.woff">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.woff2">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="fonts/Lemon-Regular.ttf">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="fonts/Oswald-Bold.ttf">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="fonts/Oswald-Light.ttf">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="fonts/Oswald-Regular.ttf">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Images/CJ_Logo.ico">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Images/Logo.ico">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Images/Logo.jpg">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Images/Logo.png">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Images/pass.png">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Images/TD.png">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Images/td_logo.png">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Images/transcom electronics.png">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Images/user.png">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.bundle.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Scripts/chart-area.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Scripts/chart-bar.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Scripts/chart-pie.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.min.map">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.1.1.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Scripts/jquery.easing.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Scripts/jquery.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Scripts/modernizr-2.6.2.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Scripts/respond.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Scripts/respond.min.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Scripts/sb-admin-2.js">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Views/Attendance/DistributionList.cshtml">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Views/Attendance/DistributionMap.cshtml">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Views/Attendance/Index.cshtml">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Views/Attendance/List.cshtml">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Views/Audit/Index.cshtml">
+      <publishTime>07/03/2022 14:39:02</publishTime>
+    </File>
+    <File Include="Views/Common/PageNotFound.cshtml">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Views/Common/UnderConstruction.cshtml">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Views/Dashboard/CATDashboard.cshtml">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Views/Dashboard/Index.cshtml">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Views/Dashboard/LeadDashboard.cshtml">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Views/Dashboard/OPSDashboard.cshtml">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Views/Dashboard/OutletDashboard.cshtml">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Views/Dashboard/SalesDashboard.cshtml">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Views/Dashboard/StockDashboard.cshtml">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Views/Dashboard/WeeklyReviewDashboard.cshtml">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Views/Executive/Index.cshtml">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Views/Home/About.cshtml">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Views/Home/Contact.cshtml">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Views/Home/Index.cshtml">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Views/Sales/List.cshtml">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Views/Sales/SkuWiseSalesList.cshtml">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Views/Shared/Error.cshtml">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout.cshtml">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Views/Shared/_MenuBar.cshtml">
+      <publishTime>07/03/2022 11:24:09</publishTime>
+    </File>
+    <File Include="Views/User/ChangePassword.cshtml">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Views/User/Login.cshtml">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Views/Visit/DistributionList.cshtml">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Views/Visit/Index.cshtml">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Views/Visit/List.cshtml">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Views/Web.config">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Views/_ViewStart.cshtml">
+      <publishTime>05/26/2022 12:58:49</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>07/05/2022 13:16:15</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

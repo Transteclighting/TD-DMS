@@ -1,0 +1,772 @@
+﻿@{
+    ViewBag.Title = "Inventory Dashboard | CJ Web Portal";
+}
+
+@section extra_style {
+    <link href="~/Content/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/3.3.3/css/fixedColumns.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.9/css/fixedHeader.bootstrap4.min.css">}
+
+@section breadcrumb{
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"><a href="/">Dashboard</a></li>
+            <li class="breadcrumb-item" aria-current="page">@Html.ActionLink("Inventory ", ViewContext.RouteData.Values["Action"].ToString(), ViewContext.RouteData.Values["controller"].ToString())</li>
+        </ol>
+    </nav>
+}
+
+<div class="row">
+    <div id="accordion" class="col-12">
+        <div class="card">
+            <div class="card-header panel-heading bg-gradient-primary text-white m-0 p-0" id="headingTwo">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed text-white w-100 text-left" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Inventory
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseTwo" class="collapse show row" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="col-xl-6 col-lg-6">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Catagory wise total QTY</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-area" id="pcattotalaty">
+                                    <canvas id="cattotalaty"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">PG wise total QTY</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-area" id="ppgtotalqty">
+                                    <canvas id="pgtotalqty"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-lg-12">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">MAG wise total QTY</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-area" id="pmagtotalqty">
+                                    <canvas id="magtotalqty"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                <div class="col-xl-6 col-lg-6">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Catagory wise  Total value (in million)</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-area" id="pcattotalval">
+                                <canvas id="cattotalval"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">PG wise Total value (in million)</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-area" id="ppgtotalval">
+                                <canvas id="pgtotalval"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">MAG wise Total value (in million)</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-area" id="pmagtotalval">
+                                <canvas id="magtotalval"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-xl-6 col-lg-6">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Cat wise Stock</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-area" id="pcatStock">
+                                    <canvas id="catStock"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">PG wise Sales</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-area" id="ppgStock">
+                                    <canvas id="pgStock"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-lg-12">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">MAG wise Stock</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-area" id="pmagStock">
+                                    <canvas id="magStock"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                <div class="col-xl-12 col-lg-12">
+                    <div id="stockexend">
+                        <div class="card card-body">
+                            <table class="table table-bordered" style="width:100%" id="dataTable">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">PGCategory</th>
+                                        <th>PGName</th>
+                                        <th>MAGName</th>
+                                        <th>Saleable</th>
+                                        <th>DisplayStock</th>
+                                        <th>Defective</th>
+                                        <th>StockQty</th>
+                                        <th>StockValue</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        if (ViewBag.StockAging != null)
+                                        {
+                                            foreach (var StockAging in ViewBag.StockAging)
+                                            {
+                                                <tr>
+                                                    <td>@StockAging.PGCategory</td>
+                                                    <td>@StockAging.PGName</td>
+                                                    <td>@StockAging.MAGName</td>
+                                                    <td>@StockAging.Saleable</td>
+                                                    <td>@StockAging.DisplayStock</td>
+                                                    <td>@StockAging.Defective</td>
+                                                    <td>@StockAging.StockQty</td>
+                                                    <td>@StockAging.StockValue</td>
+                                                </tr>
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section extra_script {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="~/Content/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Content/datatables/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            function loadermodal() {
+                $('#loadermodal').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+            };
+            function closeloadermodal() {
+                setTimeout(function () {
+                    $('#loadermodal').modal('hide');
+                }, 500);
+            };
+            function loaddata() {
+                $("#loadingIcon").removeClass("d-none");
+                loadermodal();
+                //load data
+                loadCharts();
+                loadTable();
+                //end load data
+                $("#loadingIcon").addClass("d-none");
+            };
+            $("#filter").click(function () {
+                loaddata();
+            });
+            function loadCharts() {
+                Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+                Chart.defaults.global.defaultFontColor = '#858796';
+                //chart colours
+                const colors = {
+                    first: {
+                        fill: '#8fa8c869',
+                        stroke: '#4e73df',
+                    },
+                    second: {
+                        fill: '#5d9bf7',
+                        stroke: '#8fa8c869',
+                    },
+                    third: {
+                        fill: '#91f5de',
+                        stroke: '#1cc88a',
+                    },
+                };
+                var pgcat = $('#pgcat option:selected').text();
+                var pg = $('#pg option:selected').text();
+                var brand = $('#brand option:selected').text();
+                var month = $('#month option:selected').val();
+                var year = $('#year option:selected').val();
+
+                $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("loadStockChart")',
+                    "data": { pg: pg, brand: brand, pgcat: pgcat, month: month, year: year },
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+
+                        //cat wise stock
+                        let PGCategory = [];
+                        let Saleable = [];
+                        let DisplayStock = [];
+                        let Defective = [];
+                        let StockQty = [];
+                        let StockValue = [];
+                        for (var i = 0; i < data.Castwisestock.length; i++) {
+                            PGCategory.push(data.Castwisestock[i].PGCategory);
+                            Saleable.push(data.Castwisestock[i].Saleable);
+                            DisplayStock.push(data.Castwisestock[i].DisplayStock);
+
+                            Defective.push(data.Castwisestock[i].Defective);
+                            StockQty.push(data.Castwisestock[i].StockQty);
+                            StockValue.push(data.Castwisestock[i].StockValue);
+                        }
+                        $('#catStock').remove(); // this is my <canvas> element
+                        $('#pcatStock').append('<canvas id="catStock"><canvas>');
+                        var catstockctxchart = document.getElementById("catStock").getContext("2d");
+                        const catstockchart = new Chart(catstockctxchart, {
+                            type: 'bar',
+                            data: {
+                                labels: PGCategory,
+                                datasets: [{
+                                    label: "Saleable",
+                                    fill: true,
+                                    backgroundColor: '#8fa8c869',
+                                    pointBackgroundColor:  '#4e73df',
+                                    borderColor:  '#4e73df',
+                                    pointHighlightStroke:  '#4e73df',
+                                    data: Saleable,
+                                }, {
+                                    label: "DisplayStock",
+                                    fill: true,
+                                    backgroundColor:'#5d9bf7',
+                                    pointBackgroundColor:'#8fa8c869',
+                                    borderColor:'#8fa8c869',
+                                    pointHighlightStroke:'#8fa8c869',
+                                    borderCapStyle: 'butt',
+                                    data: DisplayStock,
+                                }, {
+                                    label: "Defective",
+                                    fill: true,
+                                    backgroundColor: '#91f5de',
+                                    pointBackgroundColor: '#91f5de',
+                                    borderColor: '#91f5de',
+                                    pointHighlightStroke: '#91f5de',
+                                    borderCapStyle: 'butt',
+                                    data: Defective,
+                                }
+                                ],
+                            },
+                            options: {
+                                maintainAspectRatio: false,
+                                scaleShowValues: true,
+                                scales: {
+                                    xAxes: [{
+                                        ticks: {
+                                            autoSkip: false
+                                        }
+                                    }]
+                                },
+                                animation: {
+                                    duration: 750,
+                                },
+                            }
+                        });
+
+                        $('#cattotalaty').remove(); // this is my <canvas> element
+                        $('#pcattotalaty').append('<canvas id="cattotalaty"><canvas>');
+                        var cattotalctxchart = document.getElementById("cattotalaty").getContext("2d");
+                        const catTotalchart = new Chart(cattotalctxchart, {
+                            type: 'bar',
+                            data: {
+                                labels: PGCategory,
+                                datasets: [{
+                                    label: "StockQty",
+                                    fill: true,
+                                    backgroundColor:'#5d9bf7',
+                                    pointBackgroundColor:'#8fa8c869',
+                                    borderColor:'#8fa8c869',
+                                    pointHighlightStroke:'#8fa8c869',
+                                    borderCapStyle: 'butt',
+                                    data: StockQty,
+                                }
+                                //, {
+                                //    label: "StockValue",
+                                //    fill: true,
+                                //    backgroundColor:'#5d9bf7',
+                                //    pointBackgroundColor:'#8fa8c869',
+                                //    borderColor:'#8fa8c869',
+                                //    pointHighlightStroke:'#8fa8c869',
+                                //    borderCapStyle: 'butt',
+                                //    data: StockValue,
+                                //}
+                                ],
+                            },
+                            options: {
+                                maintainAspectRatio: false,
+                                scaleShowValues: true,
+                                scales: {
+                                    xAxes: [{
+                                        ticks: {
+                                            autoSkip: false
+                                        }
+                                    }]
+                                },
+                                animation: {
+                                    duration: 750,
+                                },
+                            }
+                        });
+
+                        $('#cattotalval').remove(); // this is my <canvas> element
+                        $('#pcattotalval').append('<canvas id="cattotalval"><canvas>');
+                        var cattotalvalctxchart = document.getElementById("cattotalval").getContext("2d");
+                        const catTotalValchart = new Chart(cattotalvalctxchart, {
+                            type: 'bar',
+                            data: {
+                                labels: PGCategory,
+                                datasets: [{
+                                    label: "StockValue",
+                                    fill: true,
+                                    backgroundColor: '#91f5de',
+                                    pointBackgroundColor: '#91f5de',
+                                    borderColor: '#91f5de',
+                                    pointHighlightStroke: '#91f5de',
+                                    borderCapStyle: 'butt',
+                                    data: StockValue,
+                                }
+                                ],
+                            },
+                            options: {
+                                maintainAspectRatio: false,
+                                scaleShowValues: true,
+                                scales: {
+                                    xAxes: [{
+                                        ticks: {
+                                            autoSkip: false
+                                        }
+                                    }]
+                                },
+                                animation: {
+                                    duration: 750,
+                                },
+                            }
+                        });
+
+                        //pg wise stock
+                        let PGName = [];
+                        let pgSaleable = [];
+                        let pgDisplayStock = [];
+                        let pgDefective = [];
+                        let pgStockQty = [];
+                        let pgStockValue = [];
+                        for (var i = 0; i < data.PGwisestock.length; i++) {
+                            PGName.push(data.PGwisestock[i].PGName);
+                            pgSaleable.push(data.PGwisestock[i].Saleable);
+                            pgDisplayStock.push(data.PGwisestock[i].DisplayStock);
+
+                            pgDefective.push(data.PGwisestock[i].Defective);
+                            pgStockQty.push(data.PGwisestock[i].StockQty);
+                            pgStockValue.push(data.PGwisestock[i].StockValue);
+                        }
+                        $('#pgStock').remove(); // this is my <canvas> element
+                        $('#ppgStock').append('<canvas id="pgStock"><canvas>');
+                        var pgstockctxchart = document.getElementById("pgStock").getContext("2d");
+                        const pgstockchart = new Chart(pgstockctxchart, {
+                            type: 'bar',
+                            data: {
+                                labels: PGName,
+                                datasets: [{
+                                    label: "Saleable",
+                                    fill: true,
+                                    backgroundColor: "#8fa8c869",
+                                    pointBackgroundColor:  '#4e73df',
+                                    borderColor:  '#4e73df',
+                                    pointHighlightStroke:  '#4e73df',
+                                    data: pgSaleable,
+                                }, {
+                                    label: "DisplayStock",
+                                    fill: true,
+                                    backgroundColor:'#5d9bf7',
+                                    pointBackgroundColor:'#8fa8c869',
+                                    borderColor:'#8fa8c869',
+                                    pointHighlightStroke:'#8fa8c869',
+                                    borderCapStyle: 'butt',
+                                    data: pgDisplayStock,
+                                }, {
+                                    label: "Defective",
+                                    fill: true,
+                                    backgroundColor:'#5d9bf7',
+                                    pointBackgroundColor: '#91f5de',
+                                    borderColor: '#91f5de',
+                                    pointHighlightStroke: '#91f5de',
+                                    borderCapStyle: 'butt',
+                                    data: pgDefective,
+                                }
+                                ],
+                            },
+                            options: {
+                                maintainAspectRatio: false,
+                                scaleShowValues: true,
+                                scales: {
+                                    xAxes: [{
+                                        ticks: {
+                                            autoSkip: false
+                                        }
+                                    }]
+                                },
+                                animation: {
+                                    duration: 750,
+                                },
+                            }
+                        });
+
+                        $('#pgtotalqty').remove(); // this is my <canvas> element
+                        $('#ppgtotalqty').append('<canvas id="pgtotalqty"><canvas>');
+                        var pgtotalctxchart = document.getElementById("pgtotalqty").getContext("2d");
+                        const pgTotalchart = new Chart(pgtotalctxchart, {
+                            type: 'bar',
+                            data: {
+                                labels: PGName,
+                                datasets: [
+                                 {
+                                     label: "StockQty",
+                                     fill: true,
+                                     backgroundColor: '#91f5de',
+                                     pointBackgroundColor:'#1cc88a',
+                                     borderColor:'#1cc88a',
+                                     pointHighlightStroke:'#1cc88a',
+                                     borderCapStyle: 'butt',
+                                     data: pgStockQty,
+                                 }
+
+                                ],
+                            },
+                            options: {
+                                maintainAspectRatio: false,
+                                scaleShowValues: true,
+                                scales: {
+                                    xAxes: [{
+                                        ticks: {
+                                            autoSkip: false
+                                        }
+                                    }]
+                                },
+                                animation: {
+                                    duration: 750,
+                                },
+                            }
+                        });
+
+                        $('#pgtotalval').remove(); // this is my <canvas> element
+                        $('#ppgtotalval').append('<canvas id="pgtotalval"><canvas>');
+                        var pgtotalvalctxchart = document.getElementById("pgtotalval").getContext("2d");
+                        const pgTotalValchart = new Chart(pgtotalvalctxchart, {
+                            type: 'bar',
+                            data: {
+                                labels: PGName,
+                                datasets: [{
+                                    label: "StockValue",
+                                    fill: true,
+                                    backgroundColor:'#5d9bf7',
+                                    pointBackgroundColor:'#8fa8c869',
+                                    borderColor:'#8fa8c869',
+                                    pointHighlightStroke:'#8fa8c869',
+                                    borderCapStyle: 'butt',
+                                    data: pgStockValue,
+                                }
+                                ],
+                            },
+                            options: {
+                                maintainAspectRatio: false,
+                                scaleShowValues: true,
+                                scales: {
+                                    xAxes: [{
+                                        ticks: {
+                                            autoSkip: false
+                                        }
+                                    }]
+                                },
+                                animation: {
+                                    duration: 750,
+                                },
+                            }
+                        });
+
+
+                        //mag wise stock
+                        let magName = [];
+                        let magSaleable = [];
+                        let magDisplayStock = [];
+                        let magDefective = [];
+                        let magStockQty = [];
+                        let magStockValue = [];
+                        for (var i = 0; i < data.MAGwisestock.length; i++) {
+                            magName.push(data.MAGwisestock[i].MAGName);
+                            magSaleable.push(data.MAGwisestock[i].Saleable);
+                            magDisplayStock.push(data.MAGwisestock[i].DisplayStock);
+
+                            magDefective.push(data.MAGwisestock[i].Defective);
+                            magStockQty.push(data.MAGwisestock[i].StockQty);
+                            magStockValue.push(data.MAGwisestock[i].StockValue);
+                        }
+                        $('#magStock').remove(); // this is my <canvas> element
+                        $('#pmagStock').append('<canvas id="magStock"><canvas>');
+                        var magstockctxchart = document.getElementById("magStock").getContext("2d");
+                        const magstockchart = new Chart(magstockctxchart, {
+                            type: 'bar',
+                            data: {
+                                labels: magName,
+                                datasets: [{
+                                    label: "Saleable",
+                                    fill: true,
+                                    backgroundColor: "#8fa8c869",
+                                    pointBackgroundColor:  '#4e73df',
+                                    borderColor:  '#4e73df',
+                                    pointHighlightStroke:  '#4e73df',
+                                    data: magSaleable,
+                                }, {
+                                    label: "DisplayStock",
+                                    fill: true,
+                                    backgroundColor:'#5d9bf7',
+                                    pointBackgroundColor:'#8fa8c869',
+                                    borderColor:'#8fa8c869',
+                                    pointHighlightStroke:'#8fa8c869',
+                                    borderCapStyle: 'butt',
+                                    data: magDisplayStock,
+                                }, {
+                                    label: "Defective",
+                                    fill: true,
+                                    backgroundColor: '#91f5de',
+                                    pointBackgroundColor:'#1cc88a',
+                                    borderColor:'#1cc88a',
+                                    pointHighlightStroke:'#1cc88a',
+                                    borderCapStyle: 'butt',
+                                    data: magDefective,
+                                }
+                                ],
+                            },
+                            options: {
+                                maintainAspectRatio: false,
+                                scaleShowValues: true,
+                                scales: {
+                                    xAxes: [{
+                                        ticks: {
+                                            autoSkip: false
+                                        }
+                                    }]
+                                },
+                                animation: {
+                                    duration: 750,
+                                },
+                            }
+                        });
+
+                        $('#magtotalqty').remove(); // this is my <canvas> element
+                        $('#pmagtotalqty').append('<canvas id="magtotalqty"><canvas>');
+                        var magtotalctxchart = document.getElementById("magtotalqty").getContext("2d");
+                        const magTotalchart = new Chart(magtotalctxchart, {
+                            type: 'bar',
+                            data: {
+                                labels: magName,
+                                datasets: [
+                                 {
+                                     label: "StockQty",
+                                     fill: true,
+                                     backgroundColor:'#5d9bf7',
+                                     pointBackgroundColor:'#8fa8c869',
+                                     borderColor:'#8fa8c869',
+                                     pointHighlightStroke:'#8fa8c869',
+                                     borderCapStyle: 'butt',
+                                     data: magStockQty,
+                                 }
+
+                                ],
+                            },
+                            options: {
+                                maintainAspectRatio: false,
+                                scaleShowValues: true,
+                                scales: {
+                                    xAxes: [{
+                                        ticks: {
+                                            autoSkip: false
+                                        }
+                                    }]
+                                },
+                                animation: {
+                                    duration: 750,
+                                },
+                            }
+                        });
+
+                        $('#magtotalval').remove(); // this is my <canvas> element
+                        $('#pmagtotalval').append('<canvas id="magtotalval"><canvas>');
+                        var magtotalvalctxchart = document.getElementById("magtotalval").getContext("2d");
+                        const magTotalValchart = new Chart(magtotalvalctxchart, {
+                            type: 'bar',
+                            data: {
+                                labels: magName,
+                                datasets: [{
+                                    label: "StockValue",
+                                    fill: true,
+                                    backgroundColor: colors.third.fill,
+                                    pointBackgroundColor:'#1cc88a',
+                                    borderColor:'#1cc88a',
+                                    pointHighlightStroke:'#1cc88a',
+                                    borderCapStyle: 'butt',
+                                    data: magStockValue,
+                                }
+                                ],
+                            },
+                            options: {
+                                maintainAspectRatio: false,
+                                scaleShowValues: true,
+                                scales: {
+                                    xAxes: [{
+                                        ticks: {
+                                            autoSkip: false
+                                        }
+                                    }]
+                                },
+                                animation: {
+                                    duration: 750,
+                                },
+                            }
+                        });
+
+
+                        closeloadermodal();
+
+                    },
+                    error: function () {
+                        alert("Error");
+                        closeloadermodal();
+                    }
+                });
+            }
+            function loadTable() {
+                table = $('#dataTable').DataTable();
+                tablet = $('#dataTable2').DataTable();
+
+            }
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("loadMonth", "Common")',
+                data: { year: new Date().getFullYear() },
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $("#month").find('option').remove();
+                    $('#month').selectpicker('refresh');
+                    $('#month').selectpicker('refresh');
+                    $('#month').append($('<option>', {
+                        value: '',
+                        text: 'Please select'
+                    }));
+                    for (var i = 0; i < data.length; i++) {
+                        //s += '<option value="' + data[i].MarketGroupCode + '">' + data[i].MarketGroupDesc + '</option>';
+                        $('#month').append($('<option>', {
+                            value: data[i].Id,
+                            text: data[i].Text
+                        }));
+                        $('#month').selectpicker('refresh');
+                    }
+
+                },
+                error: function () {
+                    alert("Error while inserting data");
+                }
+            });
+            loaddata();
+        });
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+    <script>
+        $("#pgcat").change(function () {
+            $("#pg").find('option').remove();
+            $('#pg').selectpicker('refresh');
+            var valueSelected = this.value;
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("loapgbycat", "Common")',
+                data: { cat: valueSelected },
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $('#pg').append($('<option>', {
+                        value: 'All',
+                        text: 'All'
+                    }));
+                    $("#pg option[value='All']").prop('selected', true);
+                    $('#pg').selectpicker('refresh');
+                    for (var i = 0; i < data.length; i++) {
+                        $('#pg').append($('<option>', {
+                            value: data[i].Id,
+                            text: data[i].Text
+                        }));
+                        $('#pg').selectpicker('refresh');
+                    }
+                },
+                error: function () {
+                    alert("Error while inserting data");
+                }
+            });
+            return false;
+        });
+    </script>
+
+}

@@ -1,0 +1,611 @@
+﻿@{
+    ViewBag.Title = "Outlet Dashboard | CJ Web Portal";
+}
+
+@section extra_style {
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+}
+
+@section breadcrumb{
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"><a href="/">Dashboard</a></li>
+            <li class="breadcrumb-item" aria-current="page">@Html.ActionLink("Outlet", ViewContext.RouteData.Values["Action"].ToString(), ViewContext.RouteData.Values["controller"].ToString())</li>
+        </ol>
+    </nav>
+}
+
+<div class="panel" style="margin: 10px auto;">
+    <div class="panel-heading bg-gradient-primary">
+        <a data-toggle="collapse" href="#collapse1" class="collapsed">
+            <div class="panel-title" style="color:white">
+                <i class="fa fa-sliders-h"></i> Filter
+            </div>
+        </a>
+    </div>
+    <div id="collapse1" class="panel-collapse collapse bg-white p-3 shadow m-0 p-0">
+        <div class="form-row">
+            <!--AREA -->
+            <div class="col-md-3 mb-3">
+                <label for="AREA">Area</label>
+                <div class="input-group">
+                    <select class="selectpicker w-100" name="area" id="area" data-live-search="true">
+                        <option value="All">All</option>
+                        @{
+                            if (ViewBag.areas != null)
+                            {
+                                foreach (var area in ViewBag.areas)
+                                {
+                                    <option value="@area.Id">@area.Text</option>
+                                }
+                            }
+                        }
+
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="validationTooltip01">Zone </label>
+                <div class="input-group">
+                    <select class="selectpicker w-100" name="zone" id="zone" data-live-search="true">
+                        @*<option value="All">All</option>
+                    @{
+                        if (ViewBag.zones != null)
+                        {
+                            foreach (var zone in ViewBag.zones)
+                            {
+                                <option value="@zone.Id">@zone.Text</option>
+                            }
+                        }
+                    }*@
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="validationTooltip03">Outlet</label>
+                <div class="input-group">
+                    <select class="selectpicker w-100" name="outlet" id="outlet" data-live-search="true">
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-2 mb-3">
+                <label for="validationTooltip03" class="text-white">Z</label>
+                <div class="input-group">
+                    <button class="btn btn-primary" id="filter" type="submit"><i class="fa fa-search"></i> Search <i class="fas fa-spinner fa-pulse" id="loadingIcon"></i></button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xl-6 col-lg-6">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">National Sales</h6>
+            </div>
+            <div class="card-body">
+                <div class="chart-area">
+                    <canvas id="nationalwisesales"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6 col-lg-6">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Catagory wise Sales</h6>
+            </div>
+            <div class="card-body">
+                <div class="chart-area">
+                    <canvas id="catwisesales"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6 col-lg-6">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Area wise Sales</h6>
+            </div>
+            <div class="card-body">
+                <div class="chart-area">
+                    <canvas id="areawisesales"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-6 col-lg-6">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">PG wise Sales</h6>
+            </div>
+            <div class="card-body">
+                <div class="chart-bar">
+                    <canvas id="pgwisesales"></canvas>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-xl-12 col-lg-12">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 d-flex justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">MAG wise Sales</h6>
+                <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#magexend" aria-expanded="false" aria-controls="magexend">Show list</button>
+            </div>
+            <div class="card-body">
+                <div class="chart-area">
+                    <canvas id="wimagsesales"></canvas>
+                </div>
+                <div class="collapse" id="magexend">
+                    <div class="card card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">First</th>
+                                    <th scope="col">Last</th>
+                                    <th scope="col">Handle</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@@mdo</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@@fat</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>@@twitter</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+@section extra_script {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            loadermodal();
+            Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+            Chart.defaults.global.defaultFontColor = '#858796';
+
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("loadOutletChart")',
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    //chart colours 
+                    const colors = {
+                        first: {
+                            fill: '#8fa8c869',
+                            stroke: '#4e73df',
+                        },
+                        second: {
+                            fill: '#5d9bf7',
+                            stroke: '#8fa8c869',
+                        },
+                        third: {
+                            fill: '#e0eadf',
+                            stroke: '#1cc88a',
+                        },
+                    };
+
+                    //pg wise 
+                    let pgtyearnetsale = [];
+                    let pgtYearTargetAmount = [];
+                    let pg = [];
+                    for (var i = 0; i < data.PGwiseChartModel.length; i++) {
+                        pgtyearnetsale.push(data.PGwiseChartModel[i].TYearNetSale);
+                        pgtYearTargetAmount.push(data.PGwiseChartModel[i].TYearTargetAmount);
+                        pg.push(data.PGwiseChartModel[i].PGName);
+                    }
+                    var pgctxchart = document.getElementById("pgwisesales").getContext("2d");
+                    const pgchart = new Chart(pgctxchart, {
+                        type: 'horizontalBar',
+                        data: {
+                            labels: pg,
+                            datasets: [ {
+                                label: "This Year Target Amount",
+                                fill: true,
+                                backgroundColor: colors.first.fill,
+                                pointBackgroundColor: colors.first.stroke,
+                                borderColor: colors.first.stroke,
+                                pointHighlightStroke: colors.first.stroke,
+                                data: pgtYearTargetAmount,
+                            },{
+                                label: "This year net sale",
+                                fill: true,
+                                backgroundColor: colors.second.fill,
+                                pointBackgroundColor: colors.second.stroke,
+                                borderColor: colors.second.stroke,
+                                pointHighlightStroke: colors.second.stroke,
+                                borderCapStyle: 'butt',
+                                data: pgtyearnetsale,
+                            }],
+                        },
+                        options: {
+                            maintainAspectRatio: false,
+                            scaleShowValues: true,
+                            scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        autoSkip: false
+                                    }
+                                }]
+                            },
+                            animation: {
+                                duration: 750,
+                            },
+                        }
+                    });
+
+                    //Mag wise
+                    let magtyearnetsale = [];
+                    let magtYearTargetAmount = [];
+                    let mag = [];
+                    for (var i = 0; i < data.MAGwiseChartModel.length; i++) {
+                        magtyearnetsale.push(data.MAGwiseChartModel[i].TYearNetSale);
+                        magtYearTargetAmount.push(data.MAGwiseChartModel[i].TYearTargetAmount);
+                        mag.push(data.MAGwiseChartModel[i].MAGName);
+                    }
+                    var magctxChart = document.getElementById("wimagsesales").getContext("2d");
+                    const magChart = new Chart(magctxChart, {
+                        type: 'bar',
+                        data: {
+                            labels: mag,
+                            datasets: [{
+                                label: "This Year Target Amount",
+                                fill: true,
+                                backgroundColor: colors.first.fill,
+                                pointBackgroundColor: colors.first.stroke,
+                                borderColor: colors.first.stroke,
+                                pointHighlightStroke: colors.first.stroke,
+                                data: magtYearTargetAmount,
+                            },{
+                                label: "This year net sale",
+                                fill: true,
+                                backgroundColor: colors.second.fill,
+                                pointBackgroundColor: colors.second.stroke,
+                                borderColor: colors.second.stroke,
+                                pointHighlightStroke: colors.second.stroke,
+                                borderCapStyle: 'butt',
+                                data: magtyearnetsale,
+                            }],
+                        },
+                        options: {
+                            maintainAspectRatio: false,
+                            scaleShowValues: true,
+                            scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        autoSkip: false
+                                    }
+                                }]
+                            },
+                            animation: {
+                                duration: 750,
+                            },
+                        }
+                    });
+
+                    //area chart
+                    let areatyearnetsale = [];
+                    let areatYearTargetAmount = [];
+                    let area = [];
+                    for (var i = 0; i < data.AreawiseChartModel.length; i++) {
+                        areatyearnetsale.push(data.AreawiseChartModel[i].TYearNetSale);
+                        areatYearTargetAmount.push(data.AreawiseChartModel[i].TYearTargetAmount);
+                        area.push(data.AreawiseChartModel[i].AreaName);
+                    }
+                    var areactxChart = document.getElementById("areawisesales").getContext("2d");
+                    const areaChart = new Chart(areactxChart, {
+                        type: 'line',
+                        data: {
+                            labels: area,
+                            datasets: [ {
+                                label: "This Year Target Amount",
+                                fill: true,
+                                //backgroundColor: colors.first.fill,
+                                //pointBackgroundColor: colors.first.stroke,
+                                borderColor: colors.first.stroke,
+                                //pointHighlightStroke: colors.first.stroke,
+                                data: areatYearTargetAmount,
+                            },{
+                                label: "This year net sale",
+                                fill: true,
+                                //backgroundColor: colors.third.fill,
+                                //pointBackgroundColor: colors.third.stroke,
+                                borderColor: colors.third.stroke,
+                                //pointHighlightStroke: colors.third.stroke,
+                                //borderCapStyle: 'butt',
+                                data: areatyearnetsale,
+                            }],
+                        },
+                        options: {
+                            maintainAspectRatio: false,
+                            scaleShowValues: true,
+                            scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        autoSkip: false
+                                    }
+                                }]
+                            },
+                            animation: {
+                                duration: 750,
+                            },
+                        }
+                    });
+
+                    //cat wise 
+                    let cattyearnetsale = [];
+                    let cattYearTargetAmount = [];
+                    let cat = [];
+                    for (var i = 0; i < data.CatwiseChartModel.length; i++) {
+                        cattyearnetsale.push(data.CatwiseChartModel[i].TYearNetSale);
+                        cattYearTargetAmount.push(data.CatwiseChartModel[i].TYearTargetAmount);
+                        cat.push(data.CatwiseChartModel[i].PGCategory);
+                    }
+                    var catctxChart = document.getElementById("catwisesales").getContext("2d");
+                    const catChart = new Chart(catctxChart, {
+                        type: 'bar',
+                        data: {
+                            labels: cat,
+                            datasets: [{
+                                label: "This Year Target Amount",
+                                fill: true,
+                                backgroundColor: colors.first.fill,
+                                pointBackgroundColor: colors.first.stroke,
+                                borderColor: colors.first.stroke,
+                                pointHighlightStroke: colors.first.stroke,
+                                data: cattYearTargetAmount,
+                            },{
+                                label: "This year net sale",
+                                fill: true,
+                                backgroundColor: colors.second.fill,
+                                pointBackgroundColor: colors.second.stroke,
+                                borderColor: colors.second.stroke,
+                                pointHighlightStroke: colors.second.stroke,
+                                borderCapStyle: 'butt',
+                                data: cattyearnetsale,
+                            }],
+                        },
+                        options: {
+                            maintainAspectRatio: false,
+                            scaleShowValues: true,
+                            scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        autoSkip: false
+                                    }
+                                }]
+                            },
+                            animation: {
+                                duration: 750,
+                            },
+                        }
+                    });
+
+                    //nat wise 
+                    let nattyearnetsale = [];
+                    let nattYearTargetAmount = [];
+                    let nat = [];
+                    nattyearnetsale.push(data.NationalwiseChartModel.TYearNetSale);
+                    nattYearTargetAmount.push(data.NationalwiseChartModel.TYearTargetAmount);
+                        nat.push(data.NationalwiseChartModel.NationalName);
+                    var natctxChart = document.getElementById("nationalwisesales").getContext("2d");
+                    const natChart = new Chart(natctxChart, {
+                        type: 'pie',
+                        data: {
+                            labels: ["This Year Target Amount", "This year net sale"],
+                            datasets: [{
+                                label: "National",
+                                fill: true,
+                                backgroundColor: [colors.first.fill, colors.second.fill],
+                                data: [nattYearTargetAmount,nattyearnetsale],
+                            }
+                            ],
+                        },
+                        options: {
+                            maintainAspectRatio: false,
+                            scaleShowValues: true,
+                            scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        autoSkip: false
+                                    }
+                                }]
+                            },
+                            animation: {
+                                duration: 750,
+                            },
+                        }
+                    });
+                    
+                    closeloadermodal();
+                    $("#loadingIcon").addClass("d-none");
+
+                },
+                error: function () {
+                    alert("Error");
+
+                }
+            });
+
+        });
+
+    </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+    <script>
+        function loadOutlet() {
+            $("#outlet").find('option').remove();
+            $('#outlet').selectpicker('refresh');
+            var zone = $('#zone option:selected').val();
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("loadOutlet", "Common")',
+                data: { zone: zone },
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $('#outlet').append($('<option>', {
+                        value: 'All',
+                        text: 'All'
+                    }));
+                    $('#outlet').selectpicker('refresh');
+                    for (var i = 0; i < data.length; i++) {
+                        $('#outlet').append($('<option>', {
+                            value: data[i].Id,
+                            text: data[i].Text
+                        }));
+                        $('#outlet').selectpicker('refresh');
+                    }
+
+                },
+                error: function () {
+                    alert("Error while inserting data");
+                }
+            });
+        }
+
+
+        $("#PGCat").change(function () {
+            $("#pg").find('option').remove();
+            $('#pg').selectpicker('refresh');
+            var valueSelected = this.value;
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("loapgbycat", "Common")',
+                data: { cat: valueSelected },
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $('#pg').append($('<option>', {
+                        value: 'All',
+                        text: 'All'
+                    }));
+                    $("#pg option[value='All']").prop('selected', true);
+                    $('#pg').selectpicker('refresh');
+                    for (var i = 0; i < data.length; i++) {
+                        //s += '<option value="' + data[i].MarketGroupCode + '">' + data[i].MarketGroupDesc + '</option>';
+                        $('#pg').append($('<option>', {
+                            value: data[i].Id,
+                            text: data[i].Text
+                        }));
+                        $('#pg').selectpicker('refresh');
+                    }
+                },
+                error: function () {
+                    alert("Error while inserting data");
+                }
+            });
+            return false;
+        });
+
+
+
+        //Area dropdown init
+        $("#area").change(function () {
+            $("#zone").find('option').remove();
+            $('#zone').selectpicker('refresh');
+            var valueSelected = this.value;
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("loadZones", "Common")',
+                data: { area: valueSelected },
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $('#zone').append($('<option>', {
+                        value: 'All',
+                        text: 'All'
+                    }));
+                    $("#zone option[value='All']").prop('selected', true);
+                    $('#zone').selectpicker('refresh');
+                    for (var i = 0; i < data.length; i++) {
+                        //s += '<option value="' + data[i].MarketGroupCode + '">' + data[i].MarketGroupDesc + '</option>';
+                        $('#zone').append($('<option>', {
+                            value: data[i].Id,
+                            text: data[i].Text
+                        }));
+                        $('#zone').selectpicker('refresh');
+                    }
+                    loadOutlet();
+                },
+                error: function () {
+                    alert("Error while inserting data");
+                }
+            });
+            return false;
+        });
+
+
+        $("#zone").change(function () {
+            loadOutlet();
+            return false;
+        });
+
+
+        //Customer dropdown init
+        $("#custType").change(function () {
+            var selectedType = this.value;
+            var selectedZone = $("#zone option:selected").val();
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("loadCust")',
+                data: { type: selectedType, zone: selectedZone },
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $("#cust").find('option').remove();
+                    $('#cust').selectpicker('refresh');
+                    $('#cust').append($('<option>', {
+                        value: 'All',
+                        text: 'All'
+                    }));
+                    $('#cust').selectpicker('refresh');
+                    for (var i = 0; i < data.length; i++) {
+                        $('#cust').append($('<option>', {
+                            value: data[i].Id,
+                            text: data[i].Text
+                        }));
+                        $('#cust').selectpicker('refresh');
+                    }
+
+                },
+                error: function () {
+                    alert("Error while inserting data");
+                }
+            });
+            return false;
+        });
+    </script>
+
+}

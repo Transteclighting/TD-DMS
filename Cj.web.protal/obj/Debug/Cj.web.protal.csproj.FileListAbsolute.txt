@@ -1,0 +1,110 @@
+D:\BitBucket\dms_web\Cj.web.protal\bin\roslyn\csc.exe
+D:\BitBucket\dms_web\Cj.web.protal\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\BitBucket\dms_web\Cj.web.protal\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\BitBucket\dms_web\Cj.web.protal\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\BitBucket\dms_web\Cj.web.protal\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\BitBucket\dms_web\Cj.web.protal\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\BitBucket\dms_web\Cj.web.protal\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\BitBucket\dms_web\Cj.web.protal\bin\roslyn\System.Collections.Immutable.dll
+D:\BitBucket\dms_web\Cj.web.protal\bin\roslyn\System.Reflection.Metadata.dll
+D:\BitBucket\dms_web\Cj.web.protal\bin\roslyn\vbc.exe
+D:\BitBucket\dms_web\Cj.web.protal\bin\roslyn\VBCSCompiler.exe
+D:\BitBucket\dms_web\Cj.web.protal\bin\roslyn\VBCSCompiler.exe.config
+D:\BitBucket\dms_web\Cj.web.protal\bin\Cj.web.protal.dll.config
+D:\BitBucket\dms_web\Cj.web.protal\bin\Cj.web.protal.dll
+D:\BitBucket\dms_web\Cj.web.protal\bin\Cj.web.protal.pdb
+D:\BitBucket\dms_web\Cj.web.protal\bin\Antlr3.Runtime.dll
+D:\BitBucket\dms_web\Cj.web.protal\bin\EntityFramework.dll
+D:\BitBucket\dms_web\Cj.web.protal\bin\EntityFramework.SqlServer.dll
+D:\BitBucket\dms_web\Cj.web.protal\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\BitBucket\dms_web\Cj.web.protal\bin\Microsoft.Web.Infrastructure.dll
+D:\BitBucket\dms_web\Cj.web.protal\bin\Newtonsoft.Json.dll
+D:\BitBucket\dms_web\Cj.web.protal\bin\System.Net.Http.Formatting.dll
+D:\BitBucket\dms_web\Cj.web.protal\bin\System.Web.Helpers.dll
+D:\BitBucket\dms_web\Cj.web.protal\bin\System.Web.Http.dll
+D:\BitBucket\dms_web\Cj.web.protal\bin\System.Web.Http.WebHost.dll
+D:\BitBucket\dms_web\Cj.web.protal\bin\System.Web.Mvc.dll
+D:\BitBucket\dms_web\Cj.web.protal\bin\System.Web.Optimization.dll
+D:\BitBucket\dms_web\Cj.web.protal\bin\System.Web.Razor.dll
+D:\BitBucket\dms_web\Cj.web.protal\bin\System.Web.WebPages.Deployment.dll
+D:\BitBucket\dms_web\Cj.web.protal\bin\System.Web.WebPages.dll
+D:\BitBucket\dms_web\Cj.web.protal\bin\System.Web.WebPages.Razor.dll
+D:\BitBucket\dms_web\Cj.web.protal\bin\WebGrease.dll
+D:\BitBucket\dms_web\Cj.web.protal\bin\EntityFramework.xml
+D:\BitBucket\dms_web\Cj.web.protal\bin\EntityFramework.SqlServer.xml
+D:\BitBucket\dms_web\Cj.web.protal\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\BitBucket\dms_web\Cj.web.protal\bin\System.Web.Helpers.xml
+D:\BitBucket\dms_web\Cj.web.protal\bin\System.Web.Mvc.xml
+D:\BitBucket\dms_web\Cj.web.protal\bin\System.Web.Optimization.xml
+D:\BitBucket\dms_web\Cj.web.protal\bin\System.Web.Razor.xml
+D:\BitBucket\dms_web\Cj.web.protal\bin\System.Web.WebPages.xml
+D:\BitBucket\dms_web\Cj.web.protal\bin\System.Web.WebPages.Deployment.xml
+D:\BitBucket\dms_web\Cj.web.protal\bin\System.Web.WebPages.Razor.xml
+D:\BitBucket\dms_web\Cj.web.protal\bin\Antlr3.Runtime.pdb
+D:\BitBucket\dms_web\Cj.web.protal\bin\Newtonsoft.Json.xml
+D:\BitBucket\dms_web\Cj.web.protal\bin\System.Net.Http.Formatting.xml
+D:\BitBucket\dms_web\Cj.web.protal\bin\System.Web.Http.xml
+D:\BitBucket\dms_web\Cj.web.protal\bin\System.Web.Http.WebHost.xml
+D:\BitBucket\dms_web\Cj.web.protal\obj\Debug\Cj.web.protal.csprojResolveAssemblyReference.cache
+D:\BitBucket\dms_web\Cj.web.protal\obj\Debug\Cj.web.protal.dll
+D:\BitBucket\dms_web\Cj.web.protal\obj\Debug\Cj.web.protal.pdb
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\roslyn\csc.exe
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\roslyn\System.Collections.Immutable.dll
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\roslyn\System.Reflection.Metadata.dll
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\roslyn\vbc.exe
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\roslyn\VBCSCompiler.exe
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\roslyn\VBCSCompiler.exe.config
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\Cj.web.protal.dll.config
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\Cj.web.protal.dll
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\Cj.web.protal.pdb
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\Antlr3.Runtime.dll
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\CrystalDecisions.CrystalReports.Engine.dll
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\CrystalDecisions.ReportSource.dll
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\CrystalDecisions.Shared.dll
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\CrystalDecisions.Web.dll
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\EntityFramework.dll
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\EntityFramework.SqlServer.dll
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\Microsoft.Web.Infrastructure.dll
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\Newtonsoft.Json.dll
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\System.Net.Http.Formatting.dll
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\System.Web.Helpers.dll
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\System.Web.Http.dll
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\System.Web.Http.WebHost.dll
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\System.Web.Mvc.dll
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\System.Web.Optimization.dll
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\System.Web.Razor.dll
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\System.Web.WebPages.Deployment.dll
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\System.Web.WebPages.dll
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\System.Web.WebPages.Razor.dll
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\WebGrease.dll
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\CrystalDecisions.ReportAppServer.CommLayer.dll
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\CrystalDecisions.ReportAppServer.DataSetConversion.dll
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\CrystalDecisions.ReportAppServer.Prompting.dll
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\CrystalDecisions.ReportAppServer.XmlSerialize.dll
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\CrystalDecisions.ReportAppServer.CubeDefModel.dll
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\CrystalDecisions.ReportAppServer.CommonObjectModel.dll
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\EntityFramework.xml
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\EntityFramework.SqlServer.xml
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\System.Web.Helpers.xml
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\System.Web.Mvc.xml
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\System.Web.Optimization.xml
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\System.Web.Razor.xml
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\System.Web.WebPages.xml
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\System.Web.WebPages.Deployment.xml
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\System.Web.WebPages.Razor.xml
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\Antlr3.Runtime.pdb
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\Newtonsoft.Json.xml
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\System.Net.Http.Formatting.xml
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\System.Web.Http.xml
+D:\Local\Tel\TD DMS WF\Cj.web.protal\bin\System.Web.Http.WebHost.xml
+D:\Local\Tel\TD DMS WF\Cj.web.protal\obj\Debug\Cj.web.protal.dll
+D:\Local\Tel\TD DMS WF\Cj.web.protal\obj\Debug\Cj.web.protal.pdb
+D:\Local\Tel\TD DMS WF\Cj.web.protal\obj\Debug\Cj.web.protal.csprojResolveAssemblyReference.cache

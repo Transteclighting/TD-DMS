@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DSQRCode" targetNamespace="http://tempuri.org/DSQRCode.xsd" xmlns:mstns="http://tempuri.org/DSQRCode.xsd" xmlns="http://tempuri.org/DSQRCode.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+        </Connections>
+        <Tables>
+        </Tables>
+        <Sources>
+        </Sources>
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DSQRCode" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="DSQRCode" msprop:Generator_DataSetName="DSQRCode">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="QRCode" msprop:Generator_UserTableName="QRCode" msprop:Generator_RowDeletedName="QRCodeRowDeleted" msprop:Generator_TableClassName="QRCodeDataTable" msprop:Generator_RowChangedName="QRCodeRowChanged" msprop:Generator_RowClassName="QRCodeRow" msprop:Generator_RowChangingName="QRCodeRowChanging" msprop:Generator_RowEvArgName="QRCodeRowChangeEvent" msprop:Generator_RowEvHandlerName="QRCodeRowChangeEventHandler" msprop:Generator_TablePropName="QRCode" msprop:Generator_TableVarName="tableQRCode" msprop:Generator_RowDeletingName="QRCodeRowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="QRImage" msprop:Generator_UserColumnName="QRImage" msprop:Generator_ColumnPropNameInRow="QRImage" msprop:Generator_ColumnVarNameInTable="columnQRImage" msprop:Generator_ColumnPropNameInTable="QRImageColumn" type="xs:base64Binary" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

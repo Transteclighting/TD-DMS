@@ -1,0 +1,193 @@
+﻿
+@{
+    ViewBag.Title = "DMS|Goods Receive";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    fieldset {
+        /*margin-top: 2px;*/
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-size: 14px;
+        border: 1px solid #1F497D;
+        background: #ddd;
+        border-radius: 5px;
+        width: 98%;
+        float: left;
+        position: relative;
+    }
+
+        fieldset legend {
+            background: #1F497D;
+            color: #fff;
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 5px;
+            box-shadow: 0 0 0 5px #ddd;
+            margin-left: 20px;
+            width: 115px;
+        }
+
+    #products fieldset {
+        /*margin: 5px;*/
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        border: 1px solid #1F497D;
+        background: #ddd;
+        border-radius: 5px;
+        width: 98%;
+        float: left;
+        position: relative;
+    }
+
+    #products legend {
+        background: #1F497D;
+        color: #fff;
+        padding: 5px 10px;
+        font-size: 12px;
+        border-radius: 5px;
+        box-shadow: 0 0 0 5px #ddd;
+        margin-left: 20px;
+        width: 70px;
+    }
+</style>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    if (ViewBag.CreateMsg != null)
+    {
+        if (ViewBag.StockInStatus == "1")
+        {
+            <div class="alert alert-success alert-dismissible fade in">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close"><span class="glyphicon glyphicon-remove text-danger"></span></a>
+                <strong>Congratulation!</strong> @ViewBag.StockInMsg
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-danger alert-dismissable fade in">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close"><span class=" glyphicon glyphicon-remove text-danger"></span></a>
+                <strong>Sorry!</strong> @ViewBag.StockInMsg
+            </div>
+        }
+    }
+
+
+
+    <fieldset>
+        <legend>Invoice List</legend>
+        <table id="productSearchFilter">
+            <tr>
+                <td>
+                    @Html.DropDownList("InvoiceNo", (SelectList)ViewBag.All_Invoice, "<Invoice-ALL>", htmlAttributes: new { @class = "form-control" })
+                </td>
+                <td style="padding:3px">
+                    <button style="float: right;width:150px" type="submit" id="btnGet" class="btn btn-primary btn-md">
+                        <span class="glyphicon glyphicon-search"></span> Get
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+
+
+    <div id="products">
+        <fieldset>
+            <legend>Products</legend>
+
+            <table id="example" style="overflow-x:auto;color:black;" class="table table-bordered">
+                <thead style="background-color:cadetblue;color:black;">
+                    <tr>
+                        <th>
+                            @Html.DisplayName("Product Code")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Product Name")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Barcode/Serial")
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="selectProducts"></tbody>
+            </table>
+        </fieldset>
+
+        <button style="float: left; width:150px" type="submit" id="btnsave" class="btn btn-primary btn-md">
+            <span class="glyphicon glyphicon-saved"></span> Save
+        </button>
+
+    </div>
+}
+
+@section scripts
+{
+    <script>
+
+        $(document).ready(function () {
+            $('#example').dataTable({
+                //  "pageLength": 500,
+                "columns": [
+                    { className: "dt-body-center", "width": "200px" },
+                    { "width": "500px" },
+                    { "width": "300px" },
+                ]
+            });
+
+            $("#btnsave").click(function () {
+
+                var InvoiceNo = $("#InvoiceNo").val();
+                var jsnFormatData = {
+                    InvoiceNo: InvoiceNo
+                };
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("SaveProduct", "GoodReceive")',
+                    data: JSON.stringify(jsnFormatData),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (r) {
+                        alert("Good Receive Successfull");
+                    }
+                });
+            });
+
+            $("#btnGet").click(function () {
+                var table = $('#example').DataTable();
+                table.clear().draw();
+                var InvoiceNo = $("#InvoiceNo").val();
+                var jsnFormatData = {
+                    InvoiceNo: InvoiceNo
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetProducts", "GoodReceive")',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(jsnFormatData),
+                    dataType: "json",
+                    success: function (data) {
+                        $.each(data, function (i) {
+                            var offerPrice = data[i].Rsp - data[i].PromoDiscount;
+                            $('#example').DataTable().row.add([
+
+                                '<input name="[' + i + '].ProductCode" type="hidden" value="' + data[i].ProductCode + '" />' + data[i].ProductCode,
+                                '<input name="[' + i + '].ProductName" type="hidden" value="' + data[i].ProductName + '" />' + data[i].ProductName,
+                                '<input name="[' + i + '].ProductSerialNo" type="hidden" value="' + data[i].ProductSerialNo + '" />' + data[i].ProductSerialNo
+
+                            ]).draw();
+                        });
+                    }
+                });
+                return false;
+
+            });
+
+        });
+    </script>
+
+
+}
+
+

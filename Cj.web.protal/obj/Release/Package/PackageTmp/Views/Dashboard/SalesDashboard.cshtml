@@ -1,0 +1,1060 @@
+﻿@{
+    ViewBag.Title = "Sales Dashboard | CJ Web Portal";
+}
+
+@section extra_style {
+    <link href="~/Content/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/3.3.3/css/fixedColumns.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.9/css/fixedHeader.bootstrap4.min.css">}
+
+@section breadcrumb{
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"><a href="/">Dashboard</a></li>
+            <li class="breadcrumb-item" aria-current="page">@Html.ActionLink("Sales ", ViewContext.RouteData.Values["Action"].ToString(), ViewContext.RouteData.Values["controller"].ToString())</li>
+        </ol>
+    </nav>
+}
+
+<div class="panel" style="margin: 10px auto;">
+    <div class="panel-heading bg-gradient-primary">
+        <a data-toggle="collapse" href="#collapse1" class="collapsed">
+            <div class="panel-title" style="color:white">
+                <i class="fa fa-sliders-h"></i> Filter
+            </div>
+        </a>
+    </div>
+    <div id="collapse1" class="panel-collapse collapse bg-white p-3 shadow m-0 p-0">
+        <div class="form-row">
+            <!--AREA -->
+            <div class="col-md-3 mb-3">
+                <label for="validationTooltip03">PG Category</label>
+                <div class="input-group">
+                    <select class="selectpicker w-100" name="pgcat" id="pgcat" data-live-search="true">
+                        <option value="">All</option>
+                        @{
+                            if (ViewBag.PGCat != null)
+                            {
+                                foreach (var pg in ViewBag.PGCat)
+                                {
+                                    <option value="@pg.Id">@pg.Text</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="validationTooltip03">PG</label>
+                <div class="input-group">
+                    <select class="selectpicker w-100" name="pg" id="pg" data-live-search="true">
+                        @*<option value="">All</option>
+                            @{
+                                if (ViewBag.pg != null)
+                                {
+                                    foreach (var pg in ViewBag.pg)
+                                    {
+                                        <option value="@pg.Id">@pg.Text</option>
+                                    }
+                                }
+                            }*@
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="validationTooltip03">Brand</label>
+                <div class="input-group">
+                    <select class="selectpicker w-100" name="brand" id="brand" data-live-search="true">
+                        <option value="">All</option>
+                        @{
+                            if (ViewBag.brand != null)
+                            {
+                                foreach (var brand in ViewBag.brand)
+                                {
+                                    <option value="@brand.Id">@brand.Text</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="validationTooltip01">Year </label>
+                <div class="input-group">
+                    <select class="selectpicker w-100" name="year" id="year" data-live-search="true">
+                        <option value="">Please select</option>
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="validationTooltip01">Month </label>
+                <div class="input-group">
+                    <select class="selectpicker w-100" name="month" id="month" data-live-search="true"></select>
+                </div>
+            </div>
+            <div class="col-md-2 mb-3">
+                <label for="validationTooltip03" class="text-white">Z</label>
+                <div class="input-group">
+                    <button class="btn btn-primary" id="filter" type="submit"><i class="fa fa-search"></i> Search <i class="fas fa-spinner fa-pulse d-none" id="loadingIcon"></i></button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
+    <div id="accordion" class="col-12">
+        <div class="card">
+            <div class="card-header panel-heading bg-gradient-primary text-white m-0 p-0" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-link text-white w-100 text-left" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Sales
+                    </button>
+                </h5>
+            </div>
+
+            <div id="collapseOne" class="collapse show row" aria-labelledby="headingOne" data-parent="#accordion">
+
+                <div class="col-xl-6 col-lg-6">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">National sales | Values (in million)</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-area" id="pnationalwisesales">
+                                <canvas id="nationalwisesales"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-xl-6 col-lg-6">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Category Sales | Values (in million)</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-area" id="pcatwisesales">
+                                <canvas id="catwisesales"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Area Wise Weekly Sales | Values (in million)</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-area" id="pmonthwisesales">
+                                <canvas id="monthwisesales"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Daily National sales | Values (in million)</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-area" id="pdatewisedsales">
+                                <canvas id="datewisedsales"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Daily National-1 sales | Values (in million)</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-area" id="pn1wisedsales">
+                                <canvas id="n1wisedsales"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-12 col-lg-12">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Daily National-2 sales | Values (in million)</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-area" id="pn2wisedsales">
+                                <canvas id="n2wisedsales"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Daily E-Store sales | Values (in million)</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-area" id="pestorewisedsales">
+                                <canvas id="estorewisedsales"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Area wise Sales | Values (in million)</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-area" id="pareawisesales">
+                                <canvas id="areawisesales"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-6 col-lg-6">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">PG wise Sales | Values (in million)</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-bar" id="ppgwisesales">
+                                <canvas id="pgwisesales"></canvas>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-xl-12 col-lg-12">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">MAG wise Sales | Values (in million)</h6>
+                            @*<button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#magexend" aria-expanded="false" aria-controls="magexend">Show list</button>*@
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-area" id="pwimagsesales">
+                                <canvas id="wimagsesales"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header panel-heading bg-gradient-primary text-white m-0 p-0" id="headingTwo">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed text-white w-100 text-left" data-toggle="collapse" data-target="#collapsethree" aria-expanded="false" aria-controls="collapsethree">
+                        Administrative
+                    </button>
+                </h5>
+            </div>
+            <div id="collapsethree" class="collapse row" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="col-xl-12 col-lg-12">
+                    <div id="stockexend">
+                        <div class="card card-body">
+                            <table class="table table-bordered" style="width:100%" id="dataTable2">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Position Name</th>
+                                        <th>Present</th>
+                                        <th>Late</th>
+                                        <th>Roster</th>
+                                        <th>Abcent</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td scope="col">BM</td>
+                                        <td>70</td>
+                                        <td>71</td>
+                                        <td>72</td>
+                                        <td>89</td>
+                                        <td>2</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="col">ABM-cat1</td>
+                                        <td>100</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="col">ABM-Cat2</td>
+                                        <td>200</td>
+                                        <td>3</td>
+                                        <td>3</td>
+                                        <td>3</td>
+                                        <td>3</td>
+                                        <td>3</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="col">Executive</td>
+                                        <td>200</td>
+                                        <td>3</td>
+                                        <td>3</td>
+                                        <td>3</td>
+                                        <td>3</td>
+                                        <td>3</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="col">Shop assistant</td>
+                                        <td>200</td>
+                                        <td>3</td>
+                                        <td>3</td>
+                                        <td>3</td>
+                                        <td>3</td>
+                                        <td>3</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+@section extra_script {
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>*@
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+
+    <!-- Page level plugins -->
+    <script src="~/Content/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Content/datatables/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            function loadermodal() {
+                $('#loadermodal').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+            };
+            function closeloadermodal() {
+                setTimeout(function () {
+                    $('#loadermodal').modal('hide');
+                }, 500);
+            };
+            function loaddata() {
+                $("#loadingIcon").removeClass("d-none");
+                loadermodal();
+                //load data
+                loadCharts();
+                loadTable();
+                //end load data
+                $("#loadingIcon").addClass("d-none");
+            };
+            $("#filter").click(function () {
+                loaddata();
+            });
+            function loadCharts() {
+                // Register the plugin to all charts:
+                Chart.register(ChartDataLabels);
+                // Change default options for ALL charts
+                Chart.defaults.set('plugins.datalabels', {
+                    backgroundColor: function (context) {
+                        return context.dataset.backgroundColor;
+                    },
+                    borderRadius: 2,
+                    padding: 2,
+                    color: 'white',
+                });
+                //chart colours
+                const colors = {
+                    first: {
+                        fill: '#8fa8c869',
+                        stroke: '#4e73df',
+                    },
+                    second: {
+                        fill: '#5d9bf7',
+                        stroke: '#8fa8c869',
+                    },
+                    third: {
+                        fill: '#91f5de',
+                        stroke: '#1cc88a',
+                    },
+                };
+                var pgcat = $('#pgcat option:selected').text();
+                var pg = $('#pg option:selected').text();
+                var brand = $('#brand option:selected').text();
+                var month = $('#month option:selected').val();
+                var year = $('#year option:selected').val();
+
+                $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("loadSailsChart")',
+                    "data": { pg: pg, brand: brand, pgcat: pgcat, month: month, year: year },
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+
+                        //pg wise
+                        let pgtyearnetsale = [];
+                        let pgtYearTargetAmount = [];
+                        let pg = [];
+                        for (var i = 0; i < data.PGwiseChartModel.length; i++) {
+                            pgtyearnetsale.push(data.PGwiseChartModel[i].TYearNetSale);
+                            pgtYearTargetAmount.push(data.PGwiseChartModel[i].TYearTargetAmount);
+                            pg.push(data.PGwiseChartModel[i].PGName);
+                        }
+                        $('#pgwisesales').remove(); // this is my <canvas> element
+                        $('#ppgwisesales').append('<canvas id="pgwisesales"><canvas>');
+                        var pgctxchart = document.getElementById("pgwisesales").getContext("2d");
+                        const pgchart = new Chart(pgctxchart, {
+                            type: 'bar',
+                            data: {
+                                labels: pg,
+                                datasets: [{
+                                    label: "Target",
+                                    fill: true,
+                                    backgroundColor: '#5d9bf7',
+                                    pointBackgroundColor:  '#4e73df',
+                                    borderColor:  '#4e73df',
+                                    pointHighlightStroke:  '#4e73df',
+                                    data: pgtYearTargetAmount,
+                                }, {
+                                    label: "Actual",
+                                    fill: true,
+                                    backgroundColor: '#12b75c',
+                                    pointBackgroundColor:'#8fa8c869',
+                                    borderColor:'#8fa8c869',
+                                    pointHighlightStroke:'#8fa8c869',
+                                    borderCapStyle: 'butt',
+                                    data: pgtyearnetsale,
+                                }],
+                            },
+                            options: {
+                                plugins: {
+                                    datalabels: {
+                                        align: 'end',
+                                        anchor: 'end',
+                                    }
+                                },
+                                indexAxis: 'y',
+                                maintainAspectRatio: false,
+                                scaleShowValues: true,
+                                scales: {
+                                    xAxes: [{
+                                        ticks: {
+                                            autoSkip: false
+                                        }
+                                    }]
+                                },
+                                animation: {
+                                    duration: 750,
+                                },
+
+                            }
+                        });
+
+                        //Mag wise
+                        let magtyearnetsale = [];
+                        let magtYearTargetAmount = [];
+                        let mag = [];
+                        for (var i = 0; i < data.MAGwiseChartModel.length; i++) {
+                            magtyearnetsale.push(data.MAGwiseChartModel[i].TYearNetSale);
+                            magtYearTargetAmount.push(data.MAGwiseChartModel[i].TYearTargetAmount);
+                            mag.push(data.MAGwiseChartModel[i].MAGName);
+                        }
+                        $('#wimagsesales').remove(); // this is my <canvas> element
+                        $('#pwimagsesales').append('<canvas id="wimagsesales"><canvas>');
+                        var magctxChart = document.getElementById("wimagsesales").getContext("2d");
+                        const magChart = new Chart(magctxChart, {
+                            type: 'bar',
+                            data: {
+                                labels: mag,
+                                datasets: [{
+                                    label: "Target",
+                                    fill: true,
+                                    backgroundColor: '#5d9bf7',
+                                    pointBackgroundColor:  '#4e73df',
+                                    borderColor:  '#4e73df',
+                                    pointHighlightStroke:  '#4e73df',
+                                    data: magtYearTargetAmount,
+                                }, {
+                                    label: "Actual",
+                                    fill: true,
+                                    backgroundColor:'#12b75c',
+                                    pointBackgroundColor:'#8fa8c869',
+                                    borderColor:'#8fa8c869',
+                                    pointHighlightStroke:'#8fa8c869',
+                                    borderCapStyle: 'butt',
+                                    data: magtyearnetsale,
+                                }],
+                            },
+                            options: {
+                                plugins: {
+                                    datalabels: {
+                                        align: 'end',
+                                        anchor: 'end',
+                                        rotation: 90,
+                                    }
+                                },
+                                maintainAspectRatio: false,
+                                scaleShowValues: true,
+                                scales: {
+                                    xAxes: [{
+                                        ticks: {
+                                            autoSkip: false
+                                        }
+                                    }]
+                                },
+                                animation: {
+                                    duration: 750,
+                                },
+                            }
+                        });
+
+                        //area chart
+                        let areatyearnetsale = [];
+                        let areatYearTargetAmount = [];
+                        let area = [];
+                        for (var i = 0; i < data.AreawiseChartModel.length; i++) {
+                            areatyearnetsale.push(data.AreawiseChartModel[i].TYearNetSale);
+                            areatYearTargetAmount.push(data.AreawiseChartModel[i].TYearTargetAmount);
+                            area.push(data.AreawiseChartModel[i].AreaName);
+                        }
+                        $('#areawisesales').remove(); // this is my <canvas> element
+                        $('#pareawisesales').append('<canvas id="areawisesales"><canvas>');
+                        var areactxChart = document.getElementById("areawisesales").getContext("2d");
+                        const areaChart = new Chart(areactxChart, {
+                            type: 'bar',
+                            data: {
+                                labels: area,
+                                datasets: [{
+                                    label: "Target",
+                                    fill: true,
+                                    backgroundColor: "#8fa8c869",
+                                    pointBackgroundColor:  '#4e73df',
+                                    borderColor:  '#4e73df',
+                                    pointHighlightStroke:  '#4e73df',
+                                    data: areatYearTargetAmount,
+                                }, {
+                                    label: "Actual",
+                                    fill: true,
+                                    backgroundColor: colors.third.fill,
+                                    pointBackgroundColor:'#1cc88a',
+                                    borderColor:'#1cc88a',
+                                    pointHighlightStroke:'#1cc88a',
+                                    borderCapStyle: 'butt',
+                                    data: areatyearnetsale,
+                                }],
+                            },
+                            options: {
+                                plugins: {
+                                    datalabels: {
+                                        align: 'end',
+                                        anchor: 'end',
+                                    }
+                                },
+                                maintainAspectRatio: false,
+                                scaleShowValues: true,
+                                scales: {
+                                    xAxes: [{
+                                        ticks: {
+                                            autoSkip: false
+                                        }
+                                    }]
+                                },
+                                animation: {
+                                    duration: 750,
+                                },
+                            }
+                        });
+
+                        //cat wise
+                        let cattyearnetsale = [];
+                        let cattYearTargetAmount = [];
+                        let cat = [];
+                        for (var i = 0; i < data.CatwiseChartModel.length; i++) {
+                            cattyearnetsale.push(data.CatwiseChartModel[i].TYearNetSale);
+                            cattYearTargetAmount.push(data.CatwiseChartModel[i].TYearTargetAmount);
+                            cat.push(data.CatwiseChartModel[i].PGCategory);
+                        }
+                        $('#catwisesales').remove(); // this is my <canvas> element
+                        $('#pcatwisesales').append('<canvas id="catwisesales"><canvas>');
+                        var catctxChart = document.getElementById("catwisesales").getContext("2d");
+                        const catChart = new Chart(catctxChart, {
+                            type: 'bar',
+                            data: {
+                                labels: cat,
+                                datasets: [{
+                                    label: "Target",
+                                    fill: true,
+                                    backgroundColor: '#5d9bf7',
+                                    pointBackgroundColor: '#4e73df',
+                                    borderColor: '#4e73df',
+                                    pointHighlightStroke: '#4e73df',
+                                    data: cattYearTargetAmount,
+                                }, {
+                                    label: "Actual",
+                                    fill: true,
+                                    backgroundColor: '#12b75c',
+                                    pointBackgroundColor: '#1cc88a',
+                                    borderColor: '#1cc88a',
+                                    pointHighlightStroke: '#1cc88a',
+                                    borderCapStyle: 'butt',
+                                    data: cattyearnetsale,
+                                }],
+                            },
+                            options: {
+                                plugins: {
+                                    datalabels: {
+                                        align: 'end',
+                                        anchor: 'end',
+                                    }
+                                },
+                                maintainAspectRatio: false,
+                                scaleShowValues: true,
+                                scales: {
+                                    xAxes: [{
+                                        ticks: {
+                                            autoSkip: false
+                                        }
+                                    }]
+                                },
+                                animation: {
+                                    duration: 750,
+                                },
+                            }
+                        });
+                        //nat wise
+                        let nattyearnetsale = [];
+                        let nattYearTargetAmount = [];
+                        let nat = [];
+                        nattyearnetsale.push(data.NationalwiseChartModel.TYearNetSale);
+                        nattYearTargetAmount.push(data.NationalwiseChartModel.TYearTargetAmount);
+                        nat.push(data.NationalwiseChartModel.NationalName);
+                        $('#nationalwisesales').remove(); // this is my <canvas> element
+                        $('#pnationalwisesales').append('<canvas id="nationalwisesales"><canvas>');
+                        var natctxChart = document.getElementById("nationalwisesales").getContext("2d");
+                        const natChart = new Chart(natctxChart, {
+                            type: 'pie',
+                            data: {
+                                labels: ["Target", "Actual"],
+                                datasets: [{
+                                    label: "National",
+                                    fill: true,
+                                    backgroundColor: ['#5d9bf7', '#12b75c'],
+                                    data: [nattYearTargetAmount, nattyearnetsale],
+                                }
+                                ],
+                            },
+                            options: {
+                                showAllTooltips: true,
+                                maintainAspectRatio: false,
+                                scaleShowValues: true,
+                                scales: {
+                                    xAxes: [{
+                                        ticks: {
+                                            autoSkip: false
+                                        }
+                                    }]
+                                },
+                                animation: {
+                                    duration: 750,
+                                },
+                            }
+                        });
+
+                        //nat wise
+                        let monthtyearnetsale = [];
+                        let monthtYearTargetAmount = [];
+                        let month = [];
+                        for (var i = 0; i < data.MonthwiseChartModel.length; i++) {
+                            monthtyearnetsale.push(data.MonthwiseChartModel[i].TYearNetSale);
+                            monthtYearTargetAmount.push(data.MonthwiseChartModel[i].TYearTargetAmount);
+                            month.push(data.MonthwiseChartModel[i].WeekName);
+                        }
+                        $('#monthwisesales').remove(); // this is my <canvas> element
+                        $('#pmonthwisesales').append('<canvas id="monthwisesales"><canvas>');
+                        var monthctxChart = document.getElementById("monthwisesales").getContext("2d");
+                        const monthChart = new Chart(monthctxChart, {
+                            type: 'bar',
+                            data: {
+                                labels: month,
+                                datasets: [{
+                                    label: "Target",
+                                    fill: true,
+                                    backgroundColor: '#5d9bf7',
+                                    pointBackgroundColor: '#4e73df',
+                                    borderColor: '#4e73df',
+                                    pointHighlightStroke: '#4e73df',
+                                    data: monthtYearTargetAmount,
+                                }, {
+                                    label: "Actual",
+                                    fill: true,
+                                    backgroundColor: '#12b75c',
+                                    pointBackgroundColor: '#1cc88a',
+                                    borderColor: '#1cc88a',
+                                    pointHighlightStroke: '#1cc88a',
+                                    borderCapStyle: 'butt',
+                                    data: monthtyearnetsale,
+                                }],
+                            },
+                            options: {
+                                plugins: {
+                                    datalabels: {
+                                        align: 'end',
+                                        anchor: 'end',
+                                    }
+                                },
+                                maintainAspectRatio: false,
+                                scaleShowValues: true,
+                                scales: {
+                                    xAxes: [{
+                                        ticks: {
+                                            autoSkip: false
+                                        }
+                                    }]
+                                },
+                                animation: {
+                                    duration: 750,
+                                },
+                            }
+                        });
+
+                        //daily sales
+                        let dailynetsale = [];
+                        let dailyTargetAmount = [];
+                        let daily = [];
+                        for (var i = 0; i < data.AreawiseDalysales.length; i++) {
+                            dailynetsale.push(data.AreawiseDalysales[i].NetSales);
+                            dailyTargetAmount.push(data.AreawiseDalysales[i].WeekDayTarget);
+                            daily.push(data.AreawiseDalysales[i].TDate);
+                        }
+                        $('#datewisedsales').remove(); // this is my <canvas> element
+                        $('#pdatewisedsales').append('<canvas id="datewisedsales"><canvas>');
+                        var dailyctxChart = document.getElementById("datewisedsales").getContext("2d");
+                        const dailyChart = new Chart(dailyctxChart, {
+                            type: 'bar',
+                            data: {
+                                labels: daily,
+                                datasets: [{
+                                    label: "Target",
+                                    fill: true,
+                                    backgroundColor: '#5d9bf7',
+                                    pointBackgroundColor: '#4e73df',
+                                    borderColor: '#4e73df',
+                                    pointHighlightStroke: '#4e73df',
+                                    data: dailyTargetAmount,
+                                }, {
+                                    label: "Actual",
+                                    fill: true,
+                                    backgroundColor: '#12b75c',
+                                    pointBackgroundColor: '#1cc88a',
+                                    borderColor: '#1cc88a',
+                                    pointHighlightStroke: '#1cc88a',
+                                    borderCapStyle: 'butt',
+                                    data: dailynetsale,
+                                }],
+                            },
+                            options: {
+                                plugins: {
+                                    datalabels: {
+                                        align: 'end',
+                                        anchor: 'end',
+                                        rotation: 90,
+                                    }
+                                },
+                                maintainAspectRatio: false,
+                                scaleShowValues: true,
+                                scales: {
+                                    xAxes: [{
+                                        ticks: {
+                                            autoSkip: false
+                                        }
+                                    }]
+                                },
+                                animation: {
+                                    duration: 750,
+                                },
+                            }
+                        });
+
+                        //daily sales
+                        let n1netsale = [];
+                        let n1TargetAmount = [];
+                        let n1 = [];
+                        for (var i = 0; i < data.N1wiseDalysales.length; i++) {
+                            n1netsale.push(data.N1wiseDalysales[i].NetSales);
+                            n1TargetAmount.push(data.N1wiseDalysales[i].WeekDayTarget);
+                            n1.push(data.N1wiseDalysales[i].TDate);
+                        }
+                        $('#n1wisedsales').remove(); // this is my <canvas> element
+                        $('#pn1wisedsales').append('<canvas id="n1wisedsales"><canvas>');
+                        var n1ctxChart = document.getElementById("n1wisedsales").getContext("2d");
+                        const n1Chart = new Chart(n1ctxChart, {
+                            type: 'bar',
+                            data: {
+                                labels: n1,
+                                datasets: [{
+                                    label: "Target",
+                                    fill: true,
+                                    backgroundColor: '#5d9bf7',
+                                    pointBackgroundColor: '#4e73df',
+                                    borderColor: '#4e73df',
+                                    pointHighlightStroke: '#4e73df',
+                                    data: n1TargetAmount,
+                                }, {
+                                    label: "Actual",
+                                    fill: true,
+                                    backgroundColor: '#12b75c',
+                                    pointBackgroundColor: '#1cc88a',
+                                    borderColor: '#1cc88a',
+                                    pointHighlightStroke: '#1cc88a',
+                                    borderCapStyle: 'butt',
+                                    data: n1netsale,
+                                }],
+                            },
+                            options: {
+                                plugins: {
+                                    datalabels: {
+                                        align: 'end',
+                                        anchor: 'end',
+                                        rotation: 90,
+                                    }
+                                },
+                                maintainAspectRatio: false,
+                                scaleShowValues: true,
+                                scales: {
+                                    xAxes: [{
+                                        ticks: {
+                                            autoSkip: false
+                                        }
+                                    }]
+                                },
+                                animation: {
+                                    duration: 750,
+                                },
+                            }
+                        });
+
+                        //daily sales
+                        let n2netsale = [];
+                        let n2TargetAmount = [];
+                        let n2 = [];
+                        for (var i = 0; i < data.N2wiseDalysales.length; i++) {
+                            n2netsale.push(data.N2wiseDalysales[i].NetSales);
+                            n2TargetAmount.push(data.N2wiseDalysales[i].WeekDayTarget);
+                            n2.push(data.N1wiseDalysales[i].TDate);
+                        }
+                        $('#n2wisedsales').remove(); // this is my <canvas> element
+                        $('#pn2wisedsales').append('<canvas id="n2wisedsales"><canvas>');
+                        var n2ctxChart = document.getElementById("n2wisedsales").getContext("2d");
+                        const n2Chart = new Chart(n2ctxChart, {
+                            type: 'line',
+                            data: {
+                                labels: n2,
+                                datasets: [{
+                                    label: "Target",
+                                    fill: true,
+                                    backgroundColor: '#8fa8c869',
+                                    pointBackgroundColor: '#4e73df',
+                                    borderColor: '#4e73df',
+                                    pointHighlightStroke: '#4e73df',
+                                    data: n2TargetAmount,
+                                }, {
+                                    label: "Actual",
+                                    fill: true,
+                                    backgroundColor: '#e0eadf',
+                                    pointBackgroundColor: '#1cc88a',
+                                    borderColor: '#1cc88a',
+                                    pointHighlightStroke: '#1cc88a',
+                                    borderCapStyle: 'butt',
+                                    data: n2netsale,
+                                }],
+                            },
+                            options: {
+                                plugins: {
+                                    datalabels: {
+                                        align: 'end',
+                                        anchor: 'end',
+                                        rotation: 90,
+                                        backgroundColor: function (context) {
+                                            return context.dataset.pointBackgroundColor;
+                                        },
+                                    }
+                                },
+                                maintainAspectRatio: false,
+                                scaleShowValues: true,
+                                scales: {
+                                    xAxes: [{
+                                        ticks: {
+                                            autoSkip: false
+                                        }
+                                    }]
+                                },
+                                animation: {
+                                    duration: 750,
+                                },
+                            }
+                        });
+
+
+                        //daily sales
+                        let estornetsale = [];
+                        let estorTargetAmount = [];
+                        let estor = [];
+                        for (var i = 0; i < data.EstorewiseDalysales.length; i++) {
+                            estornetsale.push(data.EstorewiseDalysales[i].NetSales);
+                            estorTargetAmount.push(data.EstorewiseDalysales[i].WeekDayTarget);
+                            estor.push(data.EstorewiseDalysales[i].TDate);
+                        }
+                        $('#estorewisedsales').remove(); // this is my <canvas> element
+                        $('#pestorewisedsales').append('<canvas id="estorewisedsales"><canvas>');
+                        var estorctxChart = document.getElementById("estorewisedsales").getContext("2d");
+                        const estorChart = new Chart(estorctxChart, {
+                            type: 'bar',
+                            data: {
+                                labels: n2,
+                                datasets: [{
+                                    label: "Target",
+                                    fill: true,
+                                    backgroundColor: '#5d9bf7',
+                                    pointBackgroundColor: '#4e73df',
+                                    borderColor: '#4e73df',
+                                    pointHighlightStroke: '#4e73df',
+                                    data: estorTargetAmount,
+                                }, {
+                                    label: "Actual",
+                                    fill: true,
+                                    backgroundColor: '#12b75c',
+                                    pointBackgroundColor: '#1cc88a',
+                                    borderColor: '#1cc88a',
+                                    pointHighlightStroke: '#1cc88a',
+                                    borderCapStyle: 'butt',
+                                    data: estornetsale,
+                                }],
+                            },
+                            options: {
+                                plugins: {
+                                    datalabels: {
+                                        padding: 0,
+                                        color: 'black',
+                                        rotation: 90,
+                                        backgroundColor: 'transparent',
+                                    }
+                                },
+                                maintainAspectRatio: false,
+                                scaleShowValues: true,
+                                scales: {
+                                    xAxes: [{
+                                        ticks: {
+                                            autoSkip: false
+                                        }
+                                    }]
+                                },
+                                animation: {
+                                    duration: 750,
+                                },
+                            }
+                        });
+                        closeloadermodal();
+
+                    },
+                    error: function () {
+                        alert("Error");
+                        closeloadermodal();
+                    }
+                });
+            }
+            function loadTable() {
+                table = $('#dataTable').DataTable();
+                tablet = $('#dataTable2').DataTable();
+
+            }
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("loadMonth", "Common")',
+                data: { year: new Date().getFullYear() },
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $("#month").find('option').remove();
+                    $('#month').selectpicker('refresh');
+                    $('#month').selectpicker('refresh');
+                    $('#month').append($('<option>', {
+                        value: '',
+                        text: 'Please select'
+                    }));
+                    for (var i = 0; i < data.length; i++) {
+                        //s += '<option value="' + data[i].MarketGroupCode + '">' + data[i].MarketGroupDesc + '</option>';
+                        $('#month').append($('<option>', {
+                            value: data[i].Id,
+                            text: data[i].Text
+                        }));
+                        $('#month').selectpicker('refresh');
+                    }
+
+                },
+                error: function () {
+                    alert("Error while inserting data");
+                }
+            });
+            loaddata();
+        });
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+    <script>
+        $("#pgcat").change(function () {
+            $("#pg").find('option').remove();
+            $('#pg').selectpicker('refresh');
+            var valueSelected = this.value;
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("loapgbycat", "Common")',
+                data: { cat: valueSelected },
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $('#pg').append($('<option>', {
+                        value: 'All',
+                        text: 'All'
+                    }));
+                    $("#pg option[value='All']").prop('selected', true);
+                    $('#pg').selectpicker('refresh');
+                    for (var i = 0; i < data.length; i++) {
+                        $('#pg').append($('<option>', {
+                            value: data[i].Id,
+                            text: data[i].Text
+                        }));
+                        $('#pg').selectpicker('refresh');
+                    }
+                },
+                error: function () {
+                    alert("Error while inserting data");
+                }
+            });
+            return false;
+        });
+    </script>
+
+}

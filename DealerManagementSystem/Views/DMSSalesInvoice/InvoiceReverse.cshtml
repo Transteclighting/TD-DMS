@@ -1,0 +1,155 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+        <div class="col-md-12">
+            <div class="form-inline">
+                <div class="form-group">
+                    <label for="txtInvoiceNo">Invoice No: </label>
+                    <input type="text" id="txtInvoiceNo" class="form-control input-sm" />
+                </div>
+                <button id="btnSearch" class="btn btn-sm btn-primary">Search</button>
+            </div>
+        </div>
+</div>
+
+
+@*<div class="row">
+    <div class="col-md-12">
+        <div class="form-inline">
+            <label for="txtInvoiceNo">
+                Invoice No:
+            </label>
+            <input type="text" id="txtInvoiceNo" class="form-control input-sm"/>
+        </div>
+        <button id="btnSearch" class="btn btn-sm btn-primary">Search</button>
+    </div>
+</div>*@
+
+
+<table id="example" class="table-bordered table-hover table-responsive table-condensed table-striped">
+    <thead style="background-color: darkseagreen; height: 40px;">
+        <tr>
+            <th>
+                InvoiceNo
+            </th>
+            <th>
+                InvoiceDate
+            </th>
+            <th>
+                InvoiceAmount
+            </th>
+            <th>
+                ConsumerName
+            </th>
+            <th>
+                ContactNo
+            </th>
+            <th>
+                Address
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+
+    </tbody>
+</table>
+
+@section scripts{
+    <script type="text/javascript">
+        $('#example').dataTable({
+            "order": [[0, "desc"]],
+            "columns":
+        [
+                { "width": "90px" },
+                { "width": "15px" },
+                { className: "dt-body-right", "width": "100px" },
+                { "width": "280px" },
+                null,
+                { "width": "280px" },
+                { className: "dt-body-center", "width": "120px" }
+        ],
+            'language':
+        {
+            search: '<div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>',
+            searchPlaceholder:
+        'Search'
+        }
+        });
+        function reverseInvoice(invoiceId,invoiceNo) {
+            if (invoiceId > 0) {
+                var r = confirm("Are you sure to apply for reverse invoice #" + invoiceNo+"?");
+
+                if (r === true) {
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("ReverseInvoice", "DmsSalesInvoice")?invoiceId=' + invoiceId,
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        async: true,
+                        timeout: 3600000,
+                        success: function (data) {
+                            alert(data.Message);
+                            location.reload();
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(textStatus + ' ' + errorThrown);
+                        }
+                    });
+                } else {
+                    //alert("Invoice invoice");
+                }
+            }
+        }
+        $("#btnSearch").click(function () {
+            $('#example').DataTable().clear().draw();
+
+            var invoiceNo = $("#txtInvoiceNo").val();
+            if (invoiceNo !== "")
+            {
+                $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("GetInvoices", "DmsSalesInvoice")?invoiceNo=' + invoiceNo,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: true,
+                    timeout: 3600000,
+                    success: function (data) {
+                        if (data.length === 0) {
+                            alert('Invalid search');
+                        }
+                        $.each(data, function (i) {
+                          $('#example').DataTable().row.add([
+                                data[i].InvoiceNo,
+                                window.moment(data[i].InvoiceDate).format("DD-MMM-YYYY"),
+                                data[i].InvoiceAmount,
+                                data[i].Consumer.ConsumerName,
+                                data[i].Consumer.ContactNo,
+                                data[i].Consumer.Address,
+                                '<button class="btn btn-sm btn-danger" onclick="reverseInvoice(' + data[i].InvoiceId + ',' + data[i].InvoiceNo + ')">Reverse</button>'
+                            ]).draw();
+                        });
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        alert(textStatus+' '+errorThrown);
+                    }
+                });
+            } else {
+                alert("Please enter invoiceNo");
+            }
+           
+        });
+
+
+
+        
+    </script>
+}
+

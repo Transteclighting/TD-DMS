@@ -1,0 +1,8 @@
+﻿namespace Cj.web.Enums
+{
+    public enum ProductStockTranSide
+    {
+        In = 1,
+        Out = 2
+    }
+}

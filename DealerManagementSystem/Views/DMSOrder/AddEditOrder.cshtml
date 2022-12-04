@@ -1,0 +1,233 @@
+﻿@model DealerManagementSystem.Models.DmsSecondarySalesOrder
+
+@{
+    ViewBag.Title = "DMS | Order";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/MakeInvoice/makeInvoiceStyle.css" rel="stylesheet" />
+
+
+@using (@Html.BeginForm())
+{
+
+    <div class="container-fluid">
+        <div class="form-group">
+            @{
+                if (Session["UserType"].ToString() == "Manager")
+                {
+                    <label for="CustomerId">Customer:</label>
+                    <select name="order.CustomerId" id="CustomerId">
+                        @{
+                            if (ViewBag.CustomersList != null)
+                            {
+                                foreach (var cust in ViewBag.CustomersList)
+                                {
+                                    <option value="@cust.Id">@cust.Text</option>
+                                }
+                            }
+                        }
+                    </select>
+                            }
+            }
+        </div>
+
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#largeShoes">
+            <i class="fas fa-search fa-sm fa-fw mr-2 text-gray-400"></i> Find Products
+        </button>
+
+        <!-- The modal -->
+        <div class="modal fade" id="largeShoes" tabindex="-1" role="dialog" aria-labelledby="modalLabelLarge" aria-hidden="true">
+            <div class="modal-dialog modal-lg" style="width: 50%;margin: 10px auto;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="modalLabelLarge">
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <label for="productCode">Product Code</label>
+                                    <input type="number" class="form-control input-sm" id="productCode" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="productName">Product Name:</label>
+                                    <input type="text" class="form-control input-sm" id="productName" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="BrandId">Brand:</label>
+                                    @Html.DropDownList("BrandId", (SelectList)ViewBag.BradList, "<Brand-ALL>", new { @class = "form-control input-sm" })
+                                </div>
+                                <div class="form-group">
+                                    <label for="MagId">MAG:</label>
+                                    @Html.DropDownList("MagId", (SelectList)ViewBag.MAGList, "<MAG-ALL>", new { @class = "form-control input-sm" })
+                                </div>
+                                <button id="btnGetProduct" type="button" class="btn btn-primary border-dark">
+                                    Get Product
+                                </button>
+                            </div>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-bordered table-striped" id="tblSearchProduct">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th hidden=""></th>
+                                            <th>@Html.Label("Product Code")</th>
+                                            <th>@Html.Label("Product Name")</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+        <table id="allSelectedProducts" class="table table-bordered table-responsive table-condensed table-striped">
+            <thead>
+                <tr>
+                    <th>@Html.Label("Product Code")</th>
+                    <th>@Html.Label("Product Name")</th>
+                    <th>@Html.Label("Quantity")</th>
+                    <th>@Html.Label("Manage")</th>
+                </tr>
+
+            </thead>
+            <tbody>
+                @if (ViewBag.ProductsList != null)
+                {
+                    int i = 0;
+                    foreach (var item in ViewBag.ProductsList)
+                    {
+                        <tr>
+                            <td class="itemProductCode">@item.ProductCode</td>
+                            <td>@item.ProductName</td>
+                            <td class="input-cell">
+                                <input type="hidden" class="product-item" value="@item.ProductId" name="order.OrderProducts[@i].ProductId">
+                                <input type="number" class="product-item form-control" name="order.OrderProducts[@i].OrderQty" required value="@item.OrderQty" />
+                            </td>
+                            <td><button type="button" class="btn btnDelete">Delete</button></td>
+                            @{i++;}
+                        </tr>
+                     }
+                }
+            </tbody>
+        </table>
+        <input type="text" name="order.Remarks" class="form-control" value="@Model.Remarks" />
+        <input type="hidden" name="order.OrderId" required class="form-control" value="@Model.OrderId" hidden/>
+        <br />
+        <button type="submit" class="btn btn-success btn-lg pull-right">Save Order</button>
+                                <!-- Modal -->
+                                <div id="myModal" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title card-title text-danger">Error!!</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Can not add same product again!</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                }
+        @section scripts
+{
+            @Scripts.Render("~/bundles/jqueryval")
+
+            <script>
+
+                $(document).ready(function () {
+                    // $('#allSelectedProducts').dataTable();
+                    function productValidation() {
+                        var arr = [];
+                        $(".itemProductCode").each(function (proInx) {
+                            var value = $(this).html();
+                            console.log(value);
+                            if (arr.indexOf(value) == -1){
+                                arr.push(value);
+                            }
+                            else {
+                                $(this).parent().addClass("danger");
+                                //alert('Can not add same product again!');
+                                $('#myModal').modal('show');
+                                $(this).closest('tr').remove();
+                                renameInput();
+                            }
+                        });
+                    }
+                    function renameInput() {
+                        $(".input-cell").each(function (proInx) {
+                            $(this).find(".product-item").each(function (index) {
+                                $(this).attr('name', $(this).attr('name').replace(/\d+/, proInx));
+                                console.log(this);
+                            });
+                        });
+                    }
+                    $("#allSelectedProducts").on('click', '.btnDelete', function () {
+                        //old
+                        $(this).closest('tr').remove();
+                        renameInput();
+                    });
+                    var searchProducts;
+                    $("#btnGetProduct").click(function () {
+                        $("#tblSearchProduct tbody").empty();
+                        var productCode = $("#productCode").val();
+                        var productName = $("#productName").val();
+                        var brandId = $("#BrandId").val();
+                        var magId = $("#MagId").val();
+                        $.ajax({
+                            type: "GET",
+                            url: '@Url.Action("GetProductsJson", "Product")' + '?productCode=' + productCode + '&productName=' + productName + '&brandId=' + brandId + '&magId=' + magId,
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (data) {
+                                searchProducts = data;
+                                var aProduct = "";
+                                $.each(data, function (i) {
+                                    aProduct += "<tr>" +
+                                        "<td><button class=\"btn btnAddProductForOrder\" type=\"button\" ><i class='fas fa-fw fa-plus'></i></button></td>" +
+                                        "<td hidden>" + data[i].ProductId + "</td>" +
+                                        "<td>" + data[i].ProductCode + "</td>" +
+                                        "<td>" + data[i].ProductName + "</td>" +
+                                        "</tr>";
+                                });
+                                $("#tblSearchProduct tbody").append(aProduct);
+                            }
+                        });
+                        return false;
+                    });
+
+                    $(".btnAddProductForOrder").click(function () {
+                        //alert("Tiktok");
+                    });
+                    var i = $(".itemProductCode").length;
+                    $(document).on("click", ".btnAddProductForOrder", function () {
+                        var aSelectedProd = "<tr>" +
+                            "<td class='itemProductCode'>" + searchProducts[$(this).closest("tr").index()].ProductCode + "</td>" +
+                            "<td>" + searchProducts[$(this).closest("tr").index()].ProductName + "</td>" +
+                            "<td class='input-cell'>"
+                             + " <input type=\"hidden\" value=\"" + searchProducts[$(this).closest("tr").index()].ProductId + "\" name=\"order.OrderProducts[" + i + "].ProductId\" class=\"product-item\"/>"
+                             + " <input type=\"number\" name=\"order.OrderProducts[" + i + "].OrderQty\" required class=\"form-control product-item\"  min=\"1\"/></td>" +
+                            "<td><button type='button' class='btn btnDelete'>Delete</button></td></tr>";
+                        $("#allSelectedProducts tbody").append(aSelectedProd);
+                        i++;
+                        productValidation();
+                    });
+                });
+            </script>
+        }

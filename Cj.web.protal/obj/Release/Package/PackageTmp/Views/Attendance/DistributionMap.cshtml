@@ -1,0 +1,340 @@
+﻿
+@{
+    ViewBag.Title = "Map - Today's Last Location | CJ Web Portal";
+}
+
+@section extra_style {
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+}
+@section breadcrumb{
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"><a href="/">Distribution</a></li>
+            <li class="breadcrumb-item" aria-current="page">@Html.ActionLink("Map - Today's Last Location", ViewContext.RouteData.Values["Action"].ToString(), ViewContext.RouteData.Values["controller"].ToString())</li>
+        </ol>
+    </nav>
+}
+<div class="panel" style="margin: 10px auto;">
+    <div class="panel-heading bg-gradient-primary" style="display: flex;justify-content: space-between;">
+        <a data-toggle="collapse" href="#collapse1" class="collapsed">
+            <div class="panel-title" style="color:white">
+                <i class="fa fa-search"></i> Filter
+            </div>
+        </a>
+        <div style="display: flex;justify-content: space-between;">
+            <button class="btn btn-link rounded-circle p-0 pl-2  text-white" id="fullscreen" type="button"><i class="fa fa-expand"></i></button>
+            <button class="btn btn-link rounded-circle p-0 pl-2 text-white" id="toggle-buttons" type="button"><i class="fa fa-bars"></i></button>
+        </div>
+    </div>
+    <div id="collapse1" class="panel-collapse collapse bg-white p-3 shadow m-0 p-0">
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label for="Region">Region</label>
+                <div class="input-group">
+                    <select class="selectpicker w-100" name="region" id="region" data-live-search="true">
+                        <option value="">All</option>
+                        @{
+                            if (ViewBag.region != null)
+                            {
+                                foreach (var region in ViewBag.region)
+                                {
+                                    <option value="@region.Id">@region.Text</option>
+                                }
+                            }
+                        }
+
+                    </select>
+                </div>
+            </div>
+
+            <!--AREA -->
+            <div class="col-md-4 mb-3">
+                <label for="AREA">Area</label>
+                <div class="input-group">
+                    <select class="selectpicker w-100" name="area" id="area" data-live-search="true"></select>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="validationTooltip01">Zone </label>
+                <div class="input-group">
+                    <select class="selectpicker w-100" name="zone" id="zone" data-live-search="true"></select>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label for="validationTooltip03">Customer</label>
+                <div class="input-group">
+                    <select class="selectpicker w-100" name="custType" id="custType" data-live-search="true">
+                        @*<option data-tokens="">Customer</option>*@
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2 mb-3">
+                <label for="validationTooltip03" class="text-white">Z</label>
+                <div class="input-group">
+                    <button class="btn btn-primary" id="filter" type="submit"><i class="fa fa-search"></i> Search <i class="fas fa-spinner fa-pulse" id="loadingIcon"></i></button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-9 col-md-9 mb-4" id="map-card">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div id="map" style="height:80vh;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-3 mb-4" id="btn-card">
+        <div class="card border-left-primary shadow h-100 col-12 m-0 p-0  overflow-hidden">
+            <div class="card-header row">
+                <div class="col-12 m-0 p-0">
+                    <input id="myInput" class="form-control w-100" type="text" placeholder="Search..">
+                </div>
+            </div>
+            <div class="card-body" id="map-buttons" style="height:80vh;overflow: scroll;">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section extra_script {
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
+
+<script type="text/javascript">
+        // dropdown init
+        $("#region").change(function () {
+            var valueSelected = this.value;
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("loadVisitArea", "Common")',
+                data: { region: valueSelected },
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $("#area").find('option').remove();
+                    $('#area').selectpicker('refresh');
+                    $("#zone").find('option').remove();
+                    $('#zone').selectpicker('refresh');
+                    $("#custType").find('option').remove();
+                    $('#custType').selectpicker('refresh');
+                    $('#area').append($('<option>', {
+                        value: '',
+                        text: 'All'
+                    }));
+                    $('#area').selectpicker('refresh');
+                    for (var i = 0; i < data.length; i++) {
+                        //s += '<option value="' + data[i].MarketGroupCode + '">' + data[i].MarketGroupDesc + '</option>';
+                        $('#area').append($('<option>', {
+                            value: data[i].Id,
+                            text: data[i].Text
+                        }));
+                        $('#area').selectpicker('refresh');
+                    }
+
+                },
+                error: function () {
+                    alert("Error while inserting data");
+                }
+            });
+            return false;
+        });
+
+
+
+    //Area dropdown init
+        $("#area").change(function () {
+            var valueSelected = this.value;
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("loadVisitZones", "Common")',
+                data: { area: valueSelected },
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $("#zone").find('option').remove();
+                    $('#zone').selectpicker('refresh');
+                    $("#custType").find('option').remove();
+                    $('#custType').selectpicker('refresh');
+                    $('#zone').append($('<option>', {
+                        value: '',
+                        text: 'All'
+                    }));
+                    $('#zone').selectpicker('refresh');
+                    for (var i = 0; i < data.length; i++) {
+                        //s += '<option value="' + data[i].MarketGroupCode + '">' + data[i].MarketGroupDesc + '</option>';
+                        $('#zone').append($('<option>', {
+                            value: data[i].MarketGroupID,
+                            text: data[i].MarketGroupDesc
+                        }));
+                        $('#zone').selectpicker('refresh');
+                    }
+
+                },
+                error: function () {
+                    alert("Error while inserting data");
+                }
+            });
+            return false;
+        });
+
+      //Customer dropdown init
+    $("#zone").change(function () {
+        var selectedZone = this.value;
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("loadVisitCust", "Common")',
+            data: { zone: selectedZone },
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                $("#custType").find('option').remove();
+                $('#custType').selectpicker('refresh');
+                $('#custType').append($('<option>', {
+                    value: '',
+                    text: 'All'
+                }));
+                $('#custType').selectpicker('refresh');
+                for (var i = 0; i < data.length; i++) {
+                    $('#custType').append($('<option>', {
+                        value: data[i].Id,
+                        text: data[i].Text
+                    }));
+                    $('#custType').selectpicker('refresh');
+                }
+
+            },
+            error: function () {
+                alert("Error while inserting data");
+            }
+        });
+        return false;
+    });
+</script>
+    <script>
+    // Create additional Control placeholders
+    function addControlPlaceholders(map) {
+        var corners = map._controlCorners,
+            l = 'leaflet-',
+            container = map._controlContainer;
+
+        function createCorner(vSide, hSide) {
+            var className = l + vSide + ' ' + l + hSide;
+            corners[vSide + hSide] = L.DomUtil.create('div', className, container);
+        }
+
+        createCorner('verticalcenter', 'left');
+        createCorner('verticalcenter', 'right');
+    }
+
+    var mymap = L.map('map', {
+        fullscreenControl: true,
+        center: [24.176518, 90.274658],
+        zoom: 7.4,
+    });
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiemhkcnV2byIsImEiOiJja3IyZXF6MzgyYjNmMzBydTM0ODMybzNkIn0.1UFKNZCs59u5n78_nWiRuw', {
+        maxZoom: 18,
+        attribution: 'Transcom Electronics Limited',
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1
+    }).addTo(mymap);
+
+    addControlPlaceholders(mymap);
+    mymap.zoomControl.setPosition('verticalcenterright');
+    mymap.fullscreenControl.setPosition('verticalcenterright');
+
+    function loadLocation() {
+        var region = $('#region option:selected').val();
+        var area = $('#area option:selected').val();
+        var zone = $('#zone option:selected').val();
+        var cust = $('#custType option:selected').val();
+       
+        $("#loadingIcon").removeClass("d-none");
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("loadDistributionMap")',
+            data: { area: area, zone: zone, cust: cust, region: region },
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+
+                $("#loadingIcon").addClass("d-none");
+                mymap.eachLayer(function (layer) {
+                    mymap.removeLayer(layer);
+                });
+                L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiemhkcnV2byIsImEiOiJja3IyZXF6MzgyYjNmMzBydTM0ODMybzNkIn0.1UFKNZCs59u5n78_nWiRuw', {
+                    maxZoom: 18,
+                    attribution: 'Transcom Electronics Limited',
+                    id: 'mapbox/streets-v11',
+                    tileSize: 512,
+                    zoomOffset: -1
+                }).addTo(mymap);
+                for (var i = 0; i < data.length; i++) {
+                    var r = "<button class='map-item border-0 mb-2 bg-gradient-primary text-white w-100' name='" + data[i].EmployeeName + "' lat='" + data[i].Latitude + "' long='" + data[i].Longitude + "' deg='" + data[i].Designation + "' loc='" + data[i].JobLocationName + "' addr='" + data[i].Address + "' lcot='" + data[i].LastCheckTime + "' style='border-radius:10px;'> " + data[i].EmployeeName + "<br>" + data[i].Designation + "<br>" + data[i].JobLocationName + "<br></button>";
+                    $("#map-buttons").append(r);
+                    L.marker([data[i].Latitude, data[i].Longitude]).addTo(mymap).bindPopup("Name: " + data[i].EmployeeName + "<br>Designation: " + data[i].Designation + "<br>Job Location: " + data[i].JobLocationName + "<br>Last Check-In: " + data[i].LastCheckTime + "<br>Address: " + data[i].Address, { closeOnClick: false, autoClose: false });
+                }
+            },
+            error: function () {
+                alert("Error while loading map");
+            }
+        });
+    }
+    loadLocation();
+    $(document).on('click', '.map-item', function () {
+        mymap.eachLayer(function (layer) {
+            mymap.removeLayer(layer);
+        });
+        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiemhkcnV2byIsImEiOiJja3IyZXF6MzgyYjNmMzBydTM0ODMybzNkIn0.1UFKNZCs59u5n78_nWiRuw', {
+            maxZoom: 18,
+            attribution: 'Transcom Electronics Limited',
+            id: 'mapbox/streets-v11',
+            tileSize: 512,
+            zoomOffset: -1
+        }).addTo(mymap);
+        var lat = $(this).attr("lat");
+        var long = $(this).attr("long");
+        var name = $(this).attr("name");
+        var deg = $(this).attr("deg");
+        var loc = $(this).attr("loc");
+        var addr = $(this).attr("addr");
+        var lcot = $(this).attr("lcot");
+        var text = "Name: " + name + "<br>Designation: " + deg + "<br>Job Location: " + loc + "<br>Last Check-In: " + lcot + "<br>Address: " + addr;
+        //alert(text);
+        L.marker([lat, long]).addTo(mymap).bindPopup(text, { closeOnClick: false, autoClose: false }).openPopup();
+        //mymap.setView([lat, long], 18);
+    });
+    $("#filter").click(function () {
+        $("#map-buttons").html("");
+         loadLocation()
+    });
+    $('#fullscreen').click(function (e) {
+        $('.container-fluid').toggleClass('fullscreen');
+    });
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#map-buttons *").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+        $("#toggle-buttons").click(function () {
+            $("#btn-card").toggleClass("d-none");
+
+            $("#map-card").toggleClass("col-xl-9 col-md-9");
+            $("#map-card").toggleClass("col-xl-12 col-md-12");
+        });
+    });
+
+    </script>
+}

@@ -1,0 +1,14 @@
+﻿using Cj.web.protal.App_Start;
+using System.Web;
+using System.Web.Mvc;
+
+namespace Cj.web
+{
+    public class FilterConfig
+    {
+        public static void RegisterGlobalFilters(GlobalFilterCollection filters)
+        {
+            filters.Add(new HandleErrorAttribute());
+        }
+    }
+}

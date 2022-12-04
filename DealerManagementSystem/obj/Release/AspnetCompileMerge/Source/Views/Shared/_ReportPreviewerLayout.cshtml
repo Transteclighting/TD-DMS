@@ -1,0 +1,40 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    @Styles.Render("~/Content/css")
+    <link href="~/Content/reset.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet"/>
+    <link rel="shortcut icon" href="~/Images/td_logo.png" />
+    @RenderSection("header",false)
+</head>
+<body style="background-color: #DDDDDD">
+<div>
+    @RenderBody()
+</div>
+
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery-3.1.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+
+<script>
+    $('#datepicker').datepicker({
+        format: 'dd-M-yyyy',
+        orientation: 'bottom auto'
+    });
+
+    $('#datepicker2').datepicker({
+        format: 'dd-M-yyyy',
+        orientation: 'bottom auto'
+    });
+</script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

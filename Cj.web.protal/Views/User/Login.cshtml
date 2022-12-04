@@ -1,0 +1,91 @@
+﻿@model Cj.web.protal.Models.User
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CJ | User Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="~/Content/Login/style.css" rel="stylesheet" media="all"/>
+    <link rel="shortcut icon" href="~/favicon.ico" />
+
+    <style>
+        .text-danger {
+            color: white;
+            font-family: Oswald-Light;
+        }
+    </style>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="container">
+            <!-- Sidebar - Brand -->
+            <div class="signin">
+                <div style="margin-left: -36px; margin-top: -33px;">
+                    <img src="~/Images/CJ_Logo.ico" alt="CJ Logo" height="50" width="50" />
+                </div>
+                <div class="row">
+                    <div class="sidebar-brand d-flex align-items-center justify-content-center">
+                        <span style="font-size: 30px; margin-top: -26px; color: #d45db5;"><b>Casper Jet Web Portal</b></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="sidebar-brand d-flex align-items-center justify-content-center"><img src="~/Images/transcom electronics.png" height="66" width="233" /></div>
+                    <br />
+                    <div>
+                        @Html.TextBoxFor(model => model.UserName, new {@class = "user", @placeholder = "User Name"})
+                    </div>
+                    <div>
+                        @Html.ValidationMessageFor(model => model.UserName, "", new { id = "lblEmptyUserName", @class = "text-danger" })
+                    </div>
+                    <div>
+                        @Html.PasswordFor(model => model.Password, new {@class = "pass", @placeholder = "Password"})
+                    </div>
+                    <div>
+                        @Html.ValidationMessageFor(model => model.Password, "", new { id = "lblEmptyPassword", @class = "text-danger" })
+
+                    </div>
+                    <div>
+                        @Html.ValidationMessage("LoginFaild", new { id = "lblLoginfaildPassword", @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*<label id="lblRememberMe" class="field-validation-error" style="color: black;">
+                    <input type="checkbox" value="Remember-Me" /> Remember Me?
+                </label>*@
+                <input class="btn btn-danger" type="submit" value="LOGIN" />
+            </div>
+        </div>
+        <div class="footer">
+            <p>All rights reserved - Transcom Electronics Limited @DateTime.Today.Year</p>
+        </div>
+    }
+
+    <script src="~/Scripts/a.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+            var loginfaildUserName = $("#lblLoginfaildUserName").text();
+            var loginfaildPassword = $("#lblLoginfaildPassword").text();
+            if (loginfaildUserName !== "") {
+                $("#UserName").focus(function () {
+                    $("#lblLoginfaildUserName").fadeOut(1000);
+                });
+            }
+            if (loginfaildPassword !== "") {
+                $("#Password").focus(function () {
+                    $("#lblLoginfaildPassword").fadeOut(1000);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

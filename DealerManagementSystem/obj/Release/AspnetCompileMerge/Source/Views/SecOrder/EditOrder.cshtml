@@ -1,0 +1,203 @@
+﻿@model DealerManagementSystem.Models.SecOrder
+
+@{
+    ViewBag.Title = "DMS | Edit Order";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/MakeInvoice/makeInvoiceStyle.css" rel="stylesheet" />
+
+
+@using (@Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-row mb-4 pb-4 d-flex">
+        <div class="col-md-2">
+            <label class="col-form-label" for="productCode">Product Code</label>
+            <input type="number" class="form-control" id="productCode" />
+        </div>
+        <div class="col-md-3">
+            <label for="productName">Product Name</label>
+            <input type="text" class="form-control" id="productName" />
+        </div>
+        <div class="col-md-2">
+            <label class="col-form-label" for="BrandId">Brand</label>
+            @Html.DropDownList("BrandId", (SelectList)ViewBag.BradList, "<Brand-ALL>", new { @class = "form-control" })
+        </div>
+        <div class="col-md-2">
+            <label class="col-form-label" for="MagId">MAG</label>
+            @Html.DropDownList("MagId", (SelectList)ViewBag.BradList, "<MAG-ALL>", new { @class = "form-control" })
+        </div>
+        <div class="col-md-1">
+            <label class="col-form-label col-12" style="width: 100% !important;color: white;" for="MagId">submit</label>
+            <button id="btnGetProduct" type="button" class="btn btn-primary">
+                Get Product
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered table-responsive table-condensed table-striped" id="tblSearchProduct">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th hidden=""></th>
+                        <th>@Html.Label("Product Code")</th>
+                        <th>@Html.Label("Product Name")</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+        <table id="allSelectedProducts" class="table table-bordered table-responsive table-condensed table-striped">
+            <thead>
+                <tr>
+                    <th>@Html.Label("Product Code")</th>
+                    <th>@Html.Label("Product Name")</th>
+                    <th>@Html.Label("Quantity")</th>
+                    <th>@Html.Label("Manage")</th>
+                </tr>
+
+            </thead>
+            <tbody>
+                @if (ViewBag.ProductsList != null)
+                {
+                    int i = 0;
+                    foreach (var item in ViewBag.ProductsList)
+                    {
+                        <tr>
+                            <td class="itemProductCode">@item.ProductCode</td>
+                            <td>@item.ProductName</td>
+                            <td class="input-cell">
+                                <input type="hidden" class="product-item" value="@item.ProductId" name="order.OrderProducts[@i].ProductId">
+                                <input type="number" class="product-item form-control" name="order.OrderProducts[@i].OrderQty" required value="@item.OrderQty" />
+                            </td>
+                            <td><button type="button" class="btn btnDelete">Delete</button></td>
+                            @{i++;}
+                        </tr>
+                                    }
+                                }
+            </tbody>
+        </table>
+
+        <input type="text" name="order.Remarks" class="form-control" value="@Model.Remarks" />
+        <input type="hidden" name="order.OrderId" required class="form-control" value="@Model.TranID" hidden />
+        <br />
+
+        <button type="submit" class="btn btn-success btn-lg pull-right">Save Order</button>
+
+
+                                <!-- Modal -->
+                                <div id="myModal" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title card-title text-danger">Error!!</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Can not add same product again!</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                }
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+
+                $(document).ready(function () {
+                    // $('#allSelectedProducts').dataTable();
+                    function productValidation() {
+                        var arr = [];
+                        $(".itemProductCode").each(function (proInx) {
+                            var value = $(this).html();
+                            console.log(value);
+                            if (arr.indexOf(value) == -1){
+                                arr.push(value);
+                            }
+                            else {
+                                $(this).parent().addClass("danger");
+                                //alert('Can not add same product again!');
+                                $('#myModal').modal('show');
+                                $(this).closest('tr').remove();
+                                renameInput();
+                            }
+                        });
+                    }
+                    function renameInput() {
+                        $(".input-cell").each(function (proInx) {
+                            $(this).find(".product-item").each(function (index) {
+                                $(this).attr('name', $(this).attr('name').replace(/\d+/, proInx));
+                                console.log(this);
+                            });
+                        });
+                    }
+                    $("#allSelectedProducts").on('click', '.btnDelete', function () {
+                        //old
+                        $(this).closest('tr').remove();
+                        renameInput();
+                    });
+                    var searchProducts;
+                    $("#btnGetProduct").click(function () {
+                        $("#tblSearchProduct tbody").empty();
+                        var productCode = $("#productCode").val();
+                        var productName = $("#productName").val();
+                        var brandId = $("#BrandId").val();
+                        var magId = $("#MagId").val();
+                        $.ajax({
+                            type: "GET",
+                            url: '@Url.Action("GetProductsJson", "Product")' + '?productCode=' + productCode + '&productName=' + productName + '&brandId=' + brandId + '&magId=' + magId,
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (data) {
+                                searchProducts = data;
+                                var aProduct = "";
+                                $.each(data, function (i) {
+                                    aProduct += "<tr>" +
+                                        "<td><button class=\"btn btnAddProductForOrder\" type=\"button\" ><i class='fas fa-fw fa-plus'></i></button></td>" +
+                                        "<td hidden>" + data[i].ProductId + "</td>" +
+                                        "<td>" + data[i].ProductCode + "</td>" +
+                                        "<td>" + data[i].ProductName + "</td>" +
+                                        "</tr>";
+                                });
+                                $("#tblSearchProduct tbody").append(aProduct);
+                            }
+                        });
+                        return false;
+                    });
+
+                    $(".btnAddProductForOrder").click(function () {
+                        //alert("Tiktok");
+                    });
+                    var i = $(".itemProductCode").length;
+                    $(document).on("click", ".btnAddProductForOrder", function () {
+                        var aSelectedProd = "<tr>" +
+                            "<td class='itemProductCode'>" + searchProducts[$(this).closest("tr").index()].ProductCode + "</td>" +
+                            "<td>" + searchProducts[$(this).closest("tr").index()].ProductName + "</td>" +
+                            "<td class='input-cell'>"
+                             + " <input type=\"hidden\" value=\"" + searchProducts[$(this).closest("tr").index()].ProductId + "\" name=\"order.OrderProducts[" + i + "].ProductId\" class=\"product-item\"/>"
+                             + " <input type=\"number\" name=\"order.OrderProducts[" + i + "].OrderQty\" required class=\"form-control product-item\"/></td>"
+                            //"<td>"
+                            // + " <input type=\"text\" name=\"barcode\" id=\"barcode\" required class=\"form-control product-item\"/></td>" 
+                           +  "<td><button type='button' class='btn btnDelete'>Delete</button></td></tr>";
+                        $("#allSelectedProducts tbody").append(aSelectedProd);
+                        i++;
+                        //productValidation();
+                    });
+                });
+    </script>
+}

@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "Weekly Review Dashboard | CJ Web Portal";
+}
+
+@section extra_style {
+
+}
+
+@section breadcrumb{
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"><a href="/">Dashboard</a></li>
+            <li class="breadcrumb-item" aria-current="page">@Html.ActionLink("Weekly Review", ViewContext.RouteData.Values["Action"].ToString(), ViewContext.RouteData.Values["controller"].ToString())</li>
+        </ol>
+    </nav>
+}
+
+<div class="panel" style="margin: 10px auto;">
+    <div class="panel-heading bg-gradient-primary">
+        <a data-toggle="collapse" href="#collapse1" class="collapsed">
+            <div class="panel-title" style="color:white">
+                <i class="fa fa-search"></i> Filter
+            </div>
+        </a>
+    </div>
+    <div id="collapse1" class="panel-collapse collapse bg-white p-3 shadow m-0 p-0">
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label for="validationTooltip04">From Date</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                    <input type="text" class="form-control datepicker" id="fromDate" name="fromDate" value="@ViewBag.fromDate">
+                    <div class="invalid-tooltip">
+                        Please provide a Date.
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="validationTooltip04">To Date</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                    <input type="text" class="form-control datepicker" id="toDate" name="toDate" value="@ViewBag.toDate">
+                    <div class="invalid-tooltip">
+                        Please provide a Date.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div>
+    <div class="row">
+        <div class="col-auto">
+            <div class="card shadow mb-4">
+                <!-- Card Body -->
+                <div class="card-body">
+                    main body
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section extra_script {
+
+}

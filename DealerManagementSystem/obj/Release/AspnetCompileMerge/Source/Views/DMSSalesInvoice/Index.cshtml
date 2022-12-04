@@ -1,0 +1,297 @@
+﻿@model IEnumerable<DealerManagementSystem.Models.DmsSalesInvoice>
+
+
+@{
+    ViewBag.Title = "DMS | Invoices";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    fieldset {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-size: 14px;
+        border: 1px solid #1F497D;
+        background: #ddd;
+        border-radius: 5px;
+        float: left;
+        position: relative;
+    }
+
+        fieldset legend {
+            background: #1F497D;
+            color: #fff;
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 5px;
+            box-shadow: 0 0 0 5px #ddd;
+            margin-left: 20px;
+            width: 100px;
+        }
+
+    #invoices fieldset {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        border: 1px solid #1F497D;
+        background: #ddd;
+        border-radius: 5px;
+        width: 98%;
+        float: left;
+        position: relative;
+    }
+
+    #invoices legend {
+        background: #1F497D;
+        color: #fff;
+        padding: 5px 10px;
+        font-size: 12px;
+        border-radius: 5px;
+        box-shadow: 0 0 0 5px #ddd;
+        margin-left: 20px;
+        width: 65px;
+    }
+</style>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+
+    if (ViewBag.InvoiceInsertionStatus != null)
+    {
+        if (ViewBag.InvoMakeStatus == "1")
+        {
+            <div class="alert alert-success alert-dismissible fade in">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close"><span class="glyphicon glyphicon-remove text-danger"></span></a>
+                <strong>Congratulation!</strong> @ViewBag.InvoiceInsertionStatus
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-danger alert-dismissable fade in">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close"><span class=" glyphicon glyphicon-remove text-danger"></span></a>
+                <strong>Sorry!</strong> @ViewBag.InvoiceInsertionStatus
+            </div>
+        }
+
+    }
+    <fieldset>
+        <legend>Invoice Date</legend>
+        <form action="">
+            <table class="table table-bordered table-responsive">
+                <tr>
+                    <td style="float: left; top: 0px; position: relative; padding-right: 5px;">
+                        <div>
+                            @Html.Label("From")
+                            <div class='input-group date' data-provide="datepicker" id='datepicker'>
+                                <input id="startDate" type='text' class="form-control" required="" placeholder="DD/MM/YYYY" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar">
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="padding-right: 5px;">
+                        <div style="float: left">
+                            @Html.Label("To")
+                            <div class='input-group date' data-provide="datepicker" id='datepicker2'>
+                                <input id="endDate" type='text' required="" placeholder="DD/MM/YYYY" class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar">
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="position: relative">
+
+                        <div style="float: right">
+                            @Html.Label("\n")
+                            <div class='button'>
+                                <button type="button" id="btnGetInvoice" class="btn btn-success active">
+                                    <span class="glyphicon glyphicon-search"></span> Get Invoices
+                                </button>
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+                <tr class="text-danger">
+                    <td><span id="startDateErrorMsg"></span></td>
+                    <td><span id="endDateErrorMsg"></span></td>
+                </tr>
+            </table>
+        </form>
+    </fieldset>
+
+    <br />
+
+    <div id="invoices">
+        <fieldset>
+            <legend>Invoices</legend>
+            <table id="example" class="table-hover table-bordered table-responsive" style="overflow-x:auto;">
+                <thead style="background-color: Highlight; color:black;">
+                    <tr>
+                        <th nowrap>
+                            @Html.DisplayNameFor(model => model.InvoiceNo)
+                        </th>
+                        <th nowrap>
+                            @Html.DisplayNameFor(model => model.InvoiceDate)
+                        </th>
+                        <th nowrap>
+                            @Html.DisplayNameFor(model => model.InvoiceAmount)
+                        </th>
+                        <th nowrap>
+                            @Html.DisplayNameFor(model => model.Consumer.ConsumerName)
+                        </th>
+                        <th nowrap>
+                            @Html.DisplayNameFor(model => model.Consumer.ContactNo)
+                        </th>
+                        <th nowrap>
+                            @Html.DisplayNameFor(model => model.Consumer.Address)
+                        </th>
+                        <th nowrap>
+                            @Html.DisplayName("Print")
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var aDmsSalesInvoic in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => aDmsSalesInvoic.InvoiceNo)
+                            </td>
+                            <td>
+                                @{
+                                    string invoiceDate = aDmsSalesInvoic.InvoiceDate.ToString("dd-MMM-yyyy");
+                                }
+                                @Html.DisplayFor(modelItem => invoiceDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => aDmsSalesInvoic.InvoiceAmount)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => aDmsSalesInvoic.Consumer.ConsumerName)
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => aDmsSalesInvoic.Consumer.ContactNo)</td>
+                            <td>@Html.DisplayFor(modelItem => aDmsSalesInvoic.Consumer.Address)</td>
+                            <td>
+                                <a class="btn btn-success btn-sm" style="padding: 2px; margin-right: 0px;" href="@Url.Action("Invoice", "ReportsPreview", new {invoiceId = aDmsSalesInvoic.InvoiceId})" target="_blank">Invoice</a>
+                                <a class="btn btn-info btn-sm " style="padding: 2px; margin-left: 0px;" href="@Url.Action("WarrantyCard", "ReportsPreview", new {invoiceId = aDmsSalesInvoic.InvoiceId})" target="_blank">Warranty</a>
+                            </td>
+                        </tr>                                    }
+                </tbody>
+            </table>
+        </fieldset>
+    </div>
+
+                                    }
+@section scripts
+{
+
+    <script>
+        $(document).ready(function () {
+
+            $('#example').dataTable({
+                "order": [[0, "desc"]],
+                "columns":
+            [
+                    { "width": "90px" },
+                    { "width": "15px" },
+                    { className: "dt-body-right", "width": "100px" },
+                    { "width": "280px" },
+                    null,
+                    { "width": "280px" },
+                    { className: "dt-body-center", "width": "120px" }
+            ],
+                'language':
+            {
+                search: '<div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>',
+                searchPlaceholder:
+            'Search'
+            }
+            });
+
+            $("#example_wrapper").prepend('<a style="position: relative; float: left; left: 10px" class=" btn btn-primary active" href="@Url.Action("ChooseProductsForInvoice", "Product")"><span class="glyphicon glyphicon-plus-sign"></span> Make Invoice</a>');
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth(); //January is 0!
+            var yyyy = today.getFullYear();
+
+            var mNames = new Array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
+
+            if (dd < 10) {
+                dd = '0' + dd;
+            }
+
+            //if (mm < 10) {
+            //    mm = '0' + mm;
+            //}
+
+            today = dd + '-' + mNames[mm] + '-' + yyyy;
+
+            $("#startDate").val(today);
+            $("#endDate").val(today);
+
+            $("#startDate").focus(function () {
+                $("#startDateErrorMsg").empty();
+            });
+
+            $("#endDate").focus(function () {
+                $("#endDateErrorMsg").empty();
+            });
+            $('#btnGetInvoice').click(function () {
+                var table = $('#example').DataTable();
+                table.clear().draw();
+                var sStartDate = $("#startDate").val();
+                var sEndDate = $("#endDate").val();
+
+                if (sStartDate !== "" && sEndDate !== "") {
+                    var jsnFormatData = { sStartDate: sStartDate, sEndDate: sEndDate };
+
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("GetInvoice", "DmsSalesInvoice")',
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(jsnFormatData),
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.length === 0) {
+                                alert('There is no invoice from ' + sStartDate + ' to ' + sEndDate);
+                            }
+                            $.each(data, function (i) {
+                                if (data[i].InvoiceDay < 10) {
+                                    data[i].InvoiceDay = '0' + data[i].InvoiceDay;
+                                }
+                                var shortMonth = data[i].InvoiceMonth.substring(0, 3);
+                                $('#example').DataTable().row.add([
+                                    data[i].InvoiceNo,
+                                    data[i].InvoiceDay + '-' + shortMonth + '-' + data[i].InvoiceYear,
+                                    data[i].InvoiceAmount,
+                                    data[i].ConsumerName,
+                                    data[i].ContactNo,
+                                    data[i].Address,
+                                    '<a class="btn btn-info btn-sm " target="_blank" style="padding: 2px; margin-right: 3px;" href="@Url.Action("Invoice", "ReportsPreview")?invoiceId=' + data[i].InvoiceId + '">Invoice</a>' +
+                                    '' +
+                                    '<a class="btn btn-info btn-sm " target="_blank" style="padding: 2px; margin-right: 3px;" href="@Url.Action("WarrantyCard", "ReportsPreview")?invoiceId=' + data[i].InvoiceId + '">Warranty</a>'
+                                               //'<a class="btn btn-success btn-sm" target="_blank" style="padding: 2px; margin-right: 3px;" href="/ReportsPreview/Invoice?invoiceId=' + data[i].InvoiceId + '">Invoice</a>' +
+                                ]).draw();
+                            });
+                        }
+
+                    });
+                } else if (sStartDate === "") {
+                    //'<a class="btn btn-success btn-sm" target="_blank" style="padding: 2px; margin-right: 3px;" href="/ReportsPreview/Invoice?invoiceId=' + data[i].InvoiceId + '">Invoice</a>' +
+                    //                '<a class="btn btn-info btn-sm " target="_blank" style="padding: 2px; margin-right: 3px;" href="/ReportsPreview/WarrantyCard?invoiceId=' + data[i].InvoiceId + '">Warranty</a>'
+                    $("#startDateErrorMsg").text("Please Enter From Date!");
+                } else {
+                    $("#endDateErrorMsg").text("Please Enter Start Date!");
+                }
+                return false;
+            });
+        });
+    </script>
+}
+

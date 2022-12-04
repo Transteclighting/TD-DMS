@@ -1,0 +1,461 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/DashboardLayout.cshtml";
+    //Layout = null;
+}
+
+@if (ViewBag.ChangePassMsg != null && ViewBag.ChangePassStatus != null)
+{
+    if (ViewBag.ChangePassStatus == 1)
+    {
+        <div class="alert alert-success alert-dismissible fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close"><span class="glyphicon glyphicon-remove text-danger"></span></a>
+            <strong>Congratulation!</strong> @ViewBag.ChangePassMsg
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger alert-dismissable fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close"><span class=" glyphicon glyphicon-remove text-danger"></span></a>
+            <strong>Sorry!</strong> @ViewBag.ChangePassMsg
+        </div>
+    }
+}
+else
+{
+
+    <div class="main-content flex-1 bg-gray-100  ">
+        <div class="flex flex-row flex-wrap flex-grow">
+            <div class="w-full md:w-1/2 xl:w-1/4 p-2">
+                <!--TD Order VS National Order-->
+                <div class="bg-gradient-to-b from-blue-200 to-blue-100 border-b-4 border-blue-600  p-5">
+                    <div class="flex flex-row items-center">
+                        <div class="flex-1 text-center md:text-center">
+                            <h5 class="font-bold  text-black-600">TD Target</h5>
+                            <h3 class="font-bold text-sm" id="OrTGT">@ViewBag.TDTarget <span class="text-black-500"></span></h3>
+                        </div>
+                        <div class="flex-1 text-center md:text-center">
+                            <h5 class="font-bold  text-black-600">TD Order</h5>
+                            <h3 class="font-bold text-sm" id="AcOrder">@ViewBag.TDOrder <span class="text-green-500"></span></h3>
+                        </div>
+                    </div>
+                </div>
+                <!--/TD Order Vs National Order-->
+            </div>
+
+            <div class="w-full md:w-1/2 xl:w-1/4 p-2">
+                <!--TD Order VS National Order-->
+                <div class="bg-gradient-to-b from-red-200 to-red-100 border-b-4 border-red-600  p-5">
+                    <div class="flex flex-row items-center">
+                        <div class="flex-1 text-center md:text-center">
+                            <h5 class="font-bold  text-black-600">LD Target</h5>
+                            <h3 class="font-bold text-sm" id="OrTGT">@ViewBag.LDTarget <span class="text-black-500"></span></h3>
+                        </div>
+                        <div class="flex-1 text-center md:text-center">
+                            <h5 class="font-bold  text-black-600">LD Order</h5>
+                            <h3 class="font-bold text-sm" id="AcOrder">@ViewBag.LDOrder <span class="text-green-500"></span></h3>
+                        </div>
+                    </div>
+                </div>
+                <!--/TD Order Vs National Order-->
+            </div>
+
+
+            <div class="w-full md:w-1/2 xl:w-1/4 p-2">
+                <!--TD Order VS National Order-->
+                <div class="bg-gradient-to-b from-yellow-200 to-yellow-100 border-b-4 border-yellow-600  p-5">
+                    <div class="flex flex-row items-center">
+                        <div class="flex-1 text-center md:text-center">
+                            <h5 class="font-bold  text-black-600">LD-1 Order</h5>
+                            <h3 class="font-bold text-sm" id="OrTGT">@ViewBag.LD_minus1_Order <span class="text-black-500"></span></h3>
+                        </div>
+                        <div class="flex-1 text-center md:text-center">
+                            <h5 class="font-bold  text-black-600">LD Delivery</h5>
+                            <h3 class="font-bold text-sm" id="AcOrder">@ViewBag.LDDelivery <span class="text-green-500"></span></h3>
+                        </div>
+                    </div>
+                </div>
+                <!--/TD Order Vs National Order-->
+            </div>
+
+
+            <div class="w-full md:w-1/2 xl:w-1/4 p-2">
+                <!--TD Order VS National Order-->
+                <div class="bg-gradient-to-b from-green-200 to-green-100 border-b-4 border-green-600  p-5">
+                    <div class="flex flex-row items-center">
+                        <div class="flex-1 text-center md:text-center">
+                            <h5 class="font-bold  text-black-600">LD Bounce</h5>
+                            <h3 class="font-bold text-sm" id="OrTGT">@ViewBag.Bounce <span class="text-black-500"></span></h3>
+                        </div>
+                        <div class="flex-1 text-center md:text-center">
+                            <h5 class="font-bold  text-black-600">LD Bounce(%)</h5>
+                            <h3 class="font-bold text-sm" id="AcOrder">@ViewBag.BouncePer <span class="text-green-500"></span></h3>
+                        </div>
+                    </div>
+                </div>
+                <!--/TD Order Vs National Order-->
+            </div>
+        </div>
+    </div>
+
+
+    <div class="flex flex-row flex-wrap flex-grow">
+
+
+        <div class="w-full md:w-1/4 xl:w-1/4 p-2">
+
+            <div class="bg-white border-transparent rounded-lg shadow-xl">
+                <div class="bg-gradient-to-b from-gray-300 to-gray-100 uppercase text-gray-800 border-b-2 border-gray-300 rounded-tl-lg rounded-tr-lg p-2">
+                    <h1 class="font-bold text-center  text-gray-800">Pri vs Sec (MTD-National)</h1>
+                </div>
+                <div class="" id="National_MTD" style="width:100%;height:250px;">
+                    <!-- Chart MTD  National -->
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full md:w-1/4 xl:w-1/4 p-2">
+            <div class="bg-white border-transparent rounded-lg shadow-xl">
+                <div class="bg-gradient-to-b from-gray-300 to-gray-100 uppercase text-gray-800 border-b-2 border-gray-300 rounded-tl-lg rounded-tr-lg p-2">
+                    <h5 class="font-bold text-center  text-gray-800">Pri vs Sec (YTD-National)</h5>
+                </div>
+                <div class="" id="National_YTD" style="width:100%;height:250px;">
+                    <!--Chart YTD National-->
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="w-full md:w-2/4 xl:w-2/4 p-2">
+            <!-- MTD Pri Vs Scc Graph-->
+            <div class="bg-white border-transparent rounded-lg shadow-xl">
+                <div class="bg-gradient-to-b from-gray-300 to-gray-100 uppercase text-gray-800 border-b-2 border-gray-300 rounded-tl-lg rounded-tr-lg p-2">
+                    <h5 class="font-bold text-center  text-gray-800">Primary vs Secondary (MTD-Region)</h5>
+                </div>
+                <div class="" id="MTDArea" style="width:100%;height:250px;">
+                </div>
+
+                <!--/ MTD Pri Vs Sec Graph-->
+            </div>
+        </div>
+        <div class="w-full md:w-1/4 xl:w-1/4 p-2">
+
+            <div class="bg-white border-transparent rounded-lg shadow-xl">
+                <div class="bg-gradient-to-b from-gray-300 to-gray-100 uppercase text-gray-800 border-b-2 border-gray-300 rounded-tl-lg rounded-tr-lg p-2">
+                    <h5 class="font-bold text-center  text-gray-800">Strike Rate(MTD-Region)</h5>
+                </div>
+                <div class="" id="StrikeRate" style="width:100%;height:250px;">
+                    <!--Strike Rate <=> MTD Area-->
+                </div>
+            </div>
+        </div>
+        <div class="w-full md:w-2/4 xl:w-2/4 p-2">
+
+            <div class="bg-white border-transparent rounded-lg shadow-xl">
+                <div class="bg-gradient-to-b from-gray-300 to-gray-100 uppercase text-gray-800 border-b-2 border-gray-300 rounded-tl-lg rounded-tr-lg p-2">
+                    <h5 class="font-bold text-center  text-gray-800">Primary vs Secondary (YTD-Region)</h5>
+                </div>
+                <div class="" id="YTDArea" style="width:100%;height:250px;">
+                    <!-- YTD Area <=> Pri Vs Sec Graph-->
+                </div>
+
+            </div>
+        </div>
+
+        <div class="w-full md:w-1/4 xl:w-1/4 p-2">
+
+            <div class="bg-white border-transparent rounded-lg shadow-xl">
+                <div class="bg-gradient-to-b from-gray-300 to-gray-100 uppercase text-gray-800 border-b-2 border-gray-300 rounded-tl-lg rounded-tr-lg p-2">
+                    <h5 class="font-bold text-center  text-gray-800">Order Vs Delivery (MTD)</h5>
+                </div>
+                <div class="" id="Bounce" style="width:100%;height:250px;">
+                    <!--Order Delivery Bounce <=> MTD-->
+                </div>
+            </div>
+        </div>
+        @*<div class="w-full md:w-1/2 xl:w-1/2 p-2">
+                <!-- MTD Pri Vs Scc Graph-->
+                <div class="bg-white border-transparent rounded-lg shadow-xl">
+                    <div class="bg-gradient-to-b from-gray-300 to-gray-100 uppercase text-gray-800 border-b-2 border-gray-300 rounded-tl-lg rounded-tr-lg p-2">
+                        <h5 class="font-bold text-center  text-gray-800">Primary vs Secondary (YTD-Area)</h5>
+                    </div>
+                    <div class="" id="" style="width:100%;height:400px;">
+                    </div>
+                    <!--/ MTD Pri Vs Sec Graph-->
+                </div>
+            </div>*@
+    </div>
+    @*<div id="MTDArea"></div>
+        <div class="col-md-6" id="YTDArea"></div>
+        <div class="col-md-6" id="pie_Chart"></div>*@
+}
+@section scripts
+    {
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    @*<script src="~/Content/chart/Chart.min.js"></script>*@
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @*@Scripts.Render("~/Content/vendor/Canvas JS/canvasjs.min.js")*@
+    @Scripts.Render("~/Content/vendor/Canvas JS/jquery.canvasjs.min.js")
+    <script>
+        window.onload = function () {
+
+            CanvasJS.addColorSet("NationalYTD",["#F9E79F","#EC7063"]);
+            CanvasJS.addColorSet("NationalMTD",["#73C6B6","#ff4d4d","#862d59","#e6e600","#ff3300"]);
+            CanvasJS.addColorSet("RegionYTD",["#D5F5E3","#F5B7B1","#EDBB99","#990000"]);
+            CanvasJS.addColorSet("RegionMTD",["#ABEBC6"," #ff4d4d","#FAD7A0","#1464AF"]);
+
+            var MTD_Region = new CanvasJS.Chart("MTDArea",
+                {
+                    nimationEnabled: true,
+                    theme: "Light1", // "light1", "light2", "dark1", "dark2"
+                    colorSet: "RegionMTD",
+                    axisY: {gridThickness: 0, labelFontSize:0,   labelWrap: true,labelMaxWidth: 1},
+                    axisX: {gridThickness: 0},
+                    data: [{
+                        toolTipContent: "<b>{label},Pri Target</b>: {y} tk. ",
+                        showInLegend:true,
+                        legendText: "Pri Target",
+                        indexLabel: " {y} ",
+                        indexLabelPlacement:"inside",
+                        indexLabelFontSize:12,
+                        indexLabelFontWeight:"bolder",
+                        indexLabelOrientation:"vertical",
+                        type: "column",
+                        dataPoints: @Html.Raw(ViewBag.MTD_PriTarget),
+                    },
+                     {
+
+                         toolTipContent: "<b>{label}, Pri Sales</b>: {y} tk. ",
+                         showInLegend:true,
+                         indexLabel: "{y} ",
+                         indexLabelPlacement:"outside",
+                         indexLabelFontSize:12,
+                         indexLabelFontWeight:"bolder",
+                         indexLabelOrientation:"vertical",
+                         legendText: "Pri Sales",
+                         type: "column",
+                         dataPoints: @Html.Raw(ViewBag.MTD_Prisales),
+                     },
+                     {
+                         toolTipContent: "<b>{label},Sec Target</b>: {y} tk. ",
+                         showInLegend:true,
+                         indexLabel: "{y} ",
+                         indexLabelPlacement:"inside",
+                         indexLabelFontSize:12,
+                         indexLabelFontWeight:"bolder",
+                         indexLabelOrientation:"vertical",
+                         legendText: "Sec Target",
+                         type: "column",
+                         dataPoints: @Html.Raw(ViewBag.MTD_SecTarget),
+                     },
+                     {
+                         toolTipContent: "<b>{label},Sec Sales</b>: {y} tk. ",
+                         showInLegend:true,
+                         indexLabel: "{y} ",
+                         indexLabelPlacement:"outside",
+                         indexLabelFontSize:12,
+                         indexLabelFontWeight:"bolder",
+                         indexLabelOrientation:"vertical",
+                         legendText: "Sec Sales",
+                         type: "column",
+                         dataPoints: @Html.Raw(ViewBag.MTD_SecSales),
+                     }]
+                });
+            MTD_Region.render();
+
+
+
+
+            var YTD_Region_chart = new CanvasJS.Chart("YTDArea",
+               {
+                   animationEnabled: true,
+                   theme: "Light1",
+                   lin: "true",
+                   colorSet: "RegionYTD",
+                   title: {fontSize: 10},
+                   axisY: {gridThickness: 0, labelFontSize:0,   labelWrap: true,labelMaxWidth: 1},
+                   axisX: {gridThickness: 0},
+                   data: [{
+                       indexLabelBackgroundColor:"yellow",
+                       toolTipContent: "<b>{label},Pri.Target</b>: {y} tk. ",
+                       showInLegend:true,
+                       legendText: "Pri Target",
+                       indexLabel: " {y} ",
+                       indexLabelPlacement:"inside",
+                       indexLabelFontSize:12,
+                       indexLabelFontWeight:"bolder",
+                       indexLabelOrientation:"vertical",
+                       type: "column",
+                       dataPoints: @Html.Raw(ViewBag.YTD_PriTarget),
+                   },
+                    {
+                        toolTipContent: "<b>{label},Pri.Sales</b>: {y} tk. ",
+                        showInLegend:true,
+                        indexLabel: "{y} ",
+                        indexLabelPlacement:"outside",
+                        indexLabelFontSize:12,
+                        indexLabelFontWeight:"bolder",
+                        indexLabelOrientation:"vertical",
+                        indexLabelBackgroundColor: "LightBlue",
+                        legendText: "Pri Sales",
+                        type: "column",
+                        dataPoints: @Html.Raw(ViewBag.YTD_Prisales),
+                    },
+                    {
+                        toolTipContent: "<b>{label},Sec.Target</b>: {y} tk.",
+                        showInLegend:true,
+                        indexLabel: "{y}",
+                        indexLabelPlacement:"inside",
+                        indexLabelFontSize:12,
+                        indexLabelFontWeight:"bolder",
+                        indexLabelOrientation:"vertical",
+                        indexLabelBackgroundColor: "LightBlue",
+                        legendText: "Sec Target",
+                        type: "column",
+                        dataPoints: @Html.Raw(ViewBag.YTD_SecTarget),
+                    },
+                    {
+                        toolTipContent: "<b>{label},Sec.Sales</b>: {y} tk. ",
+                        showInLegend:true,
+                        indexLabel: "{y} ",
+                        indexLabelPlacement:"outside",
+                        indexLabelFontSize:12,
+                        indexLabelFontWeight:"bolder",
+                        indexLabelOrientation:"vertical",
+                        indexLabelBackgroundColor: "LightBlue",
+                        legendText: "Sec Sales",
+                        type: "column",
+                        dataPoints: @Html.Raw(ViewBag.YTD_SecSales),
+                    }]
+               });
+            YTD_Region_chart.render();
+
+
+
+            var National_chart_MTD = new CanvasJS.Chart("National_MTD",
+               {
+                   animationEnabled: true,
+                   theme: "Light1",
+                   line: "true",
+                   colorSet:"NationalMTD",
+                   axisY: {gridThickness: 0, labelFontSize:0,   labelWrap: true,labelMaxWidth: 1},
+                   axisX: {gridThickness: 0},
+                   data: [{
+                       toolTipContent: "<b>{label},Target</b>: {y} tk.",
+                       showInLegend:true,
+                       legendText: "Target",
+                       indexLabel: " {y} ",
+                       indexLabelPlacement:"inside",
+                       indexLabelFontSize:12,
+                       indexLabelFontWeight:"bolder",
+                       indexLabelOrientation:"vertical",
+                       type: "column",
+                       dataPoints: @Html.Raw(ViewBag.N_Target),
+                   },
+                    {
+                        toolTipContent: "<b>{label},Sales</b>: {y} tk.",
+                        showInLegend:true,
+                        indexLabel: "{y} ",
+                        indexLabelPlacement:"outside",
+                        indexLabelFontSize:12,
+                        indexLabelFontWeight:"bolder",
+                        indexLabelOrientation:"vertical",
+                        indexLabelBackgroundColor: "LightBlue",
+                        legendText: "Sales",
+                        type: "column",
+                        dataPoints: @Html.Raw(ViewBag.N_Sales),
+                    }]
+               });
+            National_chart_MTD.render();
+
+
+            var National_chart_YTD = new CanvasJS.Chart("National_YTD",
+             {
+                 //********* National Sales Pri/Sec
+                 animationEnabled: true,
+                 theme: "Light1",
+                 lin: "true",
+                 title: {fontSize: 10},
+                 axisY: {gridThickness: 0, labelFontSize:0, labelWrap: true,labelMaxWidth: 1},
+                 axisX: {gridThickness: 0},
+                 colorSet:"NationalYTD",
+                 data: [{
+                     toolTipContent: "<b>{label},Target</b>: {y} tk.",
+                     showInLegend:true,
+                     legendText: "Target",
+                     indexLabel: " {y} ",
+                     indexLabelPlacement:"inside",
+                     indexLabelFontSize:12,
+                     indexLabelFontWeight:"bolder",
+                     indexLabelOrientation:"vertical",
+                     type: "column",
+                     dataPoints: @Html.Raw(ViewBag.N_Target_YTD),
+                 },
+                  {
+                      toolTipContent: "<b>{label},Sales</b>: {y} tk.",
+                      showInLegend:true,
+                      indexLabel: "{y} ",
+                      indexLabelPlacement:"outside",
+                      indexLabelFontSize:12,
+                      indexLabelFontWeight:"bolder",
+                      indexLabelOrientation:"vertical",
+                      legendText: "Sales",
+                      type: "column",
+                      dataPoints: @Html.Raw(ViewBag.N_Sales_YTD),
+                  }]
+             });
+            National_chart_YTD.render();
+
+
+            var SR = new CanvasJS.Chart("StrikeRate",
+                {
+                    animationEnabled: true,
+                    theme: "light1",
+                    axisY: {gridThickness: 0, labelFontSize:0, labelWrap: true,labelMaxWidth: 1},
+                    axisX: {gridThickness: 0},
+                    data: [{
+                        toolTipContent: "<b>{label}</b>: {y}%",
+                        showInLegend:false,
+                        legendText: "{label}",
+                        legendFontSize: 12,
+                        indexLabel: "{label},{y}%",
+                        indexLabelPlacement:"inside",
+                        indexLabelFontSize:12,
+                        indexLabelFontWeight:"bolder",
+                        indexLabelOrientation:"vertical",
+                        type: "pie",
+                        dataPoints: @Html.Raw(ViewBag.StrikeRate),
+                    }]
+                });
+            SR.render();
+
+
+            var Bounce = new CanvasJS.Chart("Bounce",
+            {
+                animationEnabled: true,
+                theme: "light1",
+                axisY: {gridThickness: 0, labelFontSize:0, labelWrap: true,labelMaxWidth: 1},
+                axisX: {gridThickness: 0},
+                data: [{
+                    toolTipContent: "<b>{label}</b>: {y}",
+                    showInLegend:true,
+                    legendText: "{label}",
+                    indexLabel: "{y}",
+                    indexLabelPlacement:"outside",
+                    indexLabelFontSize:12,
+                    indexLabelFontWeight:"bolder",
+                    indexLabelOrientation:"horizontal",
+                    type: "column",
+                    dataPoints: @Html.Raw(ViewBag.BounceChart),
+                }]
+            });
+            Bounce.render();
+        }
+    </script>
+}
+

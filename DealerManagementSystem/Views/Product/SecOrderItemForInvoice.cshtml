@@ -1,0 +1,300 @@
+﻿@using DealerManagementSystem.Models
+@*@model IEnumerable<DealerManagementSystem.Models.ViewModel.ProductViewModel>*@
+@model List<DealerManagementSystem.Models.ViewModel.ProductViewModel>
+@{
+    ViewBag.Title = "DMS | Choose Products";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    fieldset {
+        margin: 2px;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-size: 14px;
+        border: 1px solid #1F497D;
+        background: #ddd;
+        border-radius: 5px;
+        padding: 5px;
+        width: 98%;
+        float: left;
+        position: relative;
+    }
+
+        fieldset legend {
+            background: #1F497D;
+            color: #fff;
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 5px;
+            box-shadow: 0 0 0 5px #ddd;
+            margin-left: 20px;
+            width: 115px;
+        }
+
+    #productSearchFilter input {
+        margin-bottom: 2px;
+    }
+
+
+    #productSearchFilter select {
+        margin-bottom: 2px;
+    }
+
+    #products fieldset {
+        margin: 10px;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        border: 1px solid #1F497D;
+        background: #ddd;
+        border-radius: 5px;
+        padding: 15px;
+        width: 98%;
+        float: left;
+        position: relative;
+    }
+
+    #products legend {
+        background: #1F497D;
+        color: #fff;
+        padding: 5px 10px;
+        font-size: 12px;
+        border-radius: 5px;
+        box-shadow: 0 0 0 5px #ddd;
+        margin-left: 20px;
+        width: 70px;
+    }
+</style>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <fieldset>
+        <legend>Product Search</legend>
+        <table id="productSearchFilter">
+            <tr>
+                <td>
+                    @Html.DropDownList("PdtGroupId", (SelectList)ViewBag.MAGList, "<MAG-ALL>", htmlAttributes: new { @class = "form-control", style = "width: 98%" })
+                </td>
+
+                <td>
+                    @Html.DropDownList("BrandId", (SelectList)ViewBag.BradList, "<Brand-ALL>", htmlAttributes: new { @class = "form-control", style = "width: 98%" })
+                </td>
+
+                <td>
+                    @Html.TextBox("BarcodeSLID", "", new { @class = "form-control", placeholder = "Barcode Serial", style = "width: 98%" })
+                </td>
+
+                <td>
+                    @Html.TextBox("ProductCodeID", "", new { @class = "form-control", placeholder = "Product Code", style = "width: 99%" })
+                </td>
+
+                <td>
+                    @Html.TextBox("ProductNameID", "", new { @class = "form-control", placeholder = "Product Name", style = "width: 100%;float: left;" })
+                </td>
+                <td style="padding:3px">
+                    <button style="float: right;width:150px" type="submit" id="btnGet" class="btn btn-primary btn-md">
+                        <span class="glyphicon glyphicon-search"></span> Get
+                    </button>
+                </td>
+            </tr>
+        </table>
+
+    </fieldset>
+
+    @*<div>
+            <table>
+                <thead>
+                <tr>
+                    <th>Barcode</th>
+                    <th>Product Code</th>
+                    <th>Product Name</th>
+                    <th>MAG</th>
+                    <th>Brand</th>
+                    <th>Price</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>*@
+
+    <div id="products">
+        <fieldset>
+            <legend>Products</legend>
+            <table id="example" style="overflow-x:auto" class="table table-bordered table-responsive table-condensed">
+                <thead style="background-color: Highlight;color:black;">
+                    <tr>
+                        <th>
+                            @Html.DisplayName("")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Barcode Serial")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Product Code")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Product Name")
+                        </th>
+                        <th>
+                            @Html.DisplayName("MAG Name")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Brand Name")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Price")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Promo")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Offer Price")
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="selectProducts">
+                @foreach (var ss in Model.ToList())
+                {
+                   <tr>
+                       <td>
+                      @*  @Html.CheckBoxFor(ModelItem => ss.IsChecked, new { @class=})*@
+                           <input class="checkbox-inline" type="checkbox"  value="@ss.IsChecked" />
+                       </td>
+                       <td>
+                           @Html.DisplayFor(ModelItem => ss.ProductSerial)
+                       </td>
+
+                       <td>
+                           @Html.DisplayFor(ModelItem => ss.ProductCode)
+                       </td>
+                       <td>
+                           @Html.DisplayFor(ModelItem => ss.ProductName)
+                       </td>
+                       <td>
+                           @Html.DisplayFor(ModelItem => ss.MagName)
+                       </td>
+                       <td>
+                           @Html.DisplayFor(ModelItem => ss.BrandDesc)
+                       </td>
+
+                       <td>
+                           @Html.DisplayFor(ModelItem => ss.Rsp)
+                       </td>
+
+                       <td>
+                           @Html.DisplayFor(ModelItem => ss.PromoDiscount)
+                       </td>
+
+                       <td>
+                           @{var offerPrice = ss.Rsp - ss.PromoDiscount; }
+                           @Html.DisplayFor(ModelItem => offerPrice)
+                       </td>
+                      
+                   </tr>
+                }</tbody>
+            </table>
+        </fieldset>
+    </div>
+}
+
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            $('#example tbody').on('click', 'tr', function(e) {
+                if (event.target.type !== 'checkbox') {
+                    $(':checkbox', this).trigger('click');
+                }
+            });
+
+
+
+            $('#example').dataTable({
+                "pageLength": 500,
+                "columns": [
+                    { "width": "50px", className: "dt-body-center" },
+                    { "width": "80px" },
+                    { "width": "80px" },
+                    { "width": "400px" },
+                    { "width": "150px" },
+                    { "width": "110px" },
+                    { className: "dt-body-right", "width": "110px" },
+                    { className: "dt-body-right", "width": "110px" },
+                    { className: "dt-body-right"}
+                ],
+                'language': {
+                    search: '<div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>',
+                    searchPlaceholder: 'Search'
+                }
+
+            });
+
+            $("#example_wrapper").prepend('<button style="position: relative; float: left; left: 10px;" type="submit" id="setCustomer" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Add To Invoice</button>');
+            $("#setCustomer").click(function() {
+                var totalCheckboxes = $('input:heckbox').length;
+                if (totalCheckboxes === 0) {
+                    alert("There Is No Products To Make Invoice");
+                    return false;
+                } else {
+                    var numberOfChecked = $('input:checkbox:checked').length;
+                    if (numberOfChecked === 0) {
+                        alert("Please Select At Least One Product to Make Invoice");
+                        return false;
+                    }
+                }
+                return true;
+            });
+
+            $("#btnGet").click(function() {
+                var table = $('#example').DataTable();
+                table.clear().draw();
+                var pdtGroupId = $("#PdtGroupId").val();
+                var brandId = $("#BrandId").val();
+                var barcodeSlId = $("#BarcodeSLID").val();
+                var productCodeId = $("#ProductCodeID").val();
+                var productNameId = $("#ProductNameID").val();
+
+                var jsnFormatData = {
+                    pdtGroupId: pdtGroupId,
+                    brandId: brandId,
+                    barcodeSlId: barcodeSlId,
+                    productCodeId: productCodeId,
+                    productNameId: productNameId
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetProducts", "Product")',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(jsnFormatData),
+                    dataType: "json",
+                    success: function(data) {
+                        $.each(data, function (i) {
+                            var offerPrice = data[i].Rsp - data[i].PromoDiscount;
+                            $('#example').DataTable().row.add([
+                                '<input data-val="true" data-val-number="The field ProductId must be a number." data-val-required="The ProductId field is required." name="[' + i + '].ProductId" type="hidden" value="' + data[i].ProductId + '" />' +
+                                '<input data-val="true" data-val-number="The field CostPrice must be a number." data-val-required="The CostPrice field is required." name="[' + i + '].CostPrice" type="hidden" value="' + data[i].CostPrice + '" />' +
+                                '<input data-val="true" data-val-required="The Product Code field is required." name="[' + i + '].IsChecked" type="checkbox" value="true" /><input name="[' + i + '].IsChecked" type="hidden" value="false" />',
+                                '<input name="[' + i + '].ProductSerial" type="hidden" value="' + data[i].ProductSerial + '" />' + data[i].ProductSerial,
+                                '<input name="[' + i + '].ProductCode" type="hidden" value="' + data[i].ProductCode + '" />' + data[i].ProductCode,
+                                '<input name="[' + i + '].ProductName" type="hidden" value="' + data[i].ProductName + '" />' + data[i].ProductName,
+                                '<input name="[' + i + '].MagName" type="hidden" value="' + data[i].MagName + '" />' + data[i].MagName,
+                                '<input name="[' + i + '].BrandDesc" type="hidden" value="' + data[i].BrandDesc + '" />' + data[i].BrandDesc,
+                                '<input data-val="true" data-val-number="The field Price must be a number." data-val-required="The Price field is required." name="[' + i + '].Rsp" type="hidden" value="' + data[i].Rsp + '" />' + data[i].Rsp,
+                                '<input data-val="true" data-val-number="The field Price must be a number." data-val-required="The Price field is required." name="[' + i + '].PromoDiscount" type="hidden" value="' + data[i].PromoDiscount + '" />' + data[i].PromoDiscount,
+                                offerPrice
+                            ]).draw();
+                        });
+                    }
+                });
+                return false;
+
+            });
+
+
+        });
+    </script>
+}

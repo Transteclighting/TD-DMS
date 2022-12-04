@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "DMS | Warranty Card";
+    Layout = "~/Views/Shared/_ReportPreviewerLayout.cshtml";
+}
+
+
+    @if (ViewBag.allWarrantyCardId.Count == 1)
+    {
+
+        foreach (var anInvoice in ViewBag.allWarrantyCardId) { 
+            <div class="embed-responsive embed-responsive-16by9">
+                @*<iframe class="embed-responsive-item" src="/ReportsPreview/GetWarrantyCardPdf?pSerial=@anInvoice.ProductSerialNo"></iframe>*@
+                <iframe class="embed-responsive-item" src="@Url.Action("GetWarrantyCardPdf","ReportsPreview")?pSerial=@anInvoice.ProductSerialNo"></iframe>
+            </div>
+        }
+    }
+    else if (ViewBag.allWarrantyCardId.Count > 1)
+    {
+        foreach (var anInvoice in ViewBag.allWarrantyCardId)
+        {
+            <button class="btn btn-info" style="margin: 5px;" value="@anInvoice.ProductSerialNo">
+                <span class="glyphicon glyphicon-open-file"></span>Sl.# @anInvoice.ProductSerialNo
+            </button>
+        }
+
+    }
+
+    <span id="warrantyFrame"></span>
+
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            $(":button").click(function() {
+                var pSerial = $(this).val();
+                //var url = "/ReportsPreview/GetWarrantyCardPdf?pSerial=" + pSerial;
+                var url = "@Url.Action("GetWarrantyCardPdf", "ReportsPreview")?pSerial=" + pSerial;
+                var html = '<div class="embed-responsive embed-responsive-16by9"><iframe id="warrantyFrame" src=' + url + ' class="embed-responsive-item"></iframe></div>';
+                $("#warrantyFrame").html(html);
+            });
+        });
+    </script>
+}
+

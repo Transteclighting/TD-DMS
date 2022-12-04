@@ -1,0 +1,493 @@
+﻿@model DealerManagementSystem.Models.SecOrder
+
+@{
+    ViewBag.Title = "DMS | Order";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/MakeInvoice/makeInvoiceStyle.css" rel="stylesheet" />
+<style>
+    fieldset legend {
+        background: #1F497D;
+        color: #fff;
+        padding: 5px 10px;
+        font-size: 12px;
+        border-radius: 5px;
+        box-shadow: 0 0 0 5px #ddd;
+        margin-left: 20px;
+        width: 115px;
+    }
+
+    #allSelectedProducts td {
+        padding: 2px 10px;
+        font-size: 12px;
+        color: black;
+    }
+
+    .btnDelete {
+        border-color: none;
+    }
+
+    #example {
+        padding: 2px 2px;
+        font-size: 12px;
+        color: black;
+    }
+
+    #btnfind {
+        padding: 2px 2px;
+        font-size: 12px;
+        color: black;
+    }
+</style>
+
+@using (@Html.BeginForm())
+{
+
+    <div class="container">
+        @*<div class="form-group">
+                @{
+                    if (Session["UserType"].ToString() == "Manager")
+                    {
+                        <label for="CustomerId">Customer:</label>
+                        <select name="order.CustomerId" id="CustomerId">
+                            @{
+                                if (ViewBag.CustomersList != null)
+                                {
+                                    foreach (var cust in ViewBag.CustomersList)
+                                    {
+                                        <option value="@cust.Id">@cust.Text</option>
+                                    }
+                                }
+                            }
+                        </select>
+                                }
+                }
+            </div>*@
+
+        @*<button id="btnfind" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#largeShoes">
+                <i class="fas fa-search fa-sm fa-fw mr-2 text-gray-400"></i> Find Products
+            </button>*@
+
+        <!-- The modal -->
+        <div class="modal fade" id="largeShoes" tabindex="-1" role="dialog" aria-labelledby="modalLabelLarge" aria-hidden="true">
+            <div class="modal-dialog modal-lg" style="width: 50%;margin: 10px auto;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="modalLabelLarge">
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <label for="productCode">Product Code</label>
+                                    <input type="number" class="form-control input-sm" id="productCode" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="productName">Product Name:</label>
+                                    <input type="text" class="form-control input-sm" id="productName" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="BrandId">Brand:</label>
+                                    @Html.DropDownList("BrandId", (SelectList)ViewBag.BradList, "<Brand-ALL>", new { @class = "form-control input-sm" })
+                                </div>
+                                <div class="form-group">
+                                    <label for="MagId">MAG:</label>
+                                    @Html.DropDownList("MagId", (SelectList)ViewBag.MAGList, "<MAG-ALL>", new { @class = "form-control input-sm" })
+                                </div>
+                                <button id="btnGetProduct" type="button" class="btn btn-primary border-dark">
+                                    Get Product
+                                </button>
+                            </div>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-bordered table-striped" id="tblSearchProduct">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th hidden=""></th>
+                                            <th>@Html.Label("Product Code")</th>
+                                            <th>@Html.Label("Product Name")</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div id="products">
+        <table id="allSelectedProducts" name="allSelectedProducts" style="margin-left:20px;width:90%" class="table table-bordered table-responsive table-condensed table-striped">
+            <thead>
+                <tr>
+                    <th>@Html.Label("Product Code")</th>
+                    <th>@Html.Label("Product Name")</th>
+                    <th>@Html.Label("Qty")</th>
+                </tr>
+
+            </thead>
+            <tbody>
+                @if (ViewBag.ProductsList != null)
+                {
+                    int i = 0;
+                    foreach (var item in ViewBag.ProductsList)
+                    {
+                        <tr>
+                            <td class="itemProductCode">@item.ProductCode</td>
+                            <td>@item.ProductName</td>
+                            <td>@item.Qty</td>
+                            <td>
+                                <button type="button" class="btnDelete">
+                                    <i class="fas fa-trash fa-sm text-gray-400"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    <fieldset id="searchset">
+        <table id="productSearchFilter">
+            <tr>
+                <td>
+                    @Html.DropDownList("PdtGroupId", (SelectList)ViewBag.MAGList, "<MAG-ALL>", htmlAttributes: new { @class = "form-control", style = "width: 98%" })
+                </td>
+
+                <td>
+                    @Html.DropDownList("BrandId", (SelectList)ViewBag.BradList, "<Brand-ALL>", htmlAttributes: new { @class = "form-control", style = "width: 98%" })
+                </td>
+
+                <td>
+                    @Html.TextBox("BarcodeSLID", "", new { @class = "form-control", placeholder = "Barcode Serial", style = "width: 98%" })
+                </td>
+
+                <td>
+                    @Html.TextBox("ProductCodeID", "", new { @class = "form-control", placeholder = "Product Code", style = "width: 99%" })
+                </td>
+
+                <td>
+                    @Html.TextBox("ProductNameID", "", new { @class = "form-control", placeholder = "Product Name", style = "width: 100%;float: left;" })
+                </td>
+                <td style="padding:3px">
+                    <button style="float: right;width:150px" type="submit" id="btnGet" class="btn btn-primary btn-md">
+                        <span class="glyphicon glyphicon-search"></span> Get
+                    </button>
+                </td>
+            </tr>
+        </table>
+
+    </fieldset>
+    <div id="products">
+        <input class="btn btn-success btn-sm pull-left" style="margin-left:20px;" id="saveorder" type="button" value="Create Invoice" />
+        <table id="example" style="overflow-x:auto;width:95%" class="table table-bordered table-responsive table-condensed table-striped">
+            <thead style="background-color: Highlight;color:black;">
+                <tr>
+                    <th>
+                        @Html.DisplayName("")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Barcode Serial")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Product Code")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Product Name")
+                    </th>
+                    <th>
+                        @Html.DisplayName("MAG Name")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Brand Name")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Price")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Promo")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Offer Price")
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="selectProducts"></tbody>
+        </table>
+    </div>
+    <input type="hidden" name="order.TranID" required class="form-control" value="@Model.TranID" hidden />
+        <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title card-title text-danger">Error!!</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Can not add same product again!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+
+        $(document).ready(function () {
+            $('#searchset').hide();
+            function Check_ischecked() {
+                var totalCheckboxes = $('input:checkbox').length;
+                if (totalCheckboxes == 0) {
+                    alert("There Is No Products To Make Invoice");
+                    return false;
+                } else {
+                    var numberOfChecked = $('input:checkbox:checked').length;
+
+                    if (numberOfChecked === 0) {
+                        alert("Please Select At Least One Product to Make Invoice");
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            $("#saveorder").click(function () {
+                if (productValidation() == true) {
+                    var PID = "";
+                    var SL = "";
+                    var code = "";
+                    var checked = "";
+                    var trim = "";
+                    var rows = 0;
+                    var table = $('#example').DataTable();
+                    $('#example tbody tr').each(function () {
+                        PID = $(this).find('[id = "ProductId"]').val();
+                        SL = $(this).find('[id="Serial"]').val();
+                        var $checkbox = $(this).find('td:first-child input[type="checkbox"]')
+                        if ($checkbox.is(':checked')) {
+                            rows += 1;
+                            code += "'" + SL + "'" + ",";
+                            trim = code.replace(/(^,)|(,$)/g, "")
+                        }
+                    });
+                    var TranID = parseInt( @Model.TranID);
+                    var Rows = parseInt(rows);
+                    var url = '@Url.Action("SecOrderItemForInvoice", "Product")';
+                    url += '?Serials=' + trim.toString() + '&TranID=' + TranID + '&rowcount=' + Rows;
+                    window.location.href = url;
+                }
+            });
+
+
+
+            //======== Check ProductID and Serial======
+            @*function CheckData(productID, Serial) {
+                var int = 0;
+                var jsonList = '@Html.Raw(Json.Encode(ViewBag.StockList))';
+                var jsList = JSON.parse(jsonList);
+                $.each(jsList, function (index, value) {
+                    var JValue = "'" + value.ProductSerial + "'";
+                    var Ivalue = "'" + Serial + "'";
+                    // alert("True : " + value.ProductID + "/" + productID + "/" + JValue + "/" + Ivalue);
+                    if (value.ProductID == productID && JValue == Ivalue) {
+
+                        //  alert("True ");
+                        int = 1;
+                    }
+                });
+                if (int == 1) {
+                    return "1";
+                }
+                else {
+                    return "0";
+                }
+            }*@
+            // $('#allSelectedProducts').dataTable();
+
+            function productValidation() {
+                var arr = [];
+                $(".itemProductCode").each(function (proInx) {
+                    var value = $(this).html();
+                    console.log(value);
+                    if (arr.indexOf(value) == -1) {
+                        arr.push(value);
+                    }
+                    else {
+                        $(this).parent().addClass("danger");
+                        //alert('Can not add same product again!');
+                        $('#myModal').modal('show');
+                        $(this).closest('tr').remove();
+                        renameInput();
+                    }
+                });
+            }
+
+            function productValidation() {
+                var totalCheckboxes = $('input:checkbox').length;
+                if (totalCheckboxes == 0) {
+                    alert("There Is No Products To Make Invoice");
+                    return false;
+                } else {
+                    var numberOfChecked = $('input:checkbox:checked').length;
+
+                    if (numberOfChecked === 0) {
+                        alert("Please Select At Least One Product to Make Invoice");
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            function renameInput() {
+                $(".input-cell").each(function (proInx) {
+                    $(this).find(".product-item").each(function (index) {
+                        $(this).attr('name', $(this).attr('name').replace(/\d+/, proInx));
+                        console.log(this);
+                    });
+                });
+            }
+
+            $("#allSelectedProducts").on('click', '.btnDelete', function () {
+                //old
+                $(this).closest('tr').remove();
+                renameInput();
+            });
+
+            var searchProducts;
+            $("#btnGetProduct").click(function () {
+                $("#tblSearchProduct tbody").empty();
+                var productCode = $("#productCode").val();
+                var productName = $("#productName").val();
+                var brandId = $("#BrandId").val();
+                var magId = $("#MagId").val();
+                $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("GetProductsJson", "Product")' + '?productCode=' + productCode + '&productName=' + productName + '&brandId=' + brandId + '&magId=' + magId,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        searchProducts = data;
+                        var aProduct = "";
+                        $.each(data, function (i) {
+                            aProduct += "<tr>" +
+                                "<td><button class=\"btn btnAddProductForOrder\" type=\"button\" ><i class='fas fa-fw fa-plus'></i></button></td>" +
+                                "<td hidden>" + data[i].ProductId + "</td>" +
+                                "<td>" + data[i].ProductCode + "</td>" +
+                                "<td>" + data[i].ProductName + "</td>" +
+                                "</tr>";
+                        });
+                        $("#tblSearchProduct tbody").append(aProduct);
+                    }
+                });
+                return false;
+            });
+
+
+            var i = $(".itemProductCode").length;
+            $(document).on("click", ".btnAddProductForOrder", function () {
+                var aSelectedProd = "<tr>" +
+                    "<td class='itemProductCode'>" + searchProducts[$(this).closest("tr").index()].ProductCode + "</td>" +
+                    "<td>" + searchProducts[$(this).closest("tr").index()].ProductName + "</td>" +
+                    //"<td class='input-cell'>"
+                    // + " <input type=\"hidden\" value=\"" + searchProducts[$(this).closest("tr").index()].ProductId + "\" name=\"order.OrderProducts[" + i + "].ProductId\" class=\"product-item\"/>"
+                    // //+ " 1" +
+                    // //+ "<input type=\"number\" name=\"order.OrderProducts[" + i + "].OrderQty\" required class=\"form-control product-item\"  min=\"1\"/> " +
+                    // + "</td>" +
+                      "<td> " +
+                       "<input type=\"hidden\" value=\"" + searchProducts[$(this).closest("tr").index()].ProductId + "\" name=\"order.OrderProducts[" + i + "].ProductId\" class=\"product-item\"/>" +
+                      "<input type=\"text\" id=\"barcode\"  class=\"input-append\" name=\"barcode\" value=\"\" required />" +
+                      "</td>" +
+                      "<td><button type='button' class='btn btnDelete'>Delete</button></td></tr>";
+                $("#allSelectedProducts tbody").append(aSelectedProd);
+                i++;
+                //productValidation();
+            });
+        });
+
+
+        $(document).ready(function () {
+            $('#example').dataTable({
+                "pageLength": 500,
+                "columns": [
+                    { "width": "50px", className: "dt-body-center" },
+                    { "width": "80px" },
+                    { "width": "80px" },
+                    { "width": "400px" },
+                    { "width": "150px" },
+                    { "width": "110px" },
+                    { className: "dt-body-right", "width": "110px" },
+                    { className: "dt-body-right", "width": "110px" },
+                    { className: "dt-body-right" }
+                ],
+                'language': {
+                    search: '<div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>',
+                    searchPlaceholder: 'Search'
+                }
+
+            });
+            //$("#btnGet").click(function () {
+            var table = $('#example').DataTable();
+            table.clear().draw();
+            var pdtGroupId = $("#PdtGroupId").val();
+            var brandId = $("#BrandId").val();
+            var barcodeSlId = $("#BarcodeSLID").val();
+            var productCodeId = $("#ProductCodeID").val();
+            var productNameId = $("#ProductNameID").val();
+            var jsnFormatData = {
+                pdtGroupId: pdtGroupId,
+                brandId: brandId,
+                barcodeSlId: barcodeSlId,
+                productCodeId: productCodeId,
+                productNameId: productNameId
+            };
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetProducts", "Product")',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(jsnFormatData),
+                dataType: "json",
+                success: function (data) {
+                    $.each(data, function (i) {
+                        var offerPrice = data[i].Rsp - data[i].PromoDiscount;
+                        $('#example').DataTable().row.add([
+                            '<input id="ProductId" data-val="true" data-val-number="The field ProductId must be a number." data-val-required="The ProductId field is required." name="[' + i + '].ProductId" type="hidden" value="' + data[i].ProductId + '" />' +
+                            '<input data-val="true" data-val-number="The field CostPrice must be a number." data-val-required="The CostPrice field is required." name="[' + i + '].CostPrice" type="hidden" value="' + data[i].CostPrice + '" />' +
+                            '<input id="checkbox" data-val="true" data-val-required="The Product Code field is required." name="[' + i + '].IsChecked" type="checkbox" value="true" /><input id="checkbox" name="[' + i + '].IsChecked" type="hidden" value="false" />',
+                            '<input id="Serial" name="[' + i + '].ProductSerial" type="hidden" value="' + data[i].ProductSerial + '" />' + data[i].ProductSerial,
+                            '<input name="[' + i + '].ProductCode" type="hidden" value="' + data[i].ProductCode + '" />' + data[i].ProductCode,
+                            '<input name="[' + i + '].ProductName" type="hidden" value="' + data[i].ProductName + '" />' + data[i].ProductName,
+                            '<input name="[' + i + '].MagName" type="hidden" value="' + data[i].MagName + '" />' + data[i].MagName,
+                            '<input name="[' + i + '].BrandDesc" type="hidden" value="' + data[i].BrandDesc + '" />' + data[i].BrandDesc,
+                            '<input data-val="true" data-val-number="The field Price must be a number." data-val-required="The Price field is required." name="[' + i + '].Rsp" type="hidden" value="' + data[i].Rsp + '" />' + data[i].Rsp,
+                            '<input data-val="true" data-val-number="The field Price must be a number." data-val-required="The Price field is required." name="[' + i + '].PromoDiscount" type="hidden" value="' + data[i].PromoDiscount + '" />' + data[i].PromoDiscount,
+                            offerPrice
+
+                        ]).draw();
+                    });
+                }
+            });
+            return false;
+
+        });
+
+
+        //});
+
+    </script>
+}

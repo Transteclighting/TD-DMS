@@ -1,0 +1,500 @@
+﻿@{
+    ViewBag.Title = "Activity report | CJ Web Portal";
+}
+@section extra_style {
+    <link href="~/Content/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/3.3.3/css/fixedColumns.dataTables.min.css">
+
+
+    <!-- Latest compiled and minified JavaScript -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+
+<!-- Latest compiled and minified CSS -->
+<!-- Latest compiled and minified JavaScript -->
+
+<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
+<link rel="stylesheet" href="~/Content/leaflet.awesome-markers.css">
+}
+@section breadcrumb{
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"><a href="/">Distribution</a></li>
+            <li class="breadcrumb-item" aria-current="page">@Html.ActionLink("Activity report", ViewContext.RouteData.Values["Action"].ToString(), ViewContext.RouteData.Values["controller"].ToString())</li>
+        </ol>
+    </nav>
+}
+
+<div class="panel" style="margin: 10px auto;">
+    <div class="panel-heading bg-gradient-primary">
+        <a data-toggle="collapse" href="#collapse1" class="collapsed">
+            <div class="panel-title" style="color:white">
+                <i class="fa fa-search"></i> Filter
+            </div>
+        </a>
+    </div>
+    <div id="collapse1" class="panel-collapse collapse bg-white p-3 shadow m-0 p-0">
+        <div class="form-row">
+            <div class="col-md-2 mb-3">
+                <label for="validationTooltip04">From Date</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                    <input type="text" class="form-control datepicker" id="fromDate" name="fromDate" value="@ViewBag.fromDate">
+                    <div class="invalid-tooltip">
+                        Please provide a Date.
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 mb-3">
+                <label for="validationTooltip04">To Date</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                    <input type="text" class="form-control datepicker" id="toDate" name="toDate" value="@ViewBag.toDate">
+                    <div class="invalid-tooltip">
+                        Please provide a Date.
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label for="Region">Region</label>
+                <div class="input-group">
+                    <select class="selectpicker w-100" name="region" id="region" data-live-search="true">
+                        <option value="">All</option>
+                        @{
+                            if (ViewBag.region != null)
+                            {
+                                foreach (var region in ViewBag.region)
+                                {
+                                    <option value="@region.Id">@region.Text</option>
+                                }
+                            }
+                        }
+
+                    </select>
+                </div>
+            </div>
+            <!--AREA -->
+            <div class="col-md-4 mb-3">
+                <label for="AREA">Area</label>
+                <div class="input-group">
+                    <select class="selectpicker w-100" name="area" id="area" data-live-search="true"></select>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="validationTooltip01">Territory </label>
+                <div class="input-group">
+                    <select class="selectpicker w-100" name="zone" id="zone" data-live-search="true"></select>
+                </div>
+            </div>
+
+            <div class="col-md-2 mb-3">
+                <label for="validationTooltip03" class="text-white">Z</label>
+                <div class="input-group">
+                    <button class="btn btn-primary" id="filter" type="submit"><i class="fa fa-search"></i> Search <i class="fas fa-spinner fa-pulse" id="loadingIcon"></i></button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow mb-4">
+                <!-- Card Body -->
+                <div class="card-body">
+                    <table id="dataTable" class="table table-bordered" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Employee<br />Code</th>
+                                <th>map</th>
+                                <th>Employee<br />Name</th>
+                                <th>Designation</th>
+                                <th>Punch <br />Date</th>
+                                <th>In Time</th>
+                                <th>Distance<br />(meters)</th>
+                                <th>Out Time</th>
+                                <th>Working Time</th>
+                                <th>Total Working <br />Minutes</th>
+                                <th>No Of Plan</th>
+                                <th>No Of Visit</th>
+                                <th>No Of Invoice</th>
+                                <th>Net Sales</th>
+                                <th>Sales Qty</th>
+                                <th>In Address</th>
+                                <th>Out Address</th>
+                                <th>In Latitude</th>
+                                <th>In Longitude</th>
+                                <th>Out Latitude</th>
+                                <th>Out Longitude</th>
+                                <th>Cust Latitude</th>
+                                <th>Cust Longitude</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title col-8" id="modalLabeltitle"> </h5>
+                <h5 class="modal-title text-right col-3" id="modalLabelDate"> </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div id="map" class="col-xl-12 col-md-12" style="height:70vh;"></div>
+                    @*<div class="col-xl-6 col-md-6">
+                            <table id="modal-Table" class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            CheckTime
+                                        </th>
+                                        <th>
+                                            Type
+                                        </th>
+                                        <th>
+                                            Latitude
+                                        </th>
+                                        <th>
+                                            Longitude
+                                        </th>
+                                        <th>
+                                            Remarks
+                                        </th>
+
+                                        <th>
+                                            Address
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section extra_script {
+    <!-- Page level plugins -->
+    <script src="~/Content/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Content/datatables/dataTables.bootstrap4.min.js"></script>
+    <!-- Page level custom scripts -->
+    <script src="~/Content/datatables/datatables-custom.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedcolumns/4.0.0/js/dataTables.fixedColumns.min.js"></script>
+<script src="~/Content/leaflet.awesome-markers.js"></script>
+<script>
+
+    $(function () {
+
+        var mymap = L.map('map').setView([23.777176, 90.399452], 12);
+        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiemhkcnV2byIsImEiOiJja3IyZXF6MzgyYjNmMzBydTM0ODMybzNkIn0.1UFKNZCs59u5n78_nWiRuw', {
+            attribution: 'Transcom Electronics Limited',
+            id: 'mapbox/streets-v11',
+            tileSize: 512,
+            zoomOffset: -1
+        }).addTo(mymap);
+
+        var values = [];
+        $('#dataTable tbody').on('click', 'button', function () {
+            values.splice(0, values.length)
+            var count = 0;
+            var row = $(this).parents('tr');
+            row.find("td").each(function () {
+                values[count] = $(this).text();
+                count++;
+            });
+            $("#modalLabeltitle").html(values[2] + " (" + values[0] + ") | " + values[4] + " | " + values[5]);
+            //$("#modalLabelDate").html("<i class='fas fa-fw fa-history'></i> " + values[5]);
+
+        });
+        $('#modal').on('hidden.bs.modal', function () {
+            mymap.eachLayer(function (layer) {
+                mymap.removeLayer(layer);
+            });
+            L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiemhkcnV2byIsImEiOiJja3IyZXF6MzgyYjNmMzBydTM0ODMybzNkIn0.1UFKNZCs59u5n78_nWiRuw', {
+                attribution: 'Transcom Electronics Limited',
+                id: 'mapbox/streets-v11',
+                tileSize: 512,
+                zoomOffset: -1
+            }).addTo(mymap);
+        });
+        $('#modal').on('shown.bs.modal', function () {
+            var userLet = values[17];
+            var userLong = values[18];
+            var outletLet = values[19];
+            var outletLong = values[10];
+            //alert(userLet + "," + userLong + ",\n" + outletLet + "," + outletLong);
+
+            mymap.setView([userLet, userLong], 15);
+            setTimeout(function () {
+                mymap.invalidateSize();
+            }, 10);
+                //distance
+                
+                //User
+                L.marker([userLet, userLong], { icon: L.AwesomeMarkers.icon({ icon: 'street-view', markerColor: 'blue', prefix: 'fa' }) }).addTo(mymap).bindPopup("Name: " + values[2] + "<br> Checkin Time: " + values[6] + "<br> Address: " + values[15]);
+
+                if (outletLet && outletLong) {
+                    //outlet
+                    L.marker([outletLet, outletLong], { icon: L.AwesomeMarkers.icon({ icon: 'laptop-house', markerColor: 'red', prefix: 'fa' }) }).addTo(mymap).bindPopup(values[4]);
+                    //circle
+                    L.circle([outletLet, outletLong], 300).addTo(mymap);
+                    var latlngs = Array();
+                    latlngs.push([userLet, userLong]);
+                    latlngs.push([outletLet, outletLong]);
+                    var polyline = L.polyline(latlngs, { color: 'red' }).addTo(mymap);
+                    //if ($.fn.dataTable.isDataTable('#modal-Table')) {
+                    //    table.destroy();
+                    //}
+                }
+           
+
+        });
+    });
+
+</script>
+    <script>
+        function loadtable() {
+            var fromDate = $('#fromDate').val();
+            var toDate = $('#toDate').val();
+            var region = $('#region option:selected').val();
+            var area = $('#area option:selected').val();
+            var zone = $('#zone option:selected').val();
+            var cust = $('#custType option:selected').val();
+            if ($.fn.dataTable.isDataTable('#dataTable')) {
+                table.destroy();
+            }
+            table = $('#dataTable').DataTable({
+                "scrollX": true,
+                "responsive": false,
+                "pagingType": "full_numbers",
+                "pageLength": 10,
+                fixedColumns: {
+                    left: 2
+                },
+                fixedHeader: true,
+                "language": {
+                    paginate: {
+                        next: '<i class="fa fa-fw fa-chevron-right">',
+                        previous: '<i class="fa fa-fw fa-chevron-left">',
+                        first: '<i class="fa fa-angle-double-left"></i>',
+                        last: '<i class="fa fa-angle-double-right"></i>'
+                    }
+                },
+                "initComplete": function (settings, json) {
+                    closeloadermodal();
+                    $("#loadingIcon").addClass("d-none");
+                },
+                "ajax": {
+                    "url": "@Url.Action("loadDistributionData")",
+                "type": "GET",
+                "data": { fromDate: fromDate, toDate: toDate, area: area, zone: zone, cust: cust, region: region },
+                "datatype": "json",
+            },
+            "columns": [
+              
+                { "data": "EmployeeCode" },
+                { "data": null },
+                { "data": "EmployeeName" },
+                { "data": "DesignationName" },
+                { "data": "PunchDate" },
+                { "data": "InTime" },
+                { "data": "Distancemeters" },
+                { "data": "OutTime" },
+                { "data": "WorkingTime" },
+                { "data": "TotalWorkingMinutes" },
+                { "data": "NoOfPlan" },
+                { "data": "NoOfVisit" },
+                { "data": "NoOfInvoice" },
+                { "data": "NetSales" },
+                { "data": "SalesQty" },
+                { "data": "InAddress" },
+                { "data": "OutAddress" },
+                 { "data": "InLatitude" },
+                { "data": "InLongitude" },
+                { "data": "OutLatitude" },
+                 { "data": "OutLongitude" },
+                 { "data": "CustLatitude" },
+                { "data": "CustLongitude" },
+               
+            ],
+            "columnDefs": [
+        {
+            "targets": 1,
+            "data": null,
+            "defaultContent": "<button class='btn btn-primary' type='button' data-toggle='modal' data-target='#modal' style='padding: 0px 5px;'><i class='fas fa-fw fa-eye'></i></button>"
+        },
+        {
+            "targets":  8,
+            "data": "Distancemeters",
+            "render": function (data, type, row, meta) {
+                if (data > 300) {
+                    return '<span class="badge badge-danger">' + data + '</span>';
+                }
+                else if (data === null) {
+                    return "";
+                }
+                return data;
+            }
+        },
+        { className: "text-right", "targets": [9, 10, 11, 12, 13, 14] },
+        
+    ],
+        });
+        };
+        $(function () {
+            $('select').selectpicker();
+            loadermodal();
+            loadtable();
+            $('.datepicker').datepicker();
+            $("#filter").click(function () {
+                $("#loadingIcon").removeClass("d-none");
+                loadermodal();
+                loadtable();
+            });
+        });
+    </script>
+
+    <!-- Bootstrap DatePicker -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" type="text/css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js" type="text/javascript"></script>
+    <!-- Bootstrap DatePicker -->
+    <script type="text/javascript">
+        $(function () {
+            $('.datepicker').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                format: "M/DD/YYYY",
+            });
+        });
+        // dropdown init
+        $("#region").change(function () {
+            var valueSelected = this.value;
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("loadVisitArea", "Common")',
+                data: { region: valueSelected },
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $("#area").find('option').remove();
+                    $('#area').selectpicker('refresh');
+                    $("#zone").find('option').remove();
+                    $('#zone').selectpicker('refresh');
+                    $("#custType").find('option').remove();
+                    $('#custType').selectpicker('refresh');
+                    $('#area').append($('<option>', {
+                        value: '',
+                        text: 'All'
+                    }));
+                    $('#area').selectpicker('refresh');
+                    for (var i = 0; i < data.length; i++) {
+                        //s += '<option value="' + data[i].MarketGroupCode + '">' + data[i].MarketGroupDesc + '</option>';
+                        $('#area').append($('<option>', {
+                            value: data[i].Id,
+                            text: data[i].Text
+                        }));
+                        $('#area').selectpicker('refresh');
+                    }
+
+                },
+                error: function () {
+                    alert("Error while inserting data");
+                }
+            });
+            return false;
+        });
+
+
+
+    //Area dropdown init
+        $("#area").change(function () {
+            var valueSelected = this.value;
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("loadVisitZones", "Common")',
+                data: { area: valueSelected },
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $("#zone").find('option').remove();
+                    $('#zone').selectpicker('refresh');
+                    $("#custType").find('option').remove();
+                    $('#custType').selectpicker('refresh');
+                    $('#zone').append($('<option>', {
+                        value: '',
+                        text: 'All'
+                    }));
+                    $('#zone').selectpicker('refresh');
+                    for (var i = 0; i < data.length; i++) {
+                        //s += '<option value="' + data[i].MarketGroupCode + '">' + data[i].MarketGroupDesc + '</option>';
+                        $('#zone').append($('<option>', {
+                            value: data[i].MarketGroupID,
+                            text: data[i].MarketGroupDesc
+                        }));
+                        $('#zone').selectpicker('refresh');
+                    }
+
+                },
+                error: function () {
+                    alert("Error while inserting data");
+                }
+            });
+            return false;
+        });
+
+      //Customer dropdown init
+    $("#zone").change(function () {
+        var selectedZone = this.value;
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("loadVisitCust", "Common")',
+            data: { zone: selectedZone },
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                $("#custType").find('option').remove();
+                $('#custType').selectpicker('refresh');
+                $('#custType').append($('<option>', {
+                    value: '',
+                    text: 'All'
+                }));
+                $('#custType').selectpicker('refresh');
+                for (var i = 0; i < data.length; i++) {
+                    $('#custType').append($('<option>', {
+                        value: data[i].Id,
+                        text: data[i].Text
+                    }));
+                    $('#custType').selectpicker('refresh');
+                }
+
+            },
+            error: function () {
+                alert("Error while inserting data");
+            }
+        });
+        return false;
+    });
+    </script>
+}

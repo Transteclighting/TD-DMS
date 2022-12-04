@@ -1,0 +1,854 @@
+﻿@model DealerManagementSystem.Models.InvoiceViewModel
+@{
+    ViewBag.Title = "DMS | Make Invoice";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/MakeInvoice/makeInvoiceStyle.css" rel="stylesheet" />
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>*@
+<style>
+    fieldset {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-size: 14px;
+        border: 1px solid #1F497D;
+        background: #ddd;
+        border-radius: 5px;
+        /*padding: 15px 4px 5px 5px;*/
+        /*width: 98%;*/
+    }
+
+        fieldset legend {
+            background: #1F497D;
+            color: #fff;
+            padding: 2px 10px;
+            font-size: 14px;
+            border-radius: 5px;
+            box-shadow: 0 0 0 5px #ddd;
+            margin-left: 20px;
+            width: 85px;
+        }
+
+    #cutomer td {
+        padding: 5px;
+    }
+
+    #allSelectedProducts {
+        margin-bottom: 5px;
+    }
+
+    #priceDetails input {
+        margin: 1px;
+        text-align: center;
+    }
+
+    #productsDetails fieldset {
+        position: relative;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        border: 1px solid #1F497D;
+        background: #ddd;
+        border-radius: 5px;
+        width: 98%;
+    }
+
+    #productsDetails legend {
+        font-size: 14px;
+        background: #1F497D;
+        border-radius: 5px;
+        box-shadow: 0 0 0 5px #ddd;
+        margin-left: 20px;
+        width: 135px;
+    }
+
+    #priceDetails {
+        position: relative;
+        float: right;
+    }
+
+    fieldset .row div {
+        padding-bottom: 2px;
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+
+    .modal #discountModal {
+        top: 17%;
+        left: auto;
+        right: 10px;
+    }
+
+    #discountModal {
+        top: 17%;
+        left: auto;
+        right: 10px;
+    }
+
+    #PaymentModal {
+        top: 2%;
+        left: 4%;
+        right: 10px;
+        /*left:400px;*/
+        /*width:800px;*/
+    }
+
+    #ttable {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-size: 10px;
+    }
+</style>
+
+@using (@Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+    <fieldset>
+        <legend>
+            Customer
+        </legend>
+        <div class="row">
+            <table class="table table-bordered table-responsive-sm" id="ttable">
+                @*<tr>*@
+                @*@if (ViewBag.UserType == "DB")
+                    {*@
+                @*<td>
+                        @Html.DropDownList("Route", (SelectList)ViewBag.RouteList, "-- Select Route --", htmlAttributes: new { @class = "form-control", style = "width: 98%", id = "Route" })
+                    </td>
+                    <td>
+                        @Html.DropDownList("Outlet", (SelectList)ViewBag.OutletList, "-- Select Outlet --", htmlAttributes: new { @class = "form-control", style = "width: 98%", id = "Outlet" })
+                    </td>*@
+                @*}
+                    else
+                    {
+                        <td>
+                            @Html.DropDownList("Route", (SelectList)ViewBag.RouteList, "-- Select Route --", htmlAttributes: new { @class = "form-control", style = "width: 98%", id = "Route", @readonly = "readonly" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("Outlet", (SelectList)ViewBag.OutletList, "-- Select Outlet --", htmlAttributes: new { @class = "form-control", style = "width: 98%", id = "Outlet", @readonly = "readonly" })
+                        </td>
+                    }*@
+                @*</tr>*@
+                @*@if (ViewBag.UserType == "DB")
+                    {*@
+                <tr>
+                    <td>
+                        @Html.TextBoxFor(a => a.Consumer.ConsumerName, new { @class = "form-control", autocomplete = "off", placeholder = "Customer Name", id = "Consumer" })
+                        @Html.ValidationMessageFor(a => a.Consumer.ConsumerName)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(a => a.Consumer.Address, new { @class = "form-control", autocomplete = "off", placeholder = "Address", id = "Address" })
+                        @Html.ValidationMessageFor(a => a.Consumer.Address)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(a => a.Consumer.ContactNo, new { @class = "form-control", autocomplete = "off", placeholder = "Contact no", id = "ContactNo" })
+                        @Html.ValidationMessageFor(a => a.Consumer.ContactNo)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(a => a.Consumer.Email, new { @class = "form-control", autocomplete = "off", placeholder = "Email", id = "Email" })
+                        @Html.ValidationMessageFor(a => a.Consumer.Email)
+                    </td>
+                    @*</tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                @foreach (var con in ViewBag.Cosumer)
+                                {
+
+                                    <td>
+                                        @Html.TextBox("Consumer", (string)con.RetailName)
+
+                                    </td>
+                                    <td>
+                                        @Html.TextBox("Address", (string)con.RetailAddress)
+
+                                    </td>
+                                    <td>
+                                        @Html.TextBox("ContactNo", (string)con.Mobile01)
+
+                                    </td>
+                                    <td>
+                                        @Html.TextBox("Email", (string)con.Email)
+
+                                    </td>
+                                    @*<td>
+                                            @Html.TextBoxFor(a => a.Consumer.Address, new { @class = "form-control", autocomplete = "off", placeholder = "Address", id = "Address" })
+                                            @Html.ValidationMessageFor(a => a.Consumer.Address)
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(a => a.Consumer.ContactNo, new { @class = "form-control", autocomplete = "off", placeholder = "Contact no", id = "ContactNo" })
+                                            @Html.ValidationMessageFor(a => a.Consumer.ContactNo)
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(a => a.Consumer.Email, new { @class = "form-control", autocomplete = "off", placeholder = "Email", id = "Email" })
+                                            @Html.ValidationMessageFor(a => a.Consumer.Email)
+                                        </td>
+                                }
+                            </tr>*@
+                    @*}*@
+            </table>
+        </div>
+    </fieldset>
+
+    <fieldset id="productsDetails">
+        <legend>Products Details</legend>
+        <div style="margin: 0 auto;">
+
+            <table id="allSelectedProducts" class="table table-bordered table-responsive">
+                <thead>
+                    <tr>
+                        <th>Is Free?</th>
+                        <th>Barcode SL#</th>
+                        <th>@Html.Label("Product Code")</th>
+                        <th>@Html.Label("Product Name")</th>
+                        <th>@Html.Label("Price")</th>
+                        <th>@Html.Label("Promo")</th>
+                        <th>@Html.Label("Net-Payable")</th>
+                        <th>@Html.Label("Collection")</th>
+                    </tr>
+                </thead>
+                <tbody style="background-color: #fff">
+                    @{
+                        var totalPrice = 0;
+                        var totalPromoDiscount = 0;
+                        var netPayable = 0;
+                        int i = 0;
+                        var paid = 0;
+                    }
+                    @foreach (var aProduct in ViewBag.products)
+                {
+                    totalPromoDiscount += aProduct.PromoDiscount;
+                    totalPrice += aProduct.Rsp;
+                        <tr>
+                            <td class="text-center">
+                                <input type="checkbox" class="chkIsFree" value="true" name="DmsSalesInvoiceDetail[@i].IsFreeProduct" />
+                            </td>
+                            <td>
+                                <input type="hidden" name="DmsSalesInvoiceDetail[@i].BarcodeSerial" value="@aProduct.ProductSerial" /> @aProduct.ProductSerial
+                            </td>
+                            <td>
+                                @aProduct.ProductCode
+                            </td>
+                            <td>
+                                @aProduct.ProductName
+                            </td>
+                            <td>
+
+                                <input type="hidden" value="@aProduct.Rsp" />
+                                <span style="float: right">
+                                    @aProduct.Rsp
+                                </span>
+                            </td>
+                            <td>
+                                <input type="hidden" value="@aProduct.PromoDiscount" />
+                                <span style="float: right">
+                                    @aProduct.PromoDiscount
+                                </span>
+
+                            </td>
+                            <td>
+                                @{
+                                    var offerPrice = aProduct.Rsp - aProduct.PromoDiscount;
+                                }
+                                <input type="hidden" value="@offerPrice" />
+                                <span style="float: right">
+                                    @offerPrice
+                                </span>
+                            </td>
+                            <td>
+                                <input type="hidden" value="@offerPrice" />
+                                <span style="float: right">
+                                    @offerPrice
+                                </span>
+                            </td>
+
+                        </tr>
+                                        i++;
+                                    }
+                    @{netPayable = totalPrice - totalPromoDiscount;}
+                </tbody>
+            </table>
+
+            <table id="priceDetails" class="table-responsive">
+                <tr>
+                    <td style="position: relative; width: 120px;">
+                        <label style="left: 35%; position: absolute; top: 33%;">Total Price</label>
+                    </td>
+                    <td>
+                        @Html.TextBox("totalPrice", @totalPrice, new { id = "totalPrice", @class = "form-control", @readonly = "readonly" })
+                    </td>
+                </tr>
+                <tr>
+                    <td style="position: relative; width: 150px;">
+                        <label style="left: 42%; position: absolute; top: 33%;">Total Discount</label>
+                    </td>
+                    <td>
+
+                        @Html.TextBoxFor(a => a.DmsSalesInvoice.DiscountAmount, new { @class = "form-control", id = "discount", @Value = totalPromoDiscount, autocomplete = "off", @readonly = "true" })
+                        <button type="button" class="btn btn-info btn-sm pull-right " data-toggle="modal" id="btnDiscount" @*@data-target="#PayentModal"*@>
+                            Discount
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="position: relative; width: 120px;">
+                        <label style="left: 25%; position: absolute; top: 30%">Net Payable</label>
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(a => a.DmsSalesInvoice.InvoiceAmount, new { id = "netPayble", @Value = netPayable, @readonly = "readonly", @class = "form-control" })
+                        <button type="button" class="btn btn-info btn-sm pull-right btnPayment" data-toggle="modal" @*data-target="#discountModal"*@>
+                            Payment
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td style="position: relative; width: 120px;">
+                        <label style="left: 25%; position: absolute; top: 30%">Net Payable</label>
+                    </td>
+
+                    @*<td>
+                            @Html.TextBox("Paid", new { id = "paidamount", @Value = paid, @readonly = "readonly", @class = "form-control" })
+
+                        </td>*@
+
+                </tr>
+            </table>
+        </div>
+
+        @Html.TextBoxFor(a => a.DmsSalesInvoice.Remarks, new { @class = "form-control", placeholder = "Remarks", style = "width: 100%;position: relative ;" })
+    </fieldset>
+
+
+
+    <a style="float: right; margin-right: 10px; margin-bottom: 5px; " class="btn btn-primary active" href="@Url.Action("ChooseProductsForInvoice", "Product")">
+        <span class="glyphicon glyphicon-remove"></span> Close
+    </a>
+    <button style="float: right; margin-right: 5px; margin-bottom: 5px;" type="submit" id="btnSave" class="btn btn-success btn-md">
+        <span class="glyphicon glyphicon-floppy-disk"></span> Save
+    </button>
+
+
+
+
+    <div class="modal fade" id="discountModal" role="dialog" data-backdrop="false">
+        <div class="modal-dialog modal-sm" style="width: 100% !important;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" id="btnDiscountModalCloseIcon">&times;</button>
+                    <h4 class="modal-title">Invoice Discount</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @{
+                                int count = 0;
+                            }
+                            @foreach (var aDiscountType in Model.DmsDiscountTypes)
+                            {
+                                <div class="form-group">
+                                    <input type="hidden" value="@aDiscountType.DiscountTypeId" name="DmsInvoiceDiscount[@count].DiscountTypeId" />
+                                    <label for="@aDiscountType.DiscountTypeName">@aDiscountType.DiscountTypeName</label>
+
+                                    @if (aDiscountType.DiscountTypeId == 1) //Promo Discount
+                                    {
+                                        <input type="number" id="promoDiscount" readonly value="@totalPromoDiscount" name="DmsInvoiceDiscount[@count].Amount" class="form-control input-sm text-right" />
+                                    }
+                                    else
+                                    {
+                                        <input type="number" id="@aDiscountType.DiscountTypeName" name="DmsInvoiceDiscount[@count].Amount" class="form-control input-sm text-right" />
+                                    }
+                                </div>
+                                count++;
+
+                            }
+                            <div class="form-group">
+                                <label for="lblTotalDiscountModal">Total Discount:</label>
+                                <b>
+                                    <label id="lblTotalDiscountModal">@totalPromoDiscount</label>
+                                </b>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary pull-left" id="btnSetTotalDiscount">
+                        <i class="glyphicon glyphicon-pushpin"></i> Set
+                    </button>
+                    <button id="btnDiscountModalClose" type="button" class="btn btn-danger pull-right" data-dismiss="modal">
+                        <i class="glyphicon glyphicon-eye-close"></i> Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="modal fade" id="PaymentModal" role="dialog" data-backdrop="false">
+        <div class="modal-dialog modal-lg" style="width: 100% !important;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" id="btnDiscountModalCloseIcon">&times;</button>
+                    <h4 class="modal-title">Payment Information</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <table class="table table-bordered" id="tbl_Paydetails" style="overflow-x:auto;">
+                                    <tr>
+                                        <td>
+                                            <span>Payment Mode #</span> @Html.DropDownList("PaymentMode", (SelectList)ViewBag.PayModeList, "-- Select Payment Mode --", htmlAttributes:
+                                       new { @class = "form-control", style = "width: 98%", id = "PaymentModeID" })
+                                        </td>
+                                        <td><span>Amount # </span><input class="form-control" type="text" name="Amount" id="Amount" value="" /></td>
+                                        <td><span>Instrument # </span><input class="form-control" type="text" id="Instrument" name="Instrument" value="" /></td>
+                                        <td><span>Instrument Date # </span><input class="form-control" type="date" name="DDate" id="DDate" value="" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DropDownList("Bank", (SelectList)ViewBag.BankList, "-- Bank List --", htmlAttributes:
+                                       new { @class = "form-control", style = "width: 98%", id = "Bank" })
+                                        </td>
+                                        <td>
+                                            @Html.DropDownList("CardType", (SelectList)ViewBag.EnumList, "-- Card Type --", htmlAttributes:
+                                       new { @class = "form-control", style = "width: 98%", id = "CardType" })
+                                        </td>
+                                        <td>
+                                            @Html.DropDownList("POSMachine", (SelectList)ViewBag.POSMachine, "-- POS Machine --", htmlAttributes:
+                                       new { @class = "form-control", style = "width: 98%", id = "POSMachine" })
+                                        </td>
+                                        <td>
+                                            @Html.DropDownList("Category", (SelectList)ViewBag.CategoryList, "-- Card Category --", htmlAttributes:
+                                       new { @class = "form-control", style = "width: 98%", id = "Category" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        @*<td><span>Approval # </span> @Html.TextBox("Approval")</td>*@
+                                        <td><input class="form-control" type="text" id="Approval" name="approval" value="" placeholder="Enter Approval No" /></td>
+
+                                        <td><Span>IS EMI Product</Span> <input class="checkbox-inline" type="checkbox" id="IsEMI" name="IsEMI" /></td>
+                                        <td>
+                                            @Html.DropDownList("InstallmentNo", (SelectList)ViewBag.InstallmentList, "-- No of Inst. --", htmlAttributes:
+                                       new { @class = "form-control", style = "width: 98%", id = "InstallmentNo" })
+                                        </td>
+                                        <td>
+                                            <button id="addtotable" type="button" class="btn btn-lg btn-success">
+                                                <i class="glyphicon glyphicon-eye-open"></i> ADD
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                </table>
+
+                            </div>
+                            <div class="form-group">
+                                <table class="table table-bordered table-responsive-sm" id="PaymentDetails">
+                                    <thead>
+                                        <tr class="w3-blue">
+
+                                            <th hidden>Payment Mode ID</th>
+                                            <th>Payment Mode</th>
+                                            <th>Amount</th>
+                                            <th hidden>Bank ID</th>
+                                            <th>Bank</th>
+                                            <th hidden>Card Type ID</th>
+                                            <th>Card Type</th>
+                                            <th hidden>Pos Machine ID</th>
+                                            <th>Pos Machine</th>
+                                            <th>IS EMI</th>
+                                            <th hidden>Installment ID</th>
+                                            <th>No of Installment</th>
+                                            <th>Instrument No</th>
+                                            <th hidden>Category ID</th>
+                                            <th>Card Category</th>
+                                            <th>Approval No</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="Paydetails" type="button" class="btn btn-success">
+                        <i class="glyphicon glyphicon-eye-open"></i>  Set Payment
+                    </button>
+
+                    <button id="btnDiscountModalClose" type="button" class="btn btn-danger pull-right" data-dismiss="modal">
+                        <i class="glyphicon glyphicon-eye-close"></i> Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+                                }
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    <script>
+        function caculateTotalDiscount() {
+            var allDiscount = $('#discountModal input[type=number]');
+            var discount = 0;
+            $.each(allDiscount, function (i) {
+                if ($(this).val() !== "") {
+                    discount += parseFloat($(this).val());
+                }
+            });
+            $("#lblTotalDiscountModal").text(discount);
+        }
+        @*function SendPayent() {
+            var table = document.getElementById("PaymentDetails"), sumVal = 0;
+            for (var i = 1; i < table.rows.length; i++) {
+                sumVal = sumVal + parseFloat(table.rows[i].cells[2].innerHTML);
+            }
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("TotalPaid", "DMSSalesInvoice")",
+                data: JSON.stringify(sumVal),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+
+
+            });
+        }*@
+        function setTotalDiscountAndPayable() {
+            var allDiscount = $('#discountModal input[type=number]');
+            var isOk = false;
+            $.each(allDiscount, function (i) {
+                if ($(this).val() !== "") {
+                    isOk = true;
+                }
+            });
+            if (isOk) {
+                var totalDiscount = $("#lblTotalDiscountModal").text();
+                $("#discount").val(totalDiscount);
+                setNetPayable();
+                $("#discountModal").modal("hide");
+            } else {
+                alert("Please enter at least one discount");
+            }
+        }
+
+        $(document).on('click', '.chkIsFree', function () {
+            var thistr = $(this).closest('tr');
+            //var rsp = $(thistr).find('td:nth-child(5)').text();
+
+            if (!$(this).prop('checked')) {
+                var price = $(thistr).find('td:nth-child(5) input[type=hidden]').val();
+                $(thistr).find('td:nth-child(5) span').text(price);
+
+                var promoDiscount = $(thistr).find('td:nth-child(6) input[type=hidden]').val();
+                $(thistr).find('td:nth-child(6) span').text(promoDiscount);
+
+                var offerPrice = $(thistr).find('td:nth-child(7) input[type=hidden]').val();
+                $(thistr).find('td:nth-child(7) span').text(offerPrice);
+
+
+            } else {
+                $(thistr).find('td:nth-child(5) span').text("0");
+                $(thistr).find('td:nth-child(6) span').text("0");
+                $(thistr).find('td:nth-child(7) span').text("0");
+            }
+
+            var freeProdPrice = 0;
+            var invoiceProdPrice = 0;
+            var totalPromo = 0;
+
+            $("#allSelectedProducts tbody tr").each(function () {
+                if ($(this).find('td:nth-child(1) input').prop('checked')) {
+                    freeProdPrice += parseInt($(this).find('td:nth-child(5) span').text());
+                } else {
+                    invoiceProdPrice += parseInt($(this).find('td:nth-child(5) span').text());
+                    totalPromo += parseInt($(this).find('td:nth-child(6) span').text());
+                }
+            });
+
+            var totalDiscount = parseInt($("#discount").val());
+            var netPayable = invoiceProdPrice - totalDiscount;
+
+            $("#totalPrice").val(invoiceProdPrice);
+            $("#netPayble").val(netPayable);
+            $("#promoDiscount").val(totalPromo);
+
+            caculateTotalDiscount();
+            setTotalDiscountAndPayable();
+        });
+
+        function setNetPayable() {
+            var discountAmount = parseFloat($("#discount").val());
+            var totalPrice = parseFloat($("#totalPrice").val());
+            if (!isNaN(discountAmount) && discountAmount.length !== 0) {
+                if (totalPrice > discountAmount) {
+                    var netPayable = totalPrice - discountAmount;
+                    $("#netPayble").val(netPayable);
+                } else {
+                    $("#netPayble").val(totalPrice);
+                }
+            }
+        };
+
+        $(document).ready(function () {
+            var statesAvailable= @Html.Raw(Json.Encode(@ViewBag.RetailDetail));
+            $.each(statesAvailable, function (index,data)
+            {
+                debugger;
+                $('#Consumer').val(data.RetailName);
+                $('#Address').val(data.RetailAddress);
+                $('#ContactNo').val(data.Mobile01);
+                $('#Email').val(data.Email);
+                $('#Consumer').attr("readonly", true);
+                $('#Address').attr("readonly", false);
+                $('#ContactNo').attr("readonly", false);
+                $('#Email').attr("readonly", false);
+            })
+            $('#discountModal input').on('keyup paste', function () {
+                caculateTotalDiscount();
+            });
+
+
+            $("#btnDiscount").click(function () {
+                $("#discountModal").modal("show");
+            });
+
+
+            $(".btnPayment").click(function () {
+                $("#PaymentModal").modal("show");
+            });
+
+            $("#btnSetTotalDiscount,#btnDiscountModalClose,#btnDiscountModalCloseIcon").click(function () {
+                setTotalDiscountAndPayable();
+            });
+
+
+            $("#btnSave").click(function () {
+                var discountAmount = parseFloat($("#discount").val());
+                var totalPrice = parseFloat($("#totalPrice").val());
+                if (discountAmount > totalPrice) {
+                    alert("Discount Amount Can Not Be Large Than Total Amount.");
+                    return false;
+                }
+                return true;
+            });
+
+            $("#Paydetails").click(function () {
+
+                var table = document.getElementById("PaymentDetails"), sumVal = 0;
+
+                for (var i = 1; i < table.rows.length; i++) {
+                    sumVal = sumVal + parseFloat(table.rows[i].cells[2].innerHTML);
+                }
+                var NetPayable = parseFloat(document.getElementById("netPayble").value);
+
+                if (NetPayable !== sumVal) {
+                    alert("Payable Amount and Paid Amount Doesn't Match" + " Net Payable : Tk. " + NetPayable + " And  Payment Received  : Tk. " + sumVal);
+                    return false;
+                }
+                else {
+                    var PayDetailsArray = new Array();
+                    $("#PaymentDetails TBODY TR").each(function () {
+                        var row = $(this);
+                        var details = {};
+                        details.PaymentModeID = row.find("TD").eq(0).html();
+                        details.BankID = row.find("TD").eq(3).html();
+                        details.CardType = row.find("TD").eq(5).html();
+                        details.POSMachineID = row.find("TD").eq(7).html();
+                        details.ISEMI = row.find("TD").eq(9).html();
+                        details.NoOfInstallment = row.find("TD").eq(10).html();
+                        details.InstrumentNo = row.find("TD").eq(12).html();
+                        details.CardCategory = row.find("TD").eq(13).html();
+                        details.ApprovalNo = row.find("TD").eq(15).html();
+                        PayDetailsArray.push(details);
+                    });
+
+                    //Send the JSON array to Controller using AJAX.
+                    $.ajax({
+                        type: "POST",
+                        url: "@Url.Action("PayDetails", "DMSSalesInvoice")",
+                        data: JSON.stringify(PayDetailsArray),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+
+                    });
+                    // Send Payment Info
+
+                    var table = document.getElementById("PaymentDetails"), sumVal = 0;
+                    for (var i = 1; i < table.rows.length; i++) {
+                        sumVal = sumVal + parseFloat(table.rows[i].cells[2].innerHTML);
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: "@Url.Action("TotalPaid", "DMSSalesInvoice")",
+                        data: JSON.stringify({ "sumVal": sumVal }),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                    });
+                    //alert("Payment has been Set");
+
+                    $("#PaymentModal").modal("hide");
+                }
+            });
+        });
+    </script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#PaymentModeID').change(function () {
+                var e = document.getElementById("PaymentModeID");
+                if (e.options[e.selectedIndex].value == 2 || e.options[e.selectedIndex].value == 28) {
+                    $("#Bank").removeAttr("disabled");
+                    $("#CardType").removeAttr("disabled");
+                    $("#POSMachine").removeAttr("disabled");
+                    $("#Category").removeAttr("disabled");
+                    $("#Approval").removeAttr("disabled");
+                    $("#IsEMI").removeAttr("disabled");
+                    $("#InstallmentNo").removeAttr("disabled");
+                    $("#DDate").removeAttr("disabled");
+                    $("#Instrument").removeAttr("disabled");
+                }
+                    //else if (e.options[e.selectedIndex].value ==1)
+                else {
+                    $("#Bank").attr("disabled", "disabled");
+                    $("#CardType").attr("disabled", "disabled");
+                    $("#POSMachine").attr("disabled", "disabled");
+                    $("#Category").attr("disabled", "disabled");
+                    $("#Approval").attr("disabled", "disabled");
+                    $("#IsEMI").attr("disabled", "disabled");
+                    $("#InstallmentNo").attr("disabled", "disabled");
+                    $("#Instrument").attr("disabled", "disabled");
+                    $("#DDate").attr("disabled", "disabled");
+                }
+
+            });
+
+            $('#addtotable').on('click', function () {
+                var e = document.getElementById("PaymentModeID");
+                if (e.options[e.selectedIndex].value == 28 || e.options[e.selectedIndex].value == 2) {
+                    if ($("#PaymentModeID")[0].selectedIndex > 0) {
+                        var e = document.getElementById("PaymentModeID");
+                        var PaymentMode = e.options[e.selectedIndex].text;
+                        var PaymentModeID = e.options[e.selectedIndex].value;
+                    }
+                    else {
+                        alert("Please Select a Payment Mode");
+                    }
+                    if ($("#Amount").val() > 0) {
+                        var Amount = document.getElementById("Amount").value;
+                    }
+                    else {
+                        alert("Set Paid Amount");
+                    }
+
+                    if ($("#Instrument").Val != "") {
+                        var Instrument = document.getElementById("Instrument").value;
+                    }
+                    else {
+                        alert("Set Instrument No");
+                    }
+                    if ($("#Bank")[0].selectedIndex > 0) {
+                        var BK = document.getElementById("Bank");
+                        var Bank = BK.options[BK.selectedIndex].text;
+                        var BankID = BK.options[BK.selectedIndex].value;
+                    }
+                    else {
+                        alert("Please Select a Bank");
+                    }
+                    if ($("#CardType")[0].selectedIndex > 0) {
+                        var ee = document.getElementById("CardType");
+                        var CardType = ee.options[ee.selectedIndex].text;
+                        var CardTypeID = ee.options[ee.selectedIndex].value;
+                    }
+                    else {
+                        alert("Please Select a Card Type");
+                    }
+                    if ($("#POSMachine")[0].selectedIndex > 0) {
+                        var eee = document.getElementById("POSMachine");
+                        var POSMachine = eee.options[eee.selectedIndex].text;
+                        var POSMachineID = eee.options[eee.selectedIndex].value;
+                    }
+                    else {
+                        flag = 0;
+                        alert("Please Select a Card Type");
+                    }
+                    if ($("#Category")[0].selectedIndex > 0) {
+                        var eee = document.getElementById("Category");
+                        var Category = eee.options[eee.selectedIndex].text;
+                        var CategoryID = eee.options[eee.selectedIndex].value;
+                    }
+                    else {
+                        alert("Please Select a Category");
+                    }
+                    if ($("#Approval").val != "") {
+                        var Approval = document.getElementById("Approval").value;
+                    }
+                    else {
+                        alert("Set Approval No");
+                    }
+                    var checked = '0';
+                    if ($('#IsEMI').prop('checked')) {
+                        checked = '1';
+                    };
+                    var ISEMI = checked;
+                    if (checked == '1') {
+                        var eee = document.getElementById("InstallmentNo");
+                        if ($("#InstallmentNo")[0].selectedIndex > 0) {
+
+                            var InstallmentNo = eee.options[eee.selectedIndex].text;
+                            var InstallmentNoID = eee.options[eee.selectedIndex].value;
+                        }
+                        else {
+                            alert("Please Select Installment");
+                        }
+                    }
+                    else {
+                        var InstallmentNo = 'N/A';
+                        var InstallmentNoID = 0;
+                    }
+                    if (Amount > 0 && $("#Bank")[0].selectedIndex > 0 && $("#CardType")[0].selectedIndex > 0 && $("#Category")[0].selectedIndex > 0) {
+                        $('#PaymentDetails tbody').append('<tr class="child"><td hidden>' + PaymentModeID + '</td><td>' + PaymentMode + '</td><td>' + Amount + '</td><td hidden>' + BankID + '</td><td>' + Bank + '</td><td hidden>' + CardTypeID + '</td><td>' + CardType + '</td><td hidden>' + POSMachineID + '</td><td>' + POSMachine + '</td><td>' + ISEMI + '</td><td hidden>' + InstallmentNoID + '</td><td>' + InstallmentNo + '</td><td>' + Instrument + '</td><td hidden>' + CategoryID + '</td><td>' + Category + '</td><td>' + Approval + '</td><td><a href="javascript:void(0);" class="remCF1 btn btn-small btn-danger">Remove</a></td></tr>');
+                    }
+                    else {
+                        alert(" Invalid Filed");
+                    }
+                }
+                else {
+                    var e = document.getElementById("PaymentModeID");
+                    var PaymentMode = e.options[e.selectedIndex].text;
+                    var PaymentModeID = e.options[e.selectedIndex].value;
+                    var Amount = document.getElementById("Amount").value;
+                    var Instrument = "N/A"
+                    var Bank = "N/A";
+                    var BankID = null;
+                    var CardType = "N/A";
+                    var CardTypeID = null;
+                    var POSMachine = "N/A"
+                    var POSMachineID = null;
+                    var Category = "N/A";
+                    var CategoryID = null;
+                    var Approval = "N/A";
+                    var ISEMI = "N/A";
+                    var InstallmentNo = "N/A";
+                    var InstallmentNoID = null;
+                    if (Amount > 0) {
+                        $('#PaymentDetails tbody').append('<tr class="child"><td hidden>' + PaymentModeID + '</td><td>' + PaymentMode + '</td><td>' + Amount + '</td><td hidden>' + BankID + '</td><td>' + Bank + '</td><td hidden>' + CardTypeID + '</td><td>' + CardType + '</td><td hidden>' + POSMachineID + '</td><td>' + POSMachine + '</td><td>' + ISEMI + '</td><td hidden>' + InstallmentNoID + '</td><td>' + InstallmentNo + '</td><td>' + Instrument + '</td><td hidden>' + CategoryID + '</td><td>' + Category + '</td><td>' + Approval + '</td><td><a href="javascript:void(0);" class="remCF1 btn btn-small btn-danger">Remove</a></td></tr>');
+                    }
+                }
+            });
+            $(document).on('click', '.remCF1', function () {
+                $(this).parent().parent().remove();
+            });
+        });
+
+    </script>
+}

@@ -1,0 +1,1071 @@
+------------------------------------------------
+Exception Time: 22-Nov-2020 12:12:29 PM
+Other Info: 
+Exception: System.Data.Entity.Infrastructure.DbUpdateException: An error occurred while updating the entries. See the inner exception for details. ---> System.Data.UpdateException: An error occurred while updating the entries. See the inner exception for details. ---> System.Data.SqlClient.SqlException: Cannot insert explicit value for identity column in table 't_DMSPromoAppliedToInvoice' when IDENTITY_INSERT is set to OFF.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Mapping.Update.Internal.DynamicUpdateCommand.Execute(UpdateTranslator translator, EntityConnection connection, Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter)
+   --- End of inner exception stack trace ---
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter)
+   at System.Data.EntityClient.EntityAdapter.Update(IEntityStateManager entityCache)
+   at System.Data.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   --- End of inner exception stack trace ---
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at DealerManagementSystem.Controllers.DmsSalesInvoiceController.MakeInvoice(InvoiceViewModel aInvoiceViewModel) in D:\Local\TEL\DMS_Code\DealerManagementSystem\Controllers\DMSSalesInvoiceController.cs:line 154
+------------------------------------------------
+Exception Time: 22-Nov-2020 12:31:23 PM
+Other Info: 
+Exception: System.Data.Entity.Infrastructure.DbUpdateException: An error occurred while updating the entries. See the inner exception for details. ---> System.Data.UpdateException: An error occurred while updating the entries. See the inner exception for details. ---> System.Data.SqlClient.SqlException: The INSERT statement conflicted with the FOREIGN KEY constraint "FK_t_DMSPromoAppliedToInvoice_t_DMSSalesInvoice". The conflict occurred in database "TELSysDB_VCReCal", table "dbo.t_DMSSalesInvoice", column 'InvoiceID'.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Mapping.Update.Internal.DynamicUpdateCommand.Execute(UpdateTranslator translator, EntityConnection connection, Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter)
+   --- End of inner exception stack trace ---
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter)
+   at System.Data.EntityClient.EntityAdapter.Update(IEntityStateManager entityCache)
+   at System.Data.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   --- End of inner exception stack trace ---
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at DealerManagementSystem.Controllers.DmsSalesInvoiceController.MakeInvoice(InvoiceViewModel aInvoiceViewModel) in D:\Local\TEL\DMS_Code\DealerManagementSystem\Controllers\DMSSalesInvoiceController.cs:line 154
+------------------------------------------------
+Exception Time: 22-Nov-2020 12:35:20 PM
+Other Info: 
+Exception: System.ObjectDisposedException: Cannot access a disposed object.
+Object name: 'TransactionScope'.
+   at System.Transactions.TransactionScope.Complete()
+   at DealerManagementSystem.Controllers.DmsSalesInvoiceController.MakeInvoice(InvoiceViewModel aInvoiceViewModel) in D:\Local\TEL\DMS_Code\DealerManagementSystem\Controllers\DMSSalesInvoiceController.cs:line 155
+------------------------------------------------
+Exception Time: 22-Nov-2020 2:47:15 PM
+Other Info: 
+Exception: System.NullReferenceException: Object reference not set to an instance of an object.
+   at DealerManagementSystem.Controllers.DmsSalesInvoiceController.MakeInvoice(InvoiceViewModel aInvoiceViewModel) in D:\Local\TEL\DMS_Code\DealerManagementSystem\Controllers\DMSSalesInvoiceController.cs:line 99
+------------------------------------------------
+Exception Time: 03-Dec-2020 5:27:59 PM
+Other Info: 
+Exception: System.NullReferenceException: Object reference not set to an instance of an object.
+   at DealerManagementSystem.Controllers.DmsSalesInvoiceController.MakeInvoice(InvoiceViewModel aInvoiceViewModel) in D:\Local\TEL\DMS_Code\DealerManagementSystem\Controllers\DMSSalesInvoiceController.cs:line 99
+------------------------------------------------
+Exception Time: 01-Aug-22 5:52:16 PM
+Other Info: 
+Exception: System.InvalidCastException: Unable to cast COM object of type 'CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass' to interface type 'CrystalDecisions.ReportAppServer.Controllers.ISCRReportSource'. This operation failed because the QueryInterface call on the COM component for the interface with IID '{98CDE168-C1BF-4179-BE4C-F2CFA7CB8398}' failed due to the following error: No such interface supported (Exception from HRESULT: 0x80004002 (E_NOINTERFACE)).
+   at System.StubHelpers.StubHelpers.GetCOMIPFromRCW(Object objSrc, IntPtr pCPCMD, IntPtr& ppTarget, Boolean& pfNeedsRelease)
+   at CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass.Refresh()
+   at CrystalDecisions.ReportSource.EromReportSourceBase.Refresh(RequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.Refresh(RequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.Refresh()
+   at CrystalDecisions.CrystalReports.Engine.Table.SetDataSource(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSourceInternal(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSource(DataSet dataSet)
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 188
+------------------------------------------------
+Exception Time: 02-Aug-22 4:24:48 PM
+Other Info: 
+Exception: System.InvalidCastException: Unable to cast COM object of type 'CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass' to interface type 'CrystalDecisions.ReportAppServer.Controllers.ISCRReportSource'. This operation failed because the QueryInterface call on the COM component for the interface with IID '{98CDE168-C1BF-4179-BE4C-F2CFA7CB8398}' failed due to the following error: No such interface supported (Exception from HRESULT: 0x80004002 (E_NOINTERFACE)).
+   at System.StubHelpers.StubHelpers.GetCOMIPFromRCW(Object objSrc, IntPtr pCPCMD, IntPtr& ppTarget, Boolean& pfNeedsRelease)
+   at CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass.Refresh()
+   at CrystalDecisions.ReportSource.EromReportSourceBase.Refresh(RequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.Refresh(RequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.Refresh()
+   at CrystalDecisions.CrystalReports.Engine.Table.SetDataSource(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSourceInternal(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSource(DataSet dataSet)
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 188
+------------------------------------------------
+Exception Time: 03-Aug-22 5:59:09 PM
+Other Info: 
+Exception: System.InvalidOperationException: The changes to the database were committed successfully, but an error occurred while updating the object context. The ObjectContext might be in an inconsistent state. Inner exception message: Saving or accepting changes failed because more than one entity of type 'DealerManagementSystem.Models.PaymentDetails' have the same primary key value. Ensure that explicitly set primary key values are unique. Ensure that database-generated primary keys are configured correctly in the database and in the Entity Framework model. Use the Entity Designer for Database First/Model First configuration. Use the 'HasDatabaseGeneratedOption" fluent API or 'DatabaseGeneratedAttribute' for Code First configuration. ---> System.InvalidOperationException: Saving or accepting changes failed because more than one entity of type 'DealerManagementSystem.Models.PaymentDetails' have the same primary key value. Ensure that explicitly set primary key values are unique. Ensure that database-generated primary keys are configured correctly in the database and in the Entity Framework model. Use the Entity Designer for Database First/Model First configuration. Use the 'HasDatabaseGeneratedOption" fluent API or 'DatabaseGeneratedAttribute' for Code First configuration.
+   at System.Data.Entity.Core.Objects.ObjectStateManager.FixupKey(EntityEntry entry)
+   at System.Data.Entity.Core.Objects.EntityEntry.AcceptChanges()
+   at System.Data.Entity.Core.Objects.ObjectContext.AcceptAllChanges()
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesToStore(SaveOptions options, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction)
+   --- End of inner exception stack trace ---
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesToStore(SaveOptions options, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction)
+   at System.Data.Entity.Core.Objects.ObjectContext.<>c__DisplayClass148_0.<SaveChangesInternal>b__0()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesInternal(SaveOptions options, Boolean executeInExistingTransaction)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at DealerManagementSystem.Controllers.DmsSalesInvoiceController.MakeInvoice(InvoiceViewModel aInvoiceViewModel) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\Controllers\DMSSalesInvoiceController.cs:line 192
+------------------------------------------------
+Exception Time: 03-Aug-22 6:00:21 PM
+Other Info: 
+Exception: System.InvalidOperationException: The changes to the database were committed successfully, but an error occurred while updating the object context. The ObjectContext might be in an inconsistent state. Inner exception message: Saving or accepting changes failed because more than one entity of type 'DealerManagementSystem.Models.PaymentDetails' have the same primary key value. Ensure that explicitly set primary key values are unique. Ensure that database-generated primary keys are configured correctly in the database and in the Entity Framework model. Use the Entity Designer for Database First/Model First configuration. Use the 'HasDatabaseGeneratedOption" fluent API or 'DatabaseGeneratedAttribute' for Code First configuration. ---> System.InvalidOperationException: Saving or accepting changes failed because more than one entity of type 'DealerManagementSystem.Models.PaymentDetails' have the same primary key value. Ensure that explicitly set primary key values are unique. Ensure that database-generated primary keys are configured correctly in the database and in the Entity Framework model. Use the Entity Designer for Database First/Model First configuration. Use the 'HasDatabaseGeneratedOption" fluent API or 'DatabaseGeneratedAttribute' for Code First configuration.
+   at System.Data.Entity.Core.Objects.ObjectStateManager.FixupKey(EntityEntry entry)
+   at System.Data.Entity.Core.Objects.EntityEntry.AcceptChanges()
+   at System.Data.Entity.Core.Objects.ObjectContext.AcceptAllChanges()
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesToStore(SaveOptions options, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction)
+   --- End of inner exception stack trace ---
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesToStore(SaveOptions options, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction)
+   at System.Data.Entity.Core.Objects.ObjectContext.<>c__DisplayClass148_0.<SaveChangesInternal>b__0()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesInternal(SaveOptions options, Boolean executeInExistingTransaction)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at DealerManagementSystem.Controllers.DmsSalesInvoiceController.MakeInvoice(InvoiceViewModel aInvoiceViewModel) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\Controllers\DMSSalesInvoiceController.cs:line 192
+------------------------------------------------
+Exception Time: 03-Aug-22 6:14:03 PM
+Other Info: 
+Exception: System.Data.Entity.Infrastructure.DbUpdateException: An error occurred while updating the entries. See the inner exception for details. ---> System.Data.Entity.Core.UpdateException: An error occurred while updating the entries. See the inner exception for details. ---> System.InvalidOperationException: ExecuteNonQuery requires an open and available Connection. The connection's current state is closed.
+   at System.Data.SqlClient.SqlCommand.ValidateCommand(String method, Boolean async)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at System.Data.Entity.Infrastructure.Interception.DbCommandDispatcher.<>c.<NonQuery>b__4_0(DbCommand t, DbCommandInterceptionContext`1 c)
+   at System.Data.Entity.Infrastructure.Interception.InternalDispatcher`1.Dispatch[TTarget,TInterceptionContext,TResult](TTarget target, Func`3 operation, TInterceptionContext interceptionContext, Action`3 executing, Action`3 executed)
+   at System.Data.Entity.Infrastructure.Interception.DbCommandDispatcher.NonQuery(DbCommand command, DbCommandInterceptionContext interceptionContext)
+   at System.Data.Entity.Internal.InterceptableDbCommand.ExecuteNonQuery()
+   at System.Data.Entity.Core.Mapping.Update.Internal.DynamicUpdateCommand.Execute(Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Entity.Core.Mapping.Update.Internal.UpdateTranslator.Update()
+   --- End of inner exception stack trace ---
+   at System.Data.Entity.Core.Mapping.Update.Internal.UpdateTranslator.Update()
+   at System.Data.Entity.Core.EntityClient.Internal.EntityAdapter.<>c.<Update>b__21_0(UpdateTranslator ut)
+   at System.Data.Entity.Core.EntityClient.Internal.EntityAdapter.Update[T](T noChangesResult, Func`2 updateFunction)
+   at System.Data.Entity.Core.EntityClient.Internal.EntityAdapter.Update()
+   at System.Data.Entity.Core.Objects.ObjectContext.<SaveChangesToStore>b__153_0()
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesToStore(SaveOptions options, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction)
+   at System.Data.Entity.Core.Objects.ObjectContext.<>c__DisplayClass148_0.<SaveChangesInternal>b__0()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesInternal(SaveOptions options, Boolean executeInExistingTransaction)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   --- End of inner exception stack trace ---
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at DealerManagementSystem.Controllers.DmsSalesInvoiceController.MakeInvoice(InvoiceViewModel aInvoiceViewModel) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\Controllers\DMSSalesInvoiceController.cs:line 192
+------------------------------------------------
+Exception Time: 04-Aug-22 10:08:23 AM
+Other Info: 
+Exception: System.InvalidCastException: Unable to cast COM object of type 'CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass' to interface type 'CrystalDecisions.ReportAppServer.Controllers.ISCRReportSource'. This operation failed because the QueryInterface call on the COM component for the interface with IID '{98CDE168-C1BF-4179-BE4C-F2CFA7CB8398}' failed due to the following error: No such interface supported (Exception from HRESULT: 0x80004002 (E_NOINTERFACE)).
+   at System.StubHelpers.StubHelpers.GetCOMIPFromRCW(Object objSrc, IntPtr pCPCMD, IntPtr& ppTarget, Boolean& pfNeedsRelease)
+   at CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass.Refresh()
+   at CrystalDecisions.ReportSource.EromReportSourceBase.Refresh(RequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.Refresh(RequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.Refresh()
+   at CrystalDecisions.CrystalReports.Engine.Table.SetDataSource(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSourceInternal(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSource(DataSet dataSet)
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 188
+------------------------------------------------
+Exception Time: 05-Aug-22 11:25:05 PM
+Other Info: 
+Exception: System.Data.Entity.Core.EntityCommandExecutionException: The data reader has more than one field. Multiple fields are not valid for EDM primitive or enumeration types.
+   at System.Data.Entity.Core.Query.InternalTrees.ColumnMapFactory.CreateColumnMapFromReaderAndType(DbDataReader storeDataReader, EdmType edmType, EntitySet entitySet, Dictionary`2 renameList)
+   at System.Data.Entity.Core.Objects.ObjectContext.InternalTranslate[TElement](DbDataReader reader, String entitySetName, MergeOption mergeOption, Boolean streaming, EntitySet& entitySet, TypeUsage& edmType)
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteStoreQueryInternal[TElement](String commandText, String entitySetName, ExecutionOptions executionOptions, Object[] parameters)
+   at System.Data.Entity.Core.Objects.ObjectContext.<>c__DisplayClass186_0`1.<ExecuteStoreQueryReliably>b__1()
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectContext.<>c__DisplayClass186_0`1.<ExecuteStoreQueryReliably>b__0()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteStoreQueryReliably[TElement](String commandText, String entitySetName, ExecutionOptions executionOptions, Object[] parameters)
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteStoreQuery[TElement](String commandText, ExecutionOptions executionOptions, Object[] parameters)
+   at System.Data.Entity.Internal.InternalContext.<>c__DisplayClass111_0`1.<ExecuteSqlQuery>b__0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DealerManagementSystem.Controllers.DmsSalesInvoiceController.InsertConsumerAndGetConsumerId_DB() in D:\Local\Tel\TD DMS WF\DealerManagementSystem\Controllers\DMSSalesInvoiceController.cs:line 362
+   at DealerManagementSystem.Controllers.DmsSalesInvoiceController.MakeInvoice(InvoiceViewModel aInvoiceViewModel) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\Controllers\DMSSalesInvoiceController.cs:line 185
+------------------------------------------------
+Exception Time: 05-Aug-22 11:27:35 PM
+Other Info: 
+Exception: System.Data.Entity.Core.EntityCommandExecutionException: The data reader has more than one field. Multiple fields are not valid for EDM primitive or enumeration types.
+   at System.Data.Entity.Core.Query.InternalTrees.ColumnMapFactory.CreateColumnMapFromReaderAndType(DbDataReader storeDataReader, EdmType edmType, EntitySet entitySet, Dictionary`2 renameList)
+   at System.Data.Entity.Core.Objects.ObjectContext.InternalTranslate[TElement](DbDataReader reader, String entitySetName, MergeOption mergeOption, Boolean streaming, EntitySet& entitySet, TypeUsage& edmType)
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteStoreQueryInternal[TElement](String commandText, String entitySetName, ExecutionOptions executionOptions, Object[] parameters)
+   at System.Data.Entity.Core.Objects.ObjectContext.<>c__DisplayClass186_0`1.<ExecuteStoreQueryReliably>b__1()
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectContext.<>c__DisplayClass186_0`1.<ExecuteStoreQueryReliably>b__0()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteStoreQueryReliably[TElement](String commandText, String entitySetName, ExecutionOptions executionOptions, Object[] parameters)
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteStoreQuery[TElement](String commandText, ExecutionOptions executionOptions, Object[] parameters)
+   at System.Data.Entity.Internal.InternalContext.<>c__DisplayClass111_0`1.<ExecuteSqlQuery>b__0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DealerManagementSystem.Controllers.DmsSalesInvoiceController.InsertConsumerAndGetConsumerId_DB() in D:\Local\Tel\TD DMS WF\DealerManagementSystem\Controllers\DMSSalesInvoiceController.cs:line 362
+   at DealerManagementSystem.Controllers.DmsSalesInvoiceController.MakeInvoice(InvoiceViewModel aInvoiceViewModel) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\Controllers\DMSSalesInvoiceController.cs:line 185
+------------------------------------------------
+Exception Time: 05-Aug-22 11:29:58 PM
+Other Info: 
+Exception: System.Data.Entity.Core.EntityCommandExecutionException: The data reader has more than one field. Multiple fields are not valid for EDM primitive or enumeration types.
+   at System.Data.Entity.Core.Query.InternalTrees.ColumnMapFactory.CreateColumnMapFromReaderAndType(DbDataReader storeDataReader, EdmType edmType, EntitySet entitySet, Dictionary`2 renameList)
+   at System.Data.Entity.Core.Objects.ObjectContext.InternalTranslate[TElement](DbDataReader reader, String entitySetName, MergeOption mergeOption, Boolean streaming, EntitySet& entitySet, TypeUsage& edmType)
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteStoreQueryInternal[TElement](String commandText, String entitySetName, ExecutionOptions executionOptions, Object[] parameters)
+   at System.Data.Entity.Core.Objects.ObjectContext.<>c__DisplayClass186_0`1.<ExecuteStoreQueryReliably>b__1()
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectContext.<>c__DisplayClass186_0`1.<ExecuteStoreQueryReliably>b__0()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteStoreQueryReliably[TElement](String commandText, String entitySetName, ExecutionOptions executionOptions, Object[] parameters)
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteStoreQuery[TElement](String commandText, ExecutionOptions executionOptions, Object[] parameters)
+   at System.Data.Entity.Internal.InternalContext.<>c__DisplayClass111_0`1.<ExecuteSqlQuery>b__0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DealerManagementSystem.Controllers.DmsSalesInvoiceController.InsertConsumerAndGetConsumerId_DB() in D:\Local\Tel\TD DMS WF\DealerManagementSystem\Controllers\DMSSalesInvoiceController.cs:line 362
+   at DealerManagementSystem.Controllers.DmsSalesInvoiceController.MakeInvoice(InvoiceViewModel aInvoiceViewModel) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\Controllers\DMSSalesInvoiceController.cs:line 185
+------------------------------------------------
+Exception Time: 06-Aug-22 10:10:01 AM
+Other Info: 
+Exception: System.Data.Entity.Core.EntityException: An exception has been raised that is likely due to a transient failure. If you are connecting to a SQL Azure database consider using SqlAzureExecutionStrategy. ---> System.Data.Entity.Core.EntityException: The underlying provider failed on Open. ---> System.Data.Entity.Core.EntityException: An exception has been raised that is likely due to a transient failure. If you are connecting to a SQL Azure database consider using SqlAzureExecutionStrategy. ---> System.Data.SqlClient.SqlException: A transport-level error has occurred when receiving results from the server. (provider: TCP Provider, error: 0 - The semaphore timeout period has expired.) ---> System.ComponentModel.Win32Exception: The semaphore timeout period has expired
+   --- End of inner exception stack trace ---
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParserStateObject.ReadSniError(TdsParserStateObject stateObj, UInt32 error)
+   at System.Data.SqlClient.TdsParserStateObject.ReadSniSyncOverAsync()
+   at System.Data.SqlClient.TdsParserStateObject.TryReadNetworkPacket()
+   at System.Data.SqlClient.TdsParserStateObject.TryPrepareBuffer()
+   at System.Data.SqlClient.TdsParserStateObject.TryReadByte(Byte& value)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.TdsExecuteTransactionManagerRequest(Byte[] buffer, TransactionManagerRequestType request, String transactionName, TransactionManagerIsolationLevel isoLevel, Int32 timeout, SqlInternalTransaction transaction, TdsParserStateObject stateObj, Boolean isDelegateControlRequest)
+   at System.Data.SqlClient.SqlInternalConnectionTds.ExecuteTransactionYukon(TransactionRequest transactionRequest, String transactionName, IsolationLevel iso, SqlInternalTransaction internalTransaction, Boolean isDelegateControlRequest)
+   at System.Data.SqlClient.SqlInternalConnectionTds.ExecuteTransaction(TransactionRequest transactionRequest, String name, IsolationLevel iso, SqlInternalTransaction internalTransaction, Boolean isDelegateControlRequest)
+   at System.Data.SqlClient.SqlDelegatedTransaction.Initialize()
+   at System.Transactions.TransactionStatePSPEOperation.PSPEInitialize(InternalTransaction tx, IPromotableSinglePhaseNotification promotableSinglePhaseNotification, Guid promoterType)
+   at System.Transactions.TransactionStateActive.EnlistPromotableSinglePhase(InternalTransaction tx, IPromotableSinglePhaseNotification promotableSinglePhaseNotification, Transaction atomicTransaction, Guid promoterType)
+   at System.Transactions.Transaction.EnlistPromotableSinglePhase(IPromotableSinglePhaseNotification promotableSinglePhaseNotification, Guid promoterType)
+   at System.Transactions.Transaction.EnlistPromotableSinglePhase(IPromotableSinglePhaseNotification promotableSinglePhaseNotification)
+   at System.Data.SqlClient.SqlInternalConnection.EnlistNonNull(Transaction tx)
+   at System.Data.SqlClient.SqlInternalConnection.Enlist(Transaction tx)
+   at System.Data.SqlClient.SqlInternalConnectionTds.Activate(Transaction transaction)
+   at System.Data.ProviderBase.DbConnectionInternal.ActivateConnection(Transaction transaction)
+   at System.Data.ProviderBase.DbConnectionPool.PrepareConnection(DbConnection owningObject, DbConnectionInternal obj, Transaction transaction)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.<>c.<Open>b__13_0(DbConnection t, DbConnectionInterceptionContext c)
+   at System.Data.Entity.Infrastructure.Interception.InternalDispatcher`1.Dispatch[TTarget,TInterceptionContext](TTarget target, Action`2 operation, TInterceptionContext interceptionContext, Action`3 executing, Action`3 executed)
+   at System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.Open(DbConnection connection, DbInterceptionContext interceptionContext)
+   at System.Data.Entity.Core.EntityClient.EntityConnection.<Open>b__55_0()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.<>c__DisplayClass2_0.<Execute>b__0()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   --- End of inner exception stack trace ---
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute(Action operation)
+   at System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+   --- End of inner exception stack trace ---
+   at System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+   at System.Data.Entity.Core.Objects.ObjectContext.EnsureConnection(Boolean shouldMonitorTransactions)
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass41_0.<GetResults>b__0()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   --- End of inner exception stack trace ---
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__31_0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DealerManagementSystem.Controllers.DmsSalesInvoiceController.MakeInvoice(InvoiceViewModel aInvoiceViewModel) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\Controllers\DMSSalesInvoiceController.cs:line 149
+------------------------------------------------
+Exception Time: 06-Aug-22 11:45:59 AM
+Other Info: 
+Exception: System.NullReferenceException: Object reference not set to an instance of an object.
+   at DealerManagementSystem.Controllers.DmsSalesInvoiceController.InsertConsumerAndGetConsumerId(Consumer aConsumer) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\Controllers\DMSSalesInvoiceController.cs:line 350
+   at DealerManagementSystem.Controllers.DmsSalesInvoiceController.MakeInvoice(InvoiceViewModel aInvoiceViewModel) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\Controllers\DMSSalesInvoiceController.cs:line 185
+------------------------------------------------
+Exception Time: 06-Aug-22 11:58:03 AM
+Other Info: 
+Exception: System.InvalidCastException: Unable to cast COM object of type 'CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass' to interface type 'CrystalDecisions.ReportAppServer.Controllers.ISCRReportSource'. This operation failed because the QueryInterface call on the COM component for the interface with IID '{98CDE168-C1BF-4179-BE4C-F2CFA7CB8398}' failed due to the following error: No such interface supported (Exception from HRESULT: 0x80004002 (E_NOINTERFACE)).
+   at System.StubHelpers.StubHelpers.GetCOMIPFromRCW(Object objSrc, IntPtr pCPCMD, IntPtr& ppTarget, Boolean& pfNeedsRelease)
+   at CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass.Refresh()
+   at CrystalDecisions.ReportSource.EromReportSourceBase.Refresh(RequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.Refresh(RequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.Refresh()
+   at CrystalDecisions.CrystalReports.Engine.Table.SetDataSource(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSourceInternal(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSource(DataSet dataSet)
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 188
+------------------------------------------------
+Exception Time: 06-Aug-22 1:05:59 PM
+Other Info: 
+Exception: System.InvalidCastException: Unable to cast COM object of type 'CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass' to interface type 'CrystalDecisions.ReportAppServer.Controllers.ISCRReportSource'. This operation failed because the QueryInterface call on the COM component for the interface with IID '{98CDE168-C1BF-4179-BE4C-F2CFA7CB8398}' failed due to the following error: No such interface supported (Exception from HRESULT: 0x80004002 (E_NOINTERFACE)).
+   at System.StubHelpers.StubHelpers.GetCOMIPFromRCW(Object objSrc, IntPtr pCPCMD, IntPtr& ppTarget, Boolean& pfNeedsRelease)
+   at CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass.Refresh()
+   at CrystalDecisions.ReportSource.EromReportSourceBase.Refresh(RequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.Refresh(RequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.Refresh()
+   at CrystalDecisions.CrystalReports.Engine.Table.SetDataSource(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSourceInternal(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSource(DataSet dataSet)
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 202
+------------------------------------------------
+Exception Time: 06-Aug-22 2:08:52 PM
+Other Info: 
+Exception: System.InvalidCastException: Unable to cast COM object of type 'CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass' to interface type 'CrystalDecisions.ReportAppServer.Controllers.ISCRReportSource'. This operation failed because the QueryInterface call on the COM component for the interface with IID '{98CDE168-C1BF-4179-BE4C-F2CFA7CB8398}' failed due to the following error: No such interface supported (Exception from HRESULT: 0x80004002 (E_NOINTERFACE)).
+   at System.StubHelpers.StubHelpers.GetCOMIPFromRCW(Object objSrc, IntPtr pCPCMD, IntPtr& ppTarget, Boolean& pfNeedsRelease)
+   at CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass.Refresh()
+   at CrystalDecisions.ReportSource.EromReportSourceBase.Refresh(RequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.Refresh(RequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.Refresh()
+   at CrystalDecisions.CrystalReports.Engine.Table.SetDataSource(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSourceInternal(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSource(DataSet dataSet)
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial, String UserType) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 192
+------------------------------------------------
+Exception Time: 06-Aug-22 10:52:20 PM
+Other Info: 
+Exception: System.InvalidCastException: Unable to cast COM object of type 'CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass' to interface type 'CrystalDecisions.ReportAppServer.Controllers.ISCRReportSource'. This operation failed because the QueryInterface call on the COM component for the interface with IID '{98CDE168-C1BF-4179-BE4C-F2CFA7CB8398}' failed due to the following error: No such interface supported (Exception from HRESULT: 0x80004002 (E_NOINTERFACE)).
+   at System.StubHelpers.StubHelpers.GetCOMIPFromRCW(Object objSrc, IntPtr pCPCMD, IntPtr& ppTarget, Boolean& pfNeedsRelease)
+   at CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass.Refresh()
+   at CrystalDecisions.ReportSource.EromReportSourceBase.Refresh(RequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.Refresh(RequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.Refresh()
+   at CrystalDecisions.CrystalReports.Engine.Table.SetDataSource(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSourceInternal(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSource(DataSet dataSet)
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial, String UserType) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 192
+------------------------------------------------
+Exception Time: 06-Aug-22 11:11:41 PM
+Other Info: 
+Exception: System.InvalidCastException: Unable to cast COM object of type 'CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass' to interface type 'CrystalDecisions.ReportAppServer.Controllers.ISCRReportSource'. This operation failed because the QueryInterface call on the COM component for the interface with IID '{98CDE168-C1BF-4179-BE4C-F2CFA7CB8398}' failed due to the following error: No such interface supported (Exception from HRESULT: 0x80004002 (E_NOINTERFACE)).
+   at System.StubHelpers.StubHelpers.GetCOMIPFromRCW(Object objSrc, IntPtr pCPCMD, IntPtr& ppTarget, Boolean& pfNeedsRelease)
+   at CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass.Refresh()
+   at CrystalDecisions.ReportSource.EromReportSourceBase.Refresh(RequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.Refresh(RequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.Refresh()
+   at CrystalDecisions.CrystalReports.Engine.Table.SetDataSource(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSourceInternal(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSource(DataSet dataSet)
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial, String UserType) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 192
+------------------------------------------------
+Exception Time: 08-Aug-22 4:10:18 PM
+Other Info: 
+Exception: System.NullReferenceException: Object reference not set to an instance of an object.
+   at DealerManagementSystem.Controllers.DmsSalesInvoiceController.MakeInvoice(InvoiceViewModel aInvoiceViewModel) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\Controllers\DMSSalesInvoiceController.cs:line 224
+------------------------------------------------
+Exception Time: 08-Aug-22 4:14:52 PM
+Other Info: 
+Exception: System.NullReferenceException: Object reference not set to an instance of an object.
+   at DealerManagementSystem.Controllers.DmsSalesInvoiceController.MakeInvoice(InvoiceViewModel aInvoiceViewModel) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\Controllers\DMSSalesInvoiceController.cs:line 224
+------------------------------------------------
+Exception Time: 08-Aug-22 4:24:57 PM
+Other Info: 
+Exception: System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near the keyword 'where'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Entity.Infrastructure.Interception.DbCommandDispatcher.<>c.<Reader>b__6_0(DbCommand t, DbCommandInterceptionContext`1 c)
+   at System.Data.Entity.Infrastructure.Interception.InternalDispatcher`1.Dispatch[TTarget,TInterceptionContext,TResult](TTarget target, Func`3 operation, TInterceptionContext interceptionContext, Action`3 executing, Action`3 executed)
+   at System.Data.Entity.Infrastructure.Interception.DbCommandDispatcher.Reader(DbCommand command, DbCommandInterceptionContext interceptionContext)
+   at System.Data.Entity.Internal.InterceptableDbCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteStoreQueryInternal[TElement](String commandText, String entitySetName, ExecutionOptions executionOptions, Object[] parameters)
+   at System.Data.Entity.Core.Objects.ObjectContext.<>c__DisplayClass186_0`1.<ExecuteStoreQueryReliably>b__1()
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectContext.<>c__DisplayClass186_0`1.<ExecuteStoreQueryReliably>b__0()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteStoreQueryReliably[TElement](String commandText, String entitySetName, ExecutionOptions executionOptions, Object[] parameters)
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteStoreQuery[TElement](String commandText, ExecutionOptions executionOptions, Object[] parameters)
+   at System.Data.Entity.Internal.InternalContext.<>c__DisplayClass111_0`1.<ExecuteSqlQuery>b__0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DealerManagementSystem.Controllers.DmsSalesInvoiceController.InsertPromoDetails(List`1 productIds, Int32 invoiceId) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\Controllers\DMSSalesInvoiceController.cs:line 318
+   at DealerManagementSystem.Controllers.DmsSalesInvoiceController.MakeInvoice(InvoiceViewModel aInvoiceViewModel) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\Controllers\DMSSalesInvoiceController.cs:line 220
+ClientConnectionId:1b6fd2df-1c05-46ef-aa21-9ede53e31f56
+Error Number:156,State:1,Class:15
+------------------------------------------------
+Exception Time: 08-Aug-22 6:03:26 PM
+Other Info: 
+Exception: System.NullReferenceException: Object reference not set to an instance of an object.
+   at DealerManagementSystem.Controllers.DmsSalesInvoiceController.MakeInvoice(InvoiceViewModel aInvoiceViewModel) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\Controllers\DMSSalesInvoiceController.cs:line 156
+------------------------------------------------
+Exception Time: 10-Aug-22 3:52:14 PM
+Other Info: 
+Exception: System.InvalidCastException: Unable to cast COM object of type 'CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass' to interface type 'CrystalDecisions.ReportAppServer.Controllers.ISCRReportSource'. This operation failed because the QueryInterface call on the COM component for the interface with IID '{98CDE168-C1BF-4179-BE4C-F2CFA7CB8398}' failed due to the following error: No such interface supported (Exception from HRESULT: 0x80004002 (E_NOINTERFACE)).
+   at System.StubHelpers.StubHelpers.GetCOMIPFromRCW(Object objSrc, IntPtr pCPCMD, IntPtr& ppTarget, Boolean& pfNeedsRelease)
+   at CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass.Refresh()
+   at CrystalDecisions.ReportSource.EromReportSourceBase.Refresh(RequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.Refresh(RequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.Refresh()
+   at CrystalDecisions.CrystalReports.Engine.Table.SetDataSource(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSourceInternal(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSource(DataSet dataSet)
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial, String UserType) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 192
+------------------------------------------------
+Exception Time: 10-Aug-22 3:57:15 PM
+Other Info: 
+Exception: System.Data.Entity.Infrastructure.DbUpdateConcurrencyException: Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. See http://go.microsoft.com/fwlink/?LinkId=472540 for information on understanding and handling optimistic concurrency exceptions. ---> System.Data.Entity.Core.OptimisticConcurrencyException: Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. See http://go.microsoft.com/fwlink/?LinkId=472540 for information on understanding and handling optimistic concurrency exceptions.
+   at System.Data.Entity.Core.Mapping.Update.Internal.UpdateTranslator.ValidateRowsAffected(Int64 rowsAffected, UpdateCommand source)
+   at System.Data.Entity.Core.Mapping.Update.Internal.UpdateTranslator.Update()
+   at System.Data.Entity.Core.EntityClient.Internal.EntityAdapter.<>c.<Update>b__21_0(UpdateTranslator ut)
+   at System.Data.Entity.Core.EntityClient.Internal.EntityAdapter.Update[T](T noChangesResult, Func`2 updateFunction)
+   at System.Data.Entity.Core.EntityClient.Internal.EntityAdapter.Update()
+   at System.Data.Entity.Core.Objects.ObjectContext.<SaveChangesToStore>b__153_0()
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesToStore(SaveOptions options, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction)
+   at System.Data.Entity.Core.Objects.ObjectContext.<>c__DisplayClass148_0.<SaveChangesInternal>b__0()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesInternal(SaveOptions options, Boolean executeInExistingTransaction)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   --- End of inner exception stack trace ---
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at DealerManagementSystem.Controllers.DmsSalesInvoiceController.MakeInvoice(InvoiceViewModel aInvoiceViewModel) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\Controllers\DMSSalesInvoiceController.cs:line 230
+------------------------------------------------
+Exception Time: 11-Aug-22 11:40:32 AM
+Other Info: 
+Exception: System.InvalidCastException: Unable to cast COM object of type 'CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass' to interface type 'CrystalDecisions.ReportAppServer.Controllers.ISCRReportSource'. This operation failed because the QueryInterface call on the COM component for the interface with IID '{98CDE168-C1BF-4179-BE4C-F2CFA7CB8398}' failed due to the following error: No such interface supported (Exception from HRESULT: 0x80004002 (E_NOINTERFACE)).
+   at System.StubHelpers.StubHelpers.GetCOMIPFromRCW(Object objSrc, IntPtr pCPCMD, IntPtr& ppTarget, Boolean& pfNeedsRelease)
+   at CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass.Refresh()
+   at CrystalDecisions.ReportSource.EromReportSourceBase.Refresh(RequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.Refresh(RequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.Refresh()
+   at CrystalDecisions.CrystalReports.Engine.Table.SetDataSource(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSourceInternal(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSource(DataSet dataSet)
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial, String UserType) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 192
+------------------------------------------------
+Exception Time: 11-Aug-22 3:06:09 PM
+Other Info: User Name: testuser
+Exception: System.InvalidCastException: Unable to cast COM object of type 'CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass' to interface type 'CrystalDecisions.ReportAppServer.Controllers.ISCRReportSource'. This operation failed because the QueryInterface call on the COM component for the interface with IID '{98CDE168-C1BF-4179-BE4C-F2CFA7CB8398}' failed due to the following error: No such interface supported (Exception from HRESULT: 0x80004002 (E_NOINTERFACE)).
+   at System.StubHelpers.StubHelpers.GetCOMIPFromRCW(Object objSrc, IntPtr pCPCMD, IntPtr& ppTarget, Boolean& pfNeedsRelease)
+   at CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass.Refresh()
+   at CrystalDecisions.ReportSource.EromReportSourceBase.Refresh(RequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.Refresh(RequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.Refresh()
+   at CrystalDecisions.CrystalReports.Engine.Table.SetDataSource(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSourceInternal(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSource(DataSet dataSet)
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, Int32 invoiceId, Int32 customerId, Int32 consumerId, String loggedUserName, String loggedUserFullName) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 402
+------------------------------------------------
+Exception Time: 8/24/2022 5:06:37 PM
+Other Info: 
+Exception: System.TypeInitializationException: The type initializer for 'CrystalDecisions.CrystalReports.Engine.ReportDocument' threw an exception. ---> System.IO.FileLoadException: Could not load file or assembly 'CrystalDecisions.ReportAppServer.CommLayer, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304' or one of its dependencies. The located assembly's manifest definition does not match the assembly reference. (Exception from HRESULT: 0x80131040)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument..cctor()
+   --- End of inner exception stack trace ---
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument..ctor()
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial, String UserType) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 186
+------------------------------------------------
+Exception Time: 8/24/2022 5:10:32 PM
+Other Info: 
+Exception: System.TypeInitializationException: The type initializer for 'CrystalDecisions.CrystalReports.Engine.ReportDocument' threw an exception. ---> System.IO.FileLoadException: Could not load file or assembly 'CrystalDecisions.ReportAppServer.CommLayer, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304' or one of its dependencies. The located assembly's manifest definition does not match the assembly reference. (Exception from HRESULT: 0x80131040)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument..cctor()
+   --- End of inner exception stack trace ---
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument..ctor()
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial, String UserType) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 186
+------------------------------------------------
+Exception Time: 8/24/2022 6:03:45 PM
+Other Info: 
+Exception: System.TypeInitializationException: The type initializer for 'CrystalDecisions.CrystalReports.Engine.ReportDocument' threw an exception. ---> System.IO.FileLoadException: Could not load file or assembly 'CrystalDecisions.ReportAppServer.CommLayer, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304' or one of its dependencies. The located assembly's manifest definition does not match the assembly reference. (Exception from HRESULT: 0x80131040)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument..cctor()
+   --- End of inner exception stack trace ---
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument..ctor()
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial, String UserType) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 186
+------------------------------------------------
+Exception Time: 9/1/2022 2:46:05 PM
+Other Info: User Name: greenenterprice
+Exception: System.TypeInitializationException: The type initializer for 'CrystalDecisions.CrystalReports.Engine.ReportDocument' threw an exception. ---> System.IO.FileLoadException: Could not load file or assembly 'CrystalDecisions.ReportAppServer.CommLayer, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304' or one of its dependencies. The located assembly's manifest definition does not match the assembly reference. (Exception from HRESULT: 0x80131040)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument..cctor()
+   --- End of inner exception stack trace ---
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument..ctor()
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, Int32 invoiceId, Int32 customerId, Int32 consumerId, String loggedUserName, String loggedUserFullName) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 400
+------------------------------------------------
+Exception Time: 9/1/2022 3:58:18 PM
+Other Info: 
+Exception: System.NullReferenceException: Object reference not set to an instance of an object.
+   at DealerManagementSystem.Controllers.DmsSalesInvoiceController.MakeInvoice_FromOrder(InvoiceViewModel aInvoiceViewModel, String TranID) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\Controllers\DMSSalesInvoiceController.cs:line 417
+------------------------------------------------
+Exception Time: 9/7/2022 12:59:29 PM
+Other Info: 
+Exception: System.TypeInitializationException: The type initializer for 'CrystalDecisions.CrystalReports.Engine.ReportDocument' threw an exception. ---> System.IO.FileNotFoundException: Could not load file or assembly 'CrystalDecisions.ReportAppServer.CommLayer, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304' or one of its dependencies. The system cannot find the file specified.
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument..cctor()
+   --- End of inner exception stack trace ---
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument..ctor()
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial, String UserType) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 186
+------------------------------------------------
+Exception Time: 9/8/2022 4:19:59 PM
+Other Info: User Name: greenenterprice
+Exception: System.TypeInitializationException: The type initializer for 'CrystalDecisions.CrystalReports.Engine.ReportDocument' threw an exception. ---> System.IO.FileNotFoundException: Could not load file or assembly 'CrystalDecisions.ReportAppServer.CommLayer, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304' or one of its dependencies. The system cannot find the file specified.
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument..cctor()
+   --- End of inner exception stack trace ---
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument..ctor()
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, Int32 invoiceId, Int32 customerId, Int32 consumerId, String loggedUserName, String loggedUserFullName) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 400
+------------------------------------------------
+Exception Time: 9/23/2022 10:16:10 PM
+Other Info: 
+Exception: System.TypeInitializationException: The type initializer for 'CrystalDecisions.CrystalReports.Engine.ReportDocument' threw an exception. ---> System.IO.FileNotFoundException: Could not load file or assembly 'CrystalDecisions.ReportAppServer.CommLayer, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304' or one of its dependencies. The system cannot find the file specified.
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument..cctor()
+   --- End of inner exception stack trace ---
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument..ctor()
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial, String UserType) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 182
+------------------------------------------------
+Exception Time: 9/23/2022 10:22:45 PM
+Other Info: 
+Exception: System.TypeInitializationException: The type initializer for 'CrystalDecisions.CrystalReports.Engine.ReportDocument' threw an exception. ---> System.IO.FileNotFoundException: Could not load file or assembly 'CrystalDecisions.ReportAppServer.CommLayer, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304' or one of its dependencies. The system cannot find the file specified.
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument..cctor()
+   --- End of inner exception stack trace ---
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument..ctor()
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial, String UserType) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 182
+------------------------------------------------
+Exception Time: 9/23/2022 10:26:21 PM
+Other Info: 
+Exception: System.TypeInitializationException: The type initializer for 'CrystalDecisions.CrystalReports.Engine.ReportDocument' threw an exception. ---> System.IO.FileNotFoundException: Could not load file or assembly 'CrystalDecisions.ReportAppServer.CommLayer, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304' or one of its dependencies. The system cannot find the file specified.
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument..cctor()
+   --- End of inner exception stack trace ---
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument..ctor()
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial, String UserType) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 182
+------------------------------------------------
+Exception Time: 9/23/2022 10:35:19 PM
+Other Info: 
+Exception: System.TypeInitializationException: The type initializer for 'CrystalDecisions.CrystalReports.Engine.ReportDocument' threw an exception. ---> System.IO.FileNotFoundException: Could not load file or assembly 'CrystalDecisions.ReportAppServer.CommLayer, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304' or one of its dependencies. The system cannot find the file specified.
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument..cctor()
+   --- End of inner exception stack trace ---
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument..ctor()
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial, String UserType) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 182
+------------------------------------------------
+Exception Time: 9/24/2022 1:40:42 PM
+Other Info: 
+Exception: CrystalDecisions.CrystalReports.Engine.ParameterFieldException: The types of the parameter field and parameter field current values are not compatible. ---> System.Runtime.InteropServices.COMException: The types of the parameter field and parameter field current values are not compatible.
+   at CrystalDecisions.ReportAppServer.Controllers.ParameterFieldControllerClass.SetCurrentValues(String ReportName, String ParameterFieldName, Values Values)
+   at CrystalDecisions.CrystalReports.Engine.ParameterFieldDefinition.ApplyCurrentValues(ParameterValues currentValues)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetParameterValue(String name, Object val)
+   --- End of inner exception stack trace ---
+   at CrystalDecisions.ReportAppServer.ConvertDotNetToErom.ThrowDotNetException(Exception e)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetParameterValue(String name, Object val)
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial, String UserType) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 205
+------------------------------------------------
+Exception Time: 9/24/2022 1:42:25 PM
+Other Info: 
+Exception: CrystalDecisions.CrystalReports.Engine.ParameterFieldException: The types of the parameter field and parameter field current values are not compatible. ---> System.Runtime.InteropServices.COMException: The types of the parameter field and parameter field current values are not compatible.
+   at CrystalDecisions.ReportAppServer.Controllers.ParameterFieldControllerClass.SetCurrentValues(String ReportName, String ParameterFieldName, Values Values)
+   at CrystalDecisions.CrystalReports.Engine.ParameterFieldDefinition.ApplyCurrentValues(ParameterValues currentValues)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetParameterValue(String name, Object val)
+   --- End of inner exception stack trace ---
+   at CrystalDecisions.ReportAppServer.ConvertDotNetToErom.ThrowDotNetException(Exception e)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetParameterValue(String name, Object val)
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial, String UserType) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 205
+------------------------------------------------
+Exception Time: 9/24/2022 1:43:49 PM
+Other Info: 
+Exception: CrystalDecisions.CrystalReports.Engine.ParameterFieldException: The types of the parameter field and parameter field current values are not compatible. ---> System.Runtime.InteropServices.COMException: The types of the parameter field and parameter field current values are not compatible.
+   at CrystalDecisions.ReportAppServer.Controllers.ParameterFieldControllerClass.SetCurrentValues(String ReportName, String ParameterFieldName, Values Values)
+   at CrystalDecisions.CrystalReports.Engine.ParameterFieldDefinition.ApplyCurrentValues(ParameterValues currentValues)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetParameterValue(String name, Object val)
+   --- End of inner exception stack trace ---
+   at CrystalDecisions.ReportAppServer.ConvertDotNetToErom.ThrowDotNetException(Exception e)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetParameterValue(String name, Object val)
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial, String UserType) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 205
+------------------------------------------------
+Exception Time: 9/24/2022 1:47:36 PM
+Other Info: 
+Exception: CrystalDecisions.CrystalReports.Engine.ParameterFieldException: The types of the parameter field and parameter field current values are not compatible. ---> System.Runtime.InteropServices.COMException: The types of the parameter field and parameter field current values are not compatible.
+   at CrystalDecisions.ReportAppServer.Controllers.ParameterFieldControllerClass.SetCurrentValues(String ReportName, String ParameterFieldName, Values Values)
+   at CrystalDecisions.CrystalReports.Engine.ParameterFieldDefinition.ApplyCurrentValues(ParameterValues currentValues)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetParameterValue(String name, Object val)
+   --- End of inner exception stack trace ---
+   at CrystalDecisions.ReportAppServer.ConvertDotNetToErom.ThrowDotNetException(Exception e)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetParameterValue(String name, Object val)
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial, String UserType) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 205
+------------------------------------------------
+Exception Time: 9/24/2022 1:50:54 PM
+Other Info: 
+Exception: CrystalDecisions.CrystalReports.Engine.ParameterFieldException: The types of the parameter field and parameter field current values are not compatible. ---> System.Runtime.InteropServices.COMException: The types of the parameter field and parameter field current values are not compatible.
+   at CrystalDecisions.ReportAppServer.Controllers.ParameterFieldControllerClass.SetCurrentValues(String ReportName, String ParameterFieldName, Values Values)
+   at CrystalDecisions.CrystalReports.Engine.ParameterFieldDefinition.ApplyCurrentValues(ParameterValues currentValues)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetParameterValue(String name, Object val)
+   --- End of inner exception stack trace ---
+   at CrystalDecisions.ReportAppServer.ConvertDotNetToErom.ThrowDotNetException(Exception e)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetParameterValue(String name, Object val)
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial, String UserType) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 205
+------------------------------------------------
+Exception Time: 9/24/2022 1:56:09 PM
+Other Info: 
+Exception: CrystalDecisions.CrystalReports.Engine.ParameterFieldException: The types of the parameter field and parameter field current values are not compatible. ---> System.Runtime.InteropServices.COMException: The types of the parameter field and parameter field current values are not compatible.
+   at CrystalDecisions.ReportAppServer.Controllers.ParameterFieldControllerClass.SetCurrentValues(String ReportName, String ParameterFieldName, Values Values)
+   at CrystalDecisions.CrystalReports.Engine.ParameterFieldDefinition.ApplyCurrentValues(ParameterValues currentValues)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetParameterValue(String name, Object val)
+   --- End of inner exception stack trace ---
+   at CrystalDecisions.ReportAppServer.ConvertDotNetToErom.ThrowDotNetException(Exception e)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetParameterValue(String name, Object val)
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial, String UserType) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 205
+------------------------------------------------
+Exception Time: 9/24/2022 1:58:08 PM
+Other Info: 
+Exception: CrystalDecisions.CrystalReports.Engine.ParameterFieldException: The types of the parameter field and parameter field current values are not compatible. ---> System.Runtime.InteropServices.COMException: The types of the parameter field and parameter field current values are not compatible.
+   at CrystalDecisions.ReportAppServer.Controllers.ParameterFieldControllerClass.SetCurrentValues(String ReportName, String ParameterFieldName, Values Values)
+   at CrystalDecisions.CrystalReports.Engine.ParameterFieldDefinition.ApplyCurrentValues(ParameterValues currentValues)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetParameterValue(String name, Object val)
+   --- End of inner exception stack trace ---
+   at CrystalDecisions.ReportAppServer.ConvertDotNetToErom.ThrowDotNetException(Exception e)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetParameterValue(String name, Object val)
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial, String UserType) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 205
+------------------------------------------------
+Exception Time: 9/24/2022 2:01:33 PM
+Other Info: 
+Exception: CrystalDecisions.CrystalReports.Engine.ParameterFieldException: The types of the parameter field and parameter field current values are not compatible. ---> System.Runtime.InteropServices.COMException: The types of the parameter field and parameter field current values are not compatible.
+   at CrystalDecisions.ReportAppServer.Controllers.ParameterFieldControllerClass.SetCurrentValues(String ReportName, String ParameterFieldName, Values Values)
+   at CrystalDecisions.CrystalReports.Engine.ParameterFieldDefinition.ApplyCurrentValues(ParameterValues currentValues)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetParameterValue(String name, Object val)
+   --- End of inner exception stack trace ---
+   at CrystalDecisions.ReportAppServer.ConvertDotNetToErom.ThrowDotNetException(Exception e)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetParameterValue(String name, Object val)
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial, String UserType) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 205
+------------------------------------------------
+Exception Time: 9/24/2022 2:02:48 PM
+Other Info: 
+Exception: CrystalDecisions.CrystalReports.Engine.ParameterFieldException: The types of the parameter field and parameter field current values are not compatible. ---> System.Runtime.InteropServices.COMException: The types of the parameter field and parameter field current values are not compatible.
+   at CrystalDecisions.ReportAppServer.Controllers.ParameterFieldControllerClass.SetCurrentValues(String ReportName, String ParameterFieldName, Values Values)
+   at CrystalDecisions.CrystalReports.Engine.ParameterFieldDefinition.ApplyCurrentValues(ParameterValues currentValues)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetParameterValue(String name, Object val)
+   --- End of inner exception stack trace ---
+   at CrystalDecisions.ReportAppServer.ConvertDotNetToErom.ThrowDotNetException(Exception e)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetParameterValue(String name, Object val)
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial, String UserType) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 205
+------------------------------------------------
+Exception Time: 10/10/2022 3:59:42 PM
+Other Info: 
+Exception: System.NullReferenceException: Object reference not set to an instance of an object.
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult.QrCodeGen(Consumer aConsumer, ProductDetails aProductDetails, DmsSalesInvoice aDmsSalesInvoice, WarrantyParam aWarrantyParam, String sBarcode) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 544
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial, String UserType) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 181
+------------------------------------------------
+Exception Time: 10/10/2022 4:01:17 PM
+Other Info: 
+Exception: System.NullReferenceException: Object reference not set to an instance of an object.
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult.QrCodeGen(Consumer aConsumer, ProductDetails aProductDetails, DmsSalesInvoice aDmsSalesInvoice, WarrantyParam aWarrantyParam, String sBarcode) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 544
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial, String UserType) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 181
+------------------------------------------------
+Exception Time: 10/15/2022 1:01:06 PM
+Other Info: 
+Exception: System.ArgumentNullException: Value cannot be null.
+Parameter name: source
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source, Func`2 predicate)
+   at DealerManagementSystem.Controllers.GoodReceiveController.Insert_DMSproductStockTranItem(String InvoiceNo) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\Controllers\GoodReceiveController.cs:line 214
+   at DealerManagementSystem.Controllers.GoodReceiveController.SaveProduct(String InvoiceNo) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\Controllers\GoodReceiveController.cs:line 119
+------------------------------------------------
+Exception Time: 10/15/2022 1:01:15 PM
+Other Info: 
+Exception: System.ArgumentNullException: Value cannot be null.
+Parameter name: source
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source, Func`2 predicate)
+   at DealerManagementSystem.Controllers.GoodReceiveController.Insert_DMSproductStockTranItem(String InvoiceNo) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\Controllers\GoodReceiveController.cs:line 214
+   at DealerManagementSystem.Controllers.GoodReceiveController.SaveProduct(String InvoiceNo) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\Controllers\GoodReceiveController.cs:line 119
+------------------------------------------------
+Exception Time: 10/17/2022 3:39:18 PM
+Other Info: 
+Exception: System.NullReferenceException: Object reference not set to an instance of an object.
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult.QrCodeGen(Consumer aConsumer, ProductDetails aProductDetails, DmsSalesInvoice aDmsSalesInvoice, WarrantyParam aWarrantyParam, String sBarcode) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 544
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial, String UserType) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 181
+------------------------------------------------
+Exception Time: 10/17/2022 3:45:48 PM
+Other Info: 
+Exception: System.NullReferenceException: Object reference not set to an instance of an object.
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult.QrCodeGen(Consumer aConsumer, ProductDetails aProductDetails, DmsSalesInvoice aDmsSalesInvoice, WarrantyParam aWarrantyParam, String sBarcode) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 544
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial, String UserType) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 181
+------------------------------------------------
+Exception Time: 19-Oct-22 1:34:33 PM
+Other Info: User Name: hmelectronics
+Exception: System.IO.FileNotFoundException: Could not load file or assembly 'CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304' or one of its dependencies. The system cannot find the file specified.
+File name: 'CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304'
+   at CrystalDecisions.CrystalReports.Engine.Table.WrapAndCacheDotNetObject(Object val, Type type, ISCRAdoNetDataSet& crAdoNetDataSet)
+   at CrystalDecisions.CrystalReports.Engine.Table.SetDataSource(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSourceInternal(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSource(DataSet dataSet)
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, Int32 invoiceId, Int32 customerId, Int32 consumerId, String loggedUserName, String loggedUserFullName) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 397
+
+=== Pre-bind state information ===
+LOG: DisplayName = CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304
+ (Fully-specified)
+LOG: Appbase = file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/
+LOG: Initial PrivatePath = D:\Local\Tel\TD DMS WF\DealerManagementSystem\bin
+Calling assembly : CrystalDecisions.ReportAppServer.DataSetConversion, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304.
+===
+LOG: This bind starts in default load context.
+LOG: Using application configuration file: D:\Local\Tel\TD DMS WF\DealerManagementSystem\web.config
+LOG: Using host configuration file: C:\Users\shakil.imtiaj\Documents\IISExpress\config\aspnet.config
+LOG: Using machine configuration file from C:\Windows\Microsoft.NET\Framework\v4.0.30319\config\machine.config.
+LOG: Post-policy reference: CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304
+LOG: Attempting download of new URL file:///C:/Users/shakil.imtiaj/AppData/Local/Temp/Temporary ASP.NET Files/root/21546b17/3aa000eb/CrystalDecisions.ReportAppServer.DataDefModel.DLL.
+LOG: Attempting download of new URL file:///C:/Users/shakil.imtiaj/AppData/Local/Temp/Temporary ASP.NET Files/root/21546b17/3aa000eb/CrystalDecisions.ReportAppServer.DataDefModel/CrystalDecisions.ReportAppServer.DataDefModel.DLL.
+LOG: Attempting download of new URL file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/bin/CrystalDecisions.ReportAppServer.DataDefModel.DLL.
+LOG: Attempting download of new URL file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/bin/CrystalDecisions.ReportAppServer.DataDefModel/CrystalDecisions.ReportAppServer.DataDefModel.DLL.
+LOG: Attempting download of new URL file:///C:/Users/shakil.imtiaj/AppData/Local/Temp/Temporary ASP.NET Files/root/21546b17/3aa000eb/CrystalDecisions.ReportAppServer.DataDefModel.EXE.
+LOG: Attempting download of new URL file:///C:/Users/shakil.imtiaj/AppData/Local/Temp/Temporary ASP.NET Files/root/21546b17/3aa000eb/CrystalDecisions.ReportAppServer.DataDefModel/CrystalDecisions.ReportAppServer.DataDefModel.EXE.
+LOG: Attempting download of new URL file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/bin/CrystalDecisions.ReportAppServer.DataDefModel.EXE.
+LOG: Attempting download of new URL file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/bin/CrystalDecisions.ReportAppServer.DataDefModel/CrystalDecisions.ReportAppServer.DataDefModel.EXE.
+
+------------------------------------------------
+Exception Time: 19-Oct-22 1:36:19 PM
+Other Info: 
+Exception: System.NullReferenceException: Object reference not set to an instance of an object.
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult.QrCodeGen(Consumer aConsumer, ProductDetails aProductDetails, DmsSalesInvoice aDmsSalesInvoice, WarrantyParam aWarrantyParam, String sBarcode) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 544
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial, String UserType) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 181
+------------------------------------------------
+Exception Time: 19-Oct-22 1:37:04 PM
+Other Info: User Name: hmelectronics
+Exception: System.IO.FileNotFoundException: Could not load file or assembly 'CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304' or one of its dependencies. The system cannot find the file specified.
+File name: 'CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304'
+   at CrystalDecisions.CrystalReports.Engine.Table.WrapAndCacheDotNetObject(Object val, Type type, ISCRAdoNetDataSet& crAdoNetDataSet)
+   at CrystalDecisions.CrystalReports.Engine.Table.SetDataSource(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSourceInternal(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSource(DataSet dataSet)
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, Int32 invoiceId, Int32 customerId, Int32 consumerId, String loggedUserName, String loggedUserFullName) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 397
+
+=== Pre-bind state information ===
+LOG: DisplayName = CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304
+ (Fully-specified)
+LOG: Appbase = file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/
+LOG: Initial PrivatePath = D:\Local\Tel\TD DMS WF\DealerManagementSystem\bin
+Calling assembly : CrystalDecisions.ReportAppServer.DataSetConversion, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304.
+===
+LOG: This bind starts in default load context.
+LOG: Using application configuration file: D:\Local\Tel\TD DMS WF\DealerManagementSystem\web.config
+LOG: Using host configuration file: C:\Users\shakil.imtiaj\Documents\IISExpress\config\aspnet.config
+LOG: Using machine configuration file from C:\Windows\Microsoft.NET\Framework\v4.0.30319\config\machine.config.
+LOG: Post-policy reference: CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304
+LOG: Attempting download of new URL file:///C:/Users/shakil.imtiaj/AppData/Local/Temp/Temporary ASP.NET Files/root/21546b17/3aa000eb/CrystalDecisions.ReportAppServer.DataDefModel.DLL.
+LOG: Attempting download of new URL file:///C:/Users/shakil.imtiaj/AppData/Local/Temp/Temporary ASP.NET Files/root/21546b17/3aa000eb/CrystalDecisions.ReportAppServer.DataDefModel/CrystalDecisions.ReportAppServer.DataDefModel.DLL.
+LOG: Attempting download of new URL file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/bin/CrystalDecisions.ReportAppServer.DataDefModel.DLL.
+LOG: Attempting download of new URL file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/bin/CrystalDecisions.ReportAppServer.DataDefModel/CrystalDecisions.ReportAppServer.DataDefModel.DLL.
+LOG: Attempting download of new URL file:///C:/Users/shakil.imtiaj/AppData/Local/Temp/Temporary ASP.NET Files/root/21546b17/3aa000eb/CrystalDecisions.ReportAppServer.DataDefModel.EXE.
+LOG: Attempting download of new URL file:///C:/Users/shakil.imtiaj/AppData/Local/Temp/Temporary ASP.NET Files/root/21546b17/3aa000eb/CrystalDecisions.ReportAppServer.DataDefModel/CrystalDecisions.ReportAppServer.DataDefModel.EXE.
+LOG: Attempting download of new URL file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/bin/CrystalDecisions.ReportAppServer.DataDefModel.EXE.
+LOG: Attempting download of new URL file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/bin/CrystalDecisions.ReportAppServer.DataDefModel/CrystalDecisions.ReportAppServer.DataDefModel.EXE.
+
+------------------------------------------------
+Exception Time: 19-Oct-22 1:39:18 PM
+Other Info: User Name: hmelectronics
+Exception: System.IO.FileNotFoundException: Could not load file or assembly 'CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304' or one of its dependencies. The system cannot find the file specified.
+File name: 'CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304'
+   at CrystalDecisions.CrystalReports.Engine.Table.WrapAndCacheDotNetObject(Object val, Type type, ISCRAdoNetDataSet& crAdoNetDataSet)
+   at CrystalDecisions.CrystalReports.Engine.Table.SetDataSource(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSourceInternal(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSource(DataSet dataSet)
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, Int32 invoiceId, Int32 customerId, Int32 consumerId, String loggedUserName, String loggedUserFullName) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 397
+
+=== Pre-bind state information ===
+LOG: DisplayName = CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304
+ (Fully-specified)
+LOG: Appbase = file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/
+LOG: Initial PrivatePath = D:\Local\Tel\TD DMS WF\DealerManagementSystem\bin
+Calling assembly : CrystalDecisions.ReportAppServer.DataSetConversion, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304.
+===
+LOG: This bind starts in default load context.
+LOG: Using application configuration file: D:\Local\Tel\TD DMS WF\DealerManagementSystem\web.config
+LOG: Using host configuration file: C:\Users\shakil.imtiaj\Documents\IISExpress\config\aspnet.config
+LOG: Using machine configuration file from C:\Windows\Microsoft.NET\Framework\v4.0.30319\config\machine.config.
+LOG: Post-policy reference: CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304
+LOG: The same bind was seen before, and was failed with hr = 0x80070002.
+
+------------------------------------------------
+Exception Time: 19-Oct-22 1:53:02 PM
+Other Info: User Name: hmelectronics
+Exception: System.IO.FileNotFoundException: Could not load file or assembly 'CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304' or one of its dependencies. The system cannot find the file specified.
+File name: 'CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304'
+   at CrystalDecisions.CrystalReports.Engine.Table.WrapAndCacheDotNetObject(Object val, Type type, ISCRAdoNetDataSet& crAdoNetDataSet)
+   at CrystalDecisions.CrystalReports.Engine.Table.SetDataSource(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSourceInternal(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSource(DataSet dataSet)
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, Int32 invoiceId, Int32 customerId, Int32 consumerId, String loggedUserName, String loggedUserFullName) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 397
+
+=== Pre-bind state information ===
+LOG: DisplayName = CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304
+ (Fully-specified)
+LOG: Appbase = file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/
+LOG: Initial PrivatePath = D:\Local\Tel\TD DMS WF\DealerManagementSystem\bin
+Calling assembly : CrystalDecisions.ReportAppServer.DataSetConversion, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304.
+===
+LOG: This bind starts in default load context.
+LOG: Using application configuration file: D:\Local\Tel\TD DMS WF\DealerManagementSystem\web.config
+LOG: Using host configuration file: C:\Users\shakil.imtiaj\Documents\IISExpress\config\aspnet.config
+LOG: Using machine configuration file from C:\Windows\Microsoft.NET\Framework\v4.0.30319\config\machine.config.
+LOG: Post-policy reference: CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304
+LOG: Attempting download of new URL file:///C:/Users/shakil.imtiaj/AppData/Local/Temp/Temporary ASP.NET Files/root/21546b17/3aa000eb/CrystalDecisions.ReportAppServer.DataDefModel.DLL.
+LOG: Attempting download of new URL file:///C:/Users/shakil.imtiaj/AppData/Local/Temp/Temporary ASP.NET Files/root/21546b17/3aa000eb/CrystalDecisions.ReportAppServer.DataDefModel/CrystalDecisions.ReportAppServer.DataDefModel.DLL.
+LOG: Attempting download of new URL file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/bin/CrystalDecisions.ReportAppServer.DataDefModel.DLL.
+LOG: Attempting download of new URL file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/bin/CrystalDecisions.ReportAppServer.DataDefModel/CrystalDecisions.ReportAppServer.DataDefModel.DLL.
+LOG: Attempting download of new URL file:///C:/Users/shakil.imtiaj/AppData/Local/Temp/Temporary ASP.NET Files/root/21546b17/3aa000eb/CrystalDecisions.ReportAppServer.DataDefModel.EXE.
+LOG: Attempting download of new URL file:///C:/Users/shakil.imtiaj/AppData/Local/Temp/Temporary ASP.NET Files/root/21546b17/3aa000eb/CrystalDecisions.ReportAppServer.DataDefModel/CrystalDecisions.ReportAppServer.DataDefModel.EXE.
+LOG: Attempting download of new URL file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/bin/CrystalDecisions.ReportAppServer.DataDefModel.EXE.
+LOG: Attempting download of new URL file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/bin/CrystalDecisions.ReportAppServer.DataDefModel/CrystalDecisions.ReportAppServer.DataDefModel.EXE.
+
+------------------------------------------------
+Exception Time: 19-Oct-22 1:55:21 PM
+Other Info: User Name: hmelectronics
+Exception: System.IO.FileNotFoundException: Could not load file or assembly 'CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304' or one of its dependencies. The system cannot find the file specified.
+File name: 'CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304'
+   at CrystalDecisions.CrystalReports.Engine.Table.WrapAndCacheDotNetObject(Object val, Type type, ISCRAdoNetDataSet& crAdoNetDataSet)
+   at CrystalDecisions.CrystalReports.Engine.Table.SetDataSource(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSourceInternal(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSource(DataSet dataSet)
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, Int32 invoiceId, Int32 customerId, Int32 consumerId, String loggedUserName, String loggedUserFullName) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 397
+
+=== Pre-bind state information ===
+LOG: DisplayName = CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304
+ (Fully-specified)
+LOG: Appbase = file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/
+LOG: Initial PrivatePath = D:\Local\Tel\TD DMS WF\DealerManagementSystem\bin
+Calling assembly : CrystalDecisions.ReportAppServer.DataSetConversion, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304.
+===
+LOG: This bind starts in default load context.
+LOG: Using application configuration file: D:\Local\Tel\TD DMS WF\DealerManagementSystem\web.config
+LOG: Using host configuration file: C:\Users\shakil.imtiaj\Documents\IISExpress\config\aspnet.config
+LOG: Using machine configuration file from C:\Windows\Microsoft.NET\Framework\v4.0.30319\config\machine.config.
+LOG: Post-policy reference: CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304
+LOG: Attempting download of new URL file:///C:/Users/shakil.imtiaj/AppData/Local/Temp/Temporary ASP.NET Files/root/21546b17/3aa000eb/CrystalDecisions.ReportAppServer.DataDefModel.DLL.
+LOG: Attempting download of new URL file:///C:/Users/shakil.imtiaj/AppData/Local/Temp/Temporary ASP.NET Files/root/21546b17/3aa000eb/CrystalDecisions.ReportAppServer.DataDefModel/CrystalDecisions.ReportAppServer.DataDefModel.DLL.
+LOG: Attempting download of new URL file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/bin/CrystalDecisions.ReportAppServer.DataDefModel.DLL.
+LOG: Attempting download of new URL file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/bin/CrystalDecisions.ReportAppServer.DataDefModel/CrystalDecisions.ReportAppServer.DataDefModel.DLL.
+LOG: Attempting download of new URL file:///C:/Users/shakil.imtiaj/AppData/Local/Temp/Temporary ASP.NET Files/root/21546b17/3aa000eb/CrystalDecisions.ReportAppServer.DataDefModel.EXE.
+LOG: Attempting download of new URL file:///C:/Users/shakil.imtiaj/AppData/Local/Temp/Temporary ASP.NET Files/root/21546b17/3aa000eb/CrystalDecisions.ReportAppServer.DataDefModel/CrystalDecisions.ReportAppServer.DataDefModel.EXE.
+LOG: Attempting download of new URL file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/bin/CrystalDecisions.ReportAppServer.DataDefModel.EXE.
+LOG: Attempting download of new URL file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/bin/CrystalDecisions.ReportAppServer.DataDefModel/CrystalDecisions.ReportAppServer.DataDefModel.EXE.
+
+------------------------------------------------
+Exception Time: 19-Oct-22 1:57:28 PM
+Other Info: User Name: hmelectronics
+Exception: System.IO.FileNotFoundException: Could not load file or assembly 'CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304' or one of its dependencies. The system cannot find the file specified.
+File name: 'CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304'
+   at CrystalDecisions.CrystalReports.Engine.Table.WrapAndCacheDotNetObject(Object val, Type type, ISCRAdoNetDataSet& crAdoNetDataSet)
+   at CrystalDecisions.CrystalReports.Engine.Table.SetDataSource(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSourceInternal(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSource(DataSet dataSet)
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, Int32 invoiceId, Int32 customerId, Int32 consumerId, String loggedUserName, String loggedUserFullName) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 397
+
+=== Pre-bind state information ===
+LOG: DisplayName = CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304
+ (Fully-specified)
+LOG: Appbase = file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/
+LOG: Initial PrivatePath = D:\Local\Tel\TD DMS WF\DealerManagementSystem\bin
+Calling assembly : CrystalDecisions.ReportAppServer.DataSetConversion, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304.
+===
+LOG: This bind starts in default load context.
+LOG: Using application configuration file: D:\Local\Tel\TD DMS WF\DealerManagementSystem\web.config
+LOG: Using host configuration file: C:\Users\shakil.imtiaj\Documents\IISExpress\config\aspnet.config
+LOG: Using machine configuration file from C:\Windows\Microsoft.NET\Framework\v4.0.30319\config\machine.config.
+LOG: Post-policy reference: CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304
+LOG: Attempting download of new URL file:///C:/Users/shakil.imtiaj/AppData/Local/Temp/Temporary ASP.NET Files/root/21546b17/3aa000eb/CrystalDecisions.ReportAppServer.DataDefModel.DLL.
+LOG: Attempting download of new URL file:///C:/Users/shakil.imtiaj/AppData/Local/Temp/Temporary ASP.NET Files/root/21546b17/3aa000eb/CrystalDecisions.ReportAppServer.DataDefModel/CrystalDecisions.ReportAppServer.DataDefModel.DLL.
+LOG: Attempting download of new URL file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/bin/CrystalDecisions.ReportAppServer.DataDefModel.DLL.
+LOG: Attempting download of new URL file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/bin/CrystalDecisions.ReportAppServer.DataDefModel/CrystalDecisions.ReportAppServer.DataDefModel.DLL.
+LOG: Attempting download of new URL file:///C:/Users/shakil.imtiaj/AppData/Local/Temp/Temporary ASP.NET Files/root/21546b17/3aa000eb/CrystalDecisions.ReportAppServer.DataDefModel.EXE.
+LOG: Attempting download of new URL file:///C:/Users/shakil.imtiaj/AppData/Local/Temp/Temporary ASP.NET Files/root/21546b17/3aa000eb/CrystalDecisions.ReportAppServer.DataDefModel/CrystalDecisions.ReportAppServer.DataDefModel.EXE.
+LOG: Attempting download of new URL file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/bin/CrystalDecisions.ReportAppServer.DataDefModel.EXE.
+LOG: Attempting download of new URL file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/bin/CrystalDecisions.ReportAppServer.DataDefModel/CrystalDecisions.ReportAppServer.DataDefModel.EXE.
+
+------------------------------------------------
+Exception Time: 19-Oct-22 2:13:45 PM
+Other Info: User Name: hmelectronics
+Exception: System.IO.FileNotFoundException: Could not load file or assembly 'CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304' or one of its dependencies. The system cannot find the file specified.
+File name: 'CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304'
+   at CrystalDecisions.CrystalReports.Engine.Table.WrapAndCacheDotNetObject(Object val, Type type, ISCRAdoNetDataSet& crAdoNetDataSet)
+   at CrystalDecisions.CrystalReports.Engine.Table.SetDataSource(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSourceInternal(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSource(DataSet dataSet)
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, Int32 invoiceId, Int32 customerId, Int32 consumerId, String loggedUserName, String loggedUserFullName) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 397
+
+=== Pre-bind state information ===
+LOG: DisplayName = CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304
+ (Fully-specified)
+LOG: Appbase = file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/
+LOG: Initial PrivatePath = D:\Local\Tel\TD DMS WF\DealerManagementSystem\bin
+Calling assembly : CrystalDecisions.ReportAppServer.DataSetConversion, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304.
+===
+LOG: This bind starts in default load context.
+LOG: Using application configuration file: D:\Local\Tel\TD DMS WF\DealerManagementSystem\web.config
+LOG: Using host configuration file: C:\Users\shakil.imtiaj\Documents\IISExpress\config\aspnet.config
+LOG: Using machine configuration file from C:\Windows\Microsoft.NET\Framework\v4.0.30319\config\machine.config.
+LOG: Post-policy reference: CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304
+LOG: Attempting download of new URL file:///C:/Users/shakil.imtiaj/AppData/Local/Temp/Temporary ASP.NET Files/root/21546b17/3aa000eb/CrystalDecisions.ReportAppServer.DataDefModel.DLL.
+LOG: Attempting download of new URL file:///C:/Users/shakil.imtiaj/AppData/Local/Temp/Temporary ASP.NET Files/root/21546b17/3aa000eb/CrystalDecisions.ReportAppServer.DataDefModel/CrystalDecisions.ReportAppServer.DataDefModel.DLL.
+LOG: Attempting download of new URL file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/bin/CrystalDecisions.ReportAppServer.DataDefModel.DLL.
+LOG: Attempting download of new URL file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/bin/CrystalDecisions.ReportAppServer.DataDefModel/CrystalDecisions.ReportAppServer.DataDefModel.DLL.
+LOG: Attempting download of new URL file:///C:/Users/shakil.imtiaj/AppData/Local/Temp/Temporary ASP.NET Files/root/21546b17/3aa000eb/CrystalDecisions.ReportAppServer.DataDefModel.EXE.
+LOG: Attempting download of new URL file:///C:/Users/shakil.imtiaj/AppData/Local/Temp/Temporary ASP.NET Files/root/21546b17/3aa000eb/CrystalDecisions.ReportAppServer.DataDefModel/CrystalDecisions.ReportAppServer.DataDefModel.EXE.
+LOG: Attempting download of new URL file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/bin/CrystalDecisions.ReportAppServer.DataDefModel.EXE.
+LOG: Attempting download of new URL file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/bin/CrystalDecisions.ReportAppServer.DataDefModel/CrystalDecisions.ReportAppServer.DataDefModel.EXE.
+
+------------------------------------------------
+Exception Time: 19-Oct-22 2:20:41 PM
+Other Info: User Name: hmelectronics
+Exception: System.IO.FileNotFoundException: Could not load file or assembly 'CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304' or one of its dependencies. The system cannot find the file specified.
+File name: 'CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304'
+   at CrystalDecisions.CrystalReports.Engine.Table.WrapAndCacheDotNetObject(Object val, Type type, ISCRAdoNetDataSet& crAdoNetDataSet)
+   at CrystalDecisions.CrystalReports.Engine.Table.SetDataSource(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSourceInternal(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSource(DataSet dataSet)
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, Int32 invoiceId, Int32 customerId, Int32 consumerId, String loggedUserName, String loggedUserFullName) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 397
+
+=== Pre-bind state information ===
+LOG: DisplayName = CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304
+ (Fully-specified)
+LOG: Appbase = file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/
+LOG: Initial PrivatePath = D:\Local\Tel\TD DMS WF\DealerManagementSystem\bin
+Calling assembly : CrystalDecisions.ReportAppServer.DataSetConversion, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304.
+===
+LOG: This bind starts in default load context.
+LOG: Using application configuration file: D:\Local\Tel\TD DMS WF\DealerManagementSystem\web.config
+LOG: Using host configuration file: C:\Users\shakil.imtiaj\Documents\IISExpress\config\aspnet.config
+LOG: Using machine configuration file from C:\Windows\Microsoft.NET\Framework\v4.0.30319\config\machine.config.
+LOG: Post-policy reference: CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304
+LOG: Attempting download of new URL file:///C:/Users/shakil.imtiaj/AppData/Local/Temp/Temporary ASP.NET Files/root/21546b17/3aa000eb/CrystalDecisions.ReportAppServer.DataDefModel.DLL.
+LOG: Attempting download of new URL file:///C:/Users/shakil.imtiaj/AppData/Local/Temp/Temporary ASP.NET Files/root/21546b17/3aa000eb/CrystalDecisions.ReportAppServer.DataDefModel/CrystalDecisions.ReportAppServer.DataDefModel.DLL.
+LOG: Attempting download of new URL file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/bin/CrystalDecisions.ReportAppServer.DataDefModel.DLL.
+LOG: Attempting download of new URL file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/bin/CrystalDecisions.ReportAppServer.DataDefModel/CrystalDecisions.ReportAppServer.DataDefModel.DLL.
+LOG: Attempting download of new URL file:///C:/Users/shakil.imtiaj/AppData/Local/Temp/Temporary ASP.NET Files/root/21546b17/3aa000eb/CrystalDecisions.ReportAppServer.DataDefModel.EXE.
+LOG: Attempting download of new URL file:///C:/Users/shakil.imtiaj/AppData/Local/Temp/Temporary ASP.NET Files/root/21546b17/3aa000eb/CrystalDecisions.ReportAppServer.DataDefModel/CrystalDecisions.ReportAppServer.DataDefModel.EXE.
+LOG: Attempting download of new URL file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/bin/CrystalDecisions.ReportAppServer.DataDefModel.EXE.
+LOG: Attempting download of new URL file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/bin/CrystalDecisions.ReportAppServer.DataDefModel/CrystalDecisions.ReportAppServer.DataDefModel.EXE.
+
+------------------------------------------------
+Exception Time: 19-Oct-22 2:32:32 PM
+Other Info: User Name: hmelectronics
+Exception: System.IO.FileNotFoundException: Could not load file or assembly 'CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304' or one of its dependencies. The system cannot find the file specified.
+File name: 'CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304'
+   at CrystalDecisions.CrystalReports.Engine.Table.WrapAndCacheDotNetObject(Object val, Type type, ISCRAdoNetDataSet& crAdoNetDataSet)
+   at CrystalDecisions.CrystalReports.Engine.Table.SetDataSource(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSourceInternal(Object val, Type type)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDataSource(DataSet dataSet)
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, Int32 invoiceId, Int32 customerId, Int32 consumerId, String loggedUserName, String loggedUserFullName) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 397
+
+=== Pre-bind state information ===
+LOG: DisplayName = CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304
+ (Fully-specified)
+LOG: Appbase = file:///D:/Local/Tel/TD DMS WF/DealerManagementSystem/
+LOG: Initial PrivatePath = D:\Local\Tel\TD DMS WF\DealerManagementSystem\bin
+Calling assembly : CrystalDecisions.ReportAppServer.DataSetConversion, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304.
+===
+LOG: This bind starts in default load context.
+LOG: Using application configuration file: D:\Local\Tel\TD DMS WF\DealerManagementSystem\web.config
+LOG: Using host configuration file: C:\Users\shakil.imtiaj\Documents\IISExpress\config\aspnet.config
+LOG: Using machine configuration file from C:\Windows\Microsoft.NET\Framework\v4.0.30319\config\machine.config.
+LOG: Post-policy reference: CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304
+LOG: The same bind was seen before, and was failed with hr = 0x80070002.
+
+------------------------------------------------
+Exception Time: 19-Oct-22 2:36:01 PM
+Other Info: 
+Exception: System.NullReferenceException: Object reference not set to an instance of an object.
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult.QrCodeGen(Consumer aConsumer, ProductDetails aProductDetails, DmsSalesInvoice aDmsSalesInvoice, WarrantyParam aWarrantyParam, String sBarcode) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 544
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial, String UserType) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 181
+------------------------------------------------
+Exception Time: 19-Oct-22 2:36:41 PM
+Other Info: 
+Exception: System.NullReferenceException: Object reference not set to an instance of an object.
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult.QrCodeGen(Consumer aConsumer, ProductDetails aProductDetails, DmsSalesInvoice aDmsSalesInvoice, WarrantyParam aWarrantyParam, String sBarcode) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 544
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial, String UserType) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 181
+------------------------------------------------
+Exception Time: 19-Oct-22 2:37:41 PM
+Other Info: 
+Exception: System.NullReferenceException: Object reference not set to an instance of an object.
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult.QrCodeGen(Consumer aConsumer, ProductDetails aProductDetails, DmsSalesInvoice aDmsSalesInvoice, WarrantyParam aWarrantyParam, String sBarcode) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 544
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial, String UserType) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 181
+------------------------------------------------
+Exception Time: 19-Oct-22 3:15:59 PM
+Other Info: 
+Exception: System.NullReferenceException: Object reference not set to an instance of an object.
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult.QrCodeGen(Consumer aConsumer, ProductDetails aProductDetails, DmsSalesInvoice aDmsSalesInvoice, WarrantyParam aWarrantyParam, String sBarcode) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 544
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial, String UserType) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 181
+------------------------------------------------
+Exception Time: 29-Oct-22 11:09:29 AM
+Other Info: 
+Exception: System.Data.Entity.Infrastructure.DbUpdateException: An error occurred while updating the entries. See the inner exception for details. ---> System.Data.Entity.Core.UpdateException: An error occurred while updating the entries. See the inner exception for details. ---> System.Data.SqlClient.SqlException: Violation of UNIQUE KEY constraint 'UQ__t_DMSProductStoc__5CB9319F'. Cannot insert duplicate key in object 'dbo.t_DMSProductStockSerial'. The duplicate key value is (2206AJF182157D01006).
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at System.Data.Entity.Infrastructure.Interception.DbCommandDispatcher.<>c.<NonQuery>b__4_0(DbCommand t, DbCommandInterceptionContext`1 c)
+   at System.Data.Entity.Infrastructure.Interception.InternalDispatcher`1.Dispatch[TTarget,TInterceptionContext,TResult](TTarget target, Func`3 operation, TInterceptionContext interceptionContext, Action`3 executing, Action`3 executed)
+   at System.Data.Entity.Infrastructure.Interception.DbCommandDispatcher.NonQuery(DbCommand command, DbCommandInterceptionContext interceptionContext)
+   at System.Data.Entity.Internal.InterceptableDbCommand.ExecuteNonQuery()
+   at System.Data.Entity.Core.Mapping.Update.Internal.DynamicUpdateCommand.Execute(Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Entity.Core.Mapping.Update.Internal.UpdateTranslator.Update()
+   --- End of inner exception stack trace ---
+   at System.Data.Entity.Core.Mapping.Update.Internal.UpdateTranslator.Update()
+   at System.Data.Entity.Core.EntityClient.Internal.EntityAdapter.<>c.<Update>b__21_0(UpdateTranslator ut)
+   at System.Data.Entity.Core.EntityClient.Internal.EntityAdapter.Update[T](T noChangesResult, Func`2 updateFunction)
+   at System.Data.Entity.Core.EntityClient.Internal.EntityAdapter.Update()
+   at System.Data.Entity.Core.Objects.ObjectContext.<SaveChangesToStore>b__153_0()
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesToStore(SaveOptions options, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction)
+   at System.Data.Entity.Core.Objects.ObjectContext.<>c__DisplayClass148_0.<SaveChangesInternal>b__0()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesInternal(SaveOptions options, Boolean executeInExistingTransaction)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   --- End of inner exception stack trace ---
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at DealerManagementSystem.Controllers.GoodReceiveController.SaveProduct(String InvoiceNo) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\Controllers\GoodReceiveController.cs:line 123
+------------------------------------------------
+Exception Time: 22-Nov-22 12:57:21 PM
+Other Info: 
+Exception: CrystalDecisions.CrystalReports.Engine.ParameterFieldCurrentValueException: Missing parameter values. ---> System.Runtime.InteropServices.COMException: Missing parameter values.
+   at CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass.Export(ExportOptions pExportOptions, RequestContext pRequestContext)
+   at CrystalDecisions.ReportSource.EromReportSourceBase.ExportToStream(ExportRequestContext reqContext)
+   --- End of inner exception stack trace ---
+   at CrystalDecisions.ReportAppServer.ConvertDotNetToErom.ThrowDotNetException(Exception e)
+   at CrystalDecisions.ReportSource.EromReportSourceBase.ExportToStream(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.ExportToStream(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.ExportToStream(ExportOptions options)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.ExportToStream(ExportFormatType formatType)
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial, String UserType) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 239
+------------------------------------------------
+Exception Time: 22-Nov-22 3:01:01 PM
+Other Info: 
+Exception: System.Runtime.InteropServices.COMException (0x8002000B): Invalid index. (Exception from HRESULT: 0x8002000B (DISP_E_BADINDEX))
+   at CrystalDecisions.ReportAppServer.DataDefModel.FieldsClass.get_Item(Int32 Index)
+   at CrystalDecisions.CrystalReports.Engine.ParameterFieldDefinitions.get_Item(Int32 index)
+   at CrystalDecisions.CrystalReports.Engine.ParameterFieldDefinitions.get_Item(String fieldName)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetParameterValue(String name, Object val)
+   at DealerManagementSystem.CrystalReportToPdf.CrystalReportPdfResult..ctor(String reportPath, String pSerial, String UserType) in D:\Local\Tel\TD DMS WF\DealerManagementSystem\CrystalReportToPdf\CrystalReportPdfResult.cs:line 232

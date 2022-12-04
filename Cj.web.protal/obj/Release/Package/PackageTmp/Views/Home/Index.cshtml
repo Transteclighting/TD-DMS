@@ -1,0 +1,332 @@
+﻿@{
+    ViewBag.Title = "Dashboard | CJ Web Portal";
+
+}
+    <!-- Content Row -->
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <div class="form-group row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">BU</label>
+                <div class="col-sm-10">
+                    <select class="selectpicker w-100 form-control" name="area" id="area" data-live-search="true">
+                        <option value="TD">Transcom Digital</option>
+                    </select>
+                   
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-xl-3 col-md-6 mb-4">
+                <!-- Todays Visit -->
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                    Daily
+                                </div>
+                                <div class="mb-0"><span class="font-weight-bold">Today:</span> @ViewBag.TD.Today</div>
+                                @*<hr class="sidebar-divider">*@
+                                <div class="mb-0"><span class="font-weight-bold">Last Day:</span> @ViewBag.TD.LastDay</div>
+                            </div>
+                            
+                        </div>                       
+                    </div>
+                </div>
+        </div>
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                This Month
+                            </div>
+                            <div class="mb-0"><span class="font-weight-bold">MTD Tar:</span> @ViewBag.TD.MTDTarget</div>
+                            <div class="mb-0"><span class="font-weight-bold">Actual:</span>  @ViewBag.TD.ThisMonth</div>
+
+                        </div>
+                    </div>
+                    <div class="row no-gutters align-items-center">
+                        <div class="col-auto">
+                            <div class="mb-0 mr-3 "><span class="font-weight-bold">Ach:</span> @ViewBag.TD.MTDPer%</div>
+                        </div>
+                        <div class="col">
+                            <div class="progress progress-sm mr-2">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: @ViewBag.TD.MTDPer%" aria-valuenow="@ViewBag.TD.MTDPer" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                Last Month
+                            </div>
+                            <div class="mb-0"><span class="font-weight-bold">Target:</span> @ViewBag.TD.LMTarget</div>
+                            <div class="mb-0"><span class="font-weight-bold">Actual:</span>  @ViewBag.TD.LastMonth</div>
+
+                        </div>
+                    </div>
+                    <div class="row no-gutters align-items-center">
+                        <div class="col-auto">
+                            <div class="mb-0 mr-3"><span class="font-weight-bold">Ach:</span> @ViewBag.TD.LMPer %</div>
+                        </div>
+                        <div class="col">
+                            <div class="progress progress-sm mr-2">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: @ViewBag.TD.LMPer%" aria-valuenow="@ViewBag.TD.LMPer" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                This Year
+                            </div>
+                            <div class="mb-0"><span class="font-weight-bold">Actual:</span> @ViewBag.TD.ThisYear</div>
+                            <div class="mb-0"><span class="font-weight-bold">LY (YTD):</span>  @ViewBag.TD.LYYTD</div>
+
+                        </div>
+                    </div>
+                    <div class="row no-gutters align-items-center">
+                        <div class="col-auto">
+                            <div class="mb-0 mr-3 "><span class="font-weight-bold">Gth:</span> @ViewBag.TD.YTDGth%</div>
+                        </div>
+                        <div class="col">
+                            <div class="progress progress-sm mr-2">
+                                <div class="progress-bar bg-warning" role="progressbar" style="width: @ViewBag.TD.YTDGth%" aria-valuenow="@ViewBag.TD.YTDGth" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Content Row -->
+    <div class="row">
+        <div class="col-xl-12 col-lg-12">
+            <!-- Area Chart -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Last 7 days sale</h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-area">
+                        <canvas id="myAreaChart"></canvas>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+
+        <div class="col-xl-12 col-lg-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">MAG wise YTD Sales</h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-bar">
+                        <canvas id="myBarChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+@section extra_script {
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            
+            // Set new default font family and font color to mimic Bootstrap's default styling
+            Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+            Chart.defaults.global.defaultFontColor = '#858796';
+            let target = [];
+            let actul = [];
+            let date = [];
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("loadDailySales")',
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        target.push(data[i].Target);
+                        actul.push(data[i].Actul);
+                        date.push(data[i].DayofMonth);
+                    }
+                    const colors = {
+                        green: {
+                            fill: '#e0eadf',
+                            stroke: '#1cc88a',
+                        },
+                        purple: {
+                            fill: '#8fa8c869',
+                            stroke: '#4e73df',
+                        },
+                    };
+                    var ctx = document.getElementById("myAreaChart").getContext("2d");
+                    const myChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: date,
+                            datasets: [{
+                                label: "Target",
+                                fill: true,
+                                backgroundColor: colors.purple.fill,
+                                pointBackgroundColor: colors.purple.stroke,
+                                borderColor: colors.purple.stroke,
+                                pointHighlightStroke: colors.purple.stroke,
+                                borderCapStyle: 'butt',
+                                data: target,
+                            }, {
+                                label: "Actul",
+                                fill: true,
+                                backgroundColor: colors.green.fill,
+                                pointBackgroundColor: colors.green.stroke,
+                                borderColor: colors.green.stroke,
+                                pointHighlightStroke: colors.green.stroke,
+                                data: actul,
+                            }],
+                        },
+                        options: {
+                            maintainAspectRatio: false,
+                            layout: {
+                                padding: {
+                                    left: 5,
+                                    right: 5,
+                                    top: 5,
+                                    bottom: 0
+                                }
+                            },
+                            scaleShowValues: true,
+                            scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        autoSkip: false
+                                    }
+                                }]
+                            },
+                            animation: {
+                                duration: 750,
+                            },
+                        }
+                    });
+                },
+                error: function () {
+                }
+            });
+
+        });
+
+    </script>
+
+    <script type="text/javascript">
+            $(document).ready(function () {
+
+    Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+    Chart.defaults.global.defaultFontColor = '#858796';
+
+    function number_format(number, decimals, dec_point, thousands_sep) {
+      // *     example: number_format(1234.56, 2, ',', ' ');
+      // *     return: '1 234,56'
+      number = (number + '').replace(',', '').replace(' ', '');
+      var n = !isFinite(+number) ? 0 : +number,
+        prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+        sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+        dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+        s = '',
+        toFixedFix = function(n, prec) {
+          var k = Math.pow(10, prec);
+          return '' + Math.round(n * k) / k;
+        };
+      // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+      s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+      if (s[0].length > 3) {
+        s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+      }
+      if ((s[1] || '').length < prec) {
+        s[1] = s[1] || '';
+        s[1] += new Array(prec - s[1].length + 1).join('0');
+      }
+      return s.join(dec);
+    }
+
+    // Bar Chart Example
+    let ytdQty = [];
+    let ytdVal = [];
+    let mag = [];
+    $.ajax({
+        type: "GET",
+        url: '@Url.Action("loadTyd")',
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            for (var i = 0; i < data.length; i++) {
+                ytdQty.push(data[i].YTDQty);
+                ytdVal.push(data[i].YTDvalue);
+                mag.push(data[i].MAG);
+            }
+            var ctx = document.getElementById("myBarChart");
+            var myBarChart = new Chart(ctx, {
+                type: 'horizontalBar',
+                data: {
+                    labels: mag,
+                    datasets: [{
+                        label: "YTD Quantity",
+                        backgroundColor: "#e0eadf",
+                        hoverBackgroundColor: "#008e5b",
+                        borderColor: "#1cc88a",
+                        data: ytdQty,
+                    }, {
+                        label: "YTD Value",
+                        backgroundColor: "#4e73de",
+                        hoverBackgroundColor: "#2e59d7",
+                        borderColor: "#4e73de",
+                        data: ytdVal,
+                    }],
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    responsive: true,
+                    layout: {
+                        padding: {
+                            left: 5,
+                            right: 10,
+                            top: 10,
+                            bottom: 0
+                        }
+                    },
+                }
+            });
+        },
+        error: function () {
+        }
+    });
+
+    });
+    </script>
+
+}

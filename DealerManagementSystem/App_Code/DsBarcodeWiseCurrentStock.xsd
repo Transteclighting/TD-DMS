@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DsBarcodeWiseCurrentStock" targetNamespace="http://tempuri.org/DsBarcodeWiseCurrentStock.xsd" xmlns:mstns="http://tempuri.org/DsBarcodeWiseCurrentStock.xsd" xmlns="http://tempuri.org/DsBarcodeWiseCurrentStock.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DsBarcodeWiseCurrentStock" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DsBarcodeWiseCurrentStock" msprop:Generator_UserDSName="DsBarcodeWiseCurrentStock">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="BarcodeWiseCurrentStock" msprop:Generator_TableClassName="BarcodeWiseCurrentStockDataTable" msprop:Generator_TableVarName="tableBarcodeWiseCurrentStock" msprop:Generator_TablePropName="BarcodeWiseCurrentStock" msprop:Generator_RowDeletingName="BarcodeWiseCurrentStockRowDeleting" msprop:Generator_RowChangingName="BarcodeWiseCurrentStockRowChanging" msprop:Generator_RowEvHandlerName="BarcodeWiseCurrentStockRowChangeEventHandler" msprop:Generator_RowDeletedName="BarcodeWiseCurrentStockRowDeleted" msprop:Generator_UserTableName="BarcodeWiseCurrentStock" msprop:Generator_RowChangedName="BarcodeWiseCurrentStockRowChanged" msprop:Generator_RowEvArgName="BarcodeWiseCurrentStockRowChangeEvent" msprop:Generator_RowClassName="BarcodeWiseCurrentStockRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ProductName" msprop:Generator_ColumnVarNameInTable="columnProductName" msprop:Generator_ColumnPropNameInRow="ProductName" msprop:Generator_ColumnPropNameInTable="ProductNameColumn" msprop:Generator_UserColumnName="ProductName" type="xs:string" minOccurs="0" />
+              <xs:element name="ProductCode" msprop:Generator_ColumnVarNameInTable="columnProductCode" msprop:Generator_ColumnPropNameInRow="ProductCode" msprop:Generator_ColumnPropNameInTable="ProductCodeColumn" msprop:Generator_UserColumnName="ProductCode" type="xs:string" minOccurs="0" />
+              <xs:element name="BrandDesc" msprop:Generator_ColumnVarNameInTable="columnBrandDesc" msprop:Generator_ColumnPropNameInRow="BrandDesc" msprop:Generator_ColumnPropNameInTable="BrandDescColumn" msprop:Generator_UserColumnName="BrandDesc" type="xs:string" minOccurs="0" />
+              <xs:element name="Rsp" msprop:Generator_ColumnVarNameInTable="columnRsp" msprop:Generator_ColumnPropNameInRow="Rsp" msprop:Generator_ColumnPropNameInTable="RspColumn" msprop:Generator_UserColumnName="Rsp" type="xs:double" minOccurs="0" />
+              <xs:element name="AsgName" msprop:Generator_ColumnVarNameInTable="columnAsgName" msprop:Generator_ColumnPropNameInRow="AsgName" msprop:Generator_ColumnPropNameInTable="AsgNameColumn" msprop:Generator_UserColumnName="AsgName" type="xs:string" minOccurs="0" />
+              <xs:element name="ProductSerial" msprop:Generator_ColumnVarNameInTable="columnProductSerial" msprop:Generator_ColumnPropNameInRow="ProductSerial" msprop:Generator_ColumnPropNameInTable="ProductSerialColumn" msprop:Generator_UserColumnName="ProductSerial" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

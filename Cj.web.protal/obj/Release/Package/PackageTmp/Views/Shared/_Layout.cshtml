@@ -1,0 +1,200 @@
+﻿@using DDCj.web.Models
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    <!-- Custom styles for this template-->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+    @*<link href="~/Content/all.min.css" rel="stylesheet">*@
+    @*<link href="~/Content/font-awesome.css" rel="stylesheet">*@
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+
+    @*<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">*@
+    @RenderSection("extra_style", required: false)
+    <link rel="shortcut icon" href="~/favicon.ico" />
+</head>
+
+
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        @{
+            Html.RenderAction("RenderMenu", "Common");
+        }
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <ul class="navbar-nav mr-auto" style="height: inherit;">
+                        <li class="nav-item dropdown no-arrow mx-1 d-flex justify-content-center align-items-center">
+                            <img class="img-responsive" src="~/Images/CJ_Logo.ico" height="50" width="50" />
+                        </li>
+                    </ul>
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto" style="height: inherit;">
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Transcom Electronics Limited
+                            </a>
+                        </li>
+                        @*<li class="nav-item dropdown no-arrow">*@
+                            @*<a class="nav-link dropdown-toggle" href="#" id="notifyDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div class="topbar-divider d-none d-sm-block"></div>
+                                    <i class="fas fa-bell"></i>
+                                <span class="badge badge-success">1</span>
+                            </a>*@
+                            <!-- Dropdown - notification Information -->
+                            @*<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                 aria-labelledby="notifyDropdown">
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-envelope fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    New!!!!!!!!!!
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-envelope fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    hi!!!!!
+                                </a>
+                            </div>*@
+                        @*</li>*@
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div class="topbar-divider d-none d-sm-block"></div>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600">@Session["LoggedUserFullName"]</span>
+                                
+                                @{
+                                    if (Session["UserImg"] != null)
+                                    {
+                                        <img class="img-profile rounded-circle" src="@Session["UserImg"]">
+                                    }
+                                    else
+                                    {
+                                        <img class="img-profile rounded-circle" src="~/Content/img/undraw_profile.svg">
+                                    }
+                                }
+                                
+
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                 aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="@Url.Action("ChangePassword","User")">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Change Password
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="@Url.Action("Logout", "User")">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    @RenderSection("breadcrumb", required: false)
+                    <!-- Page Heading -->
+                    <!-- Earnings (Monthly) Card Example -->
+
+                    @if (TempData["ValidationMsg"] != null && TempData["ValidationStatus"] != null)
+                    {
+                         if ((int)TempData["ValidationStatus"] == 1)
+                         {
+                                <div class="alert alert-success alert-dismissible">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <strong> @TempData["ValidationMsg"]</strong>
+                                </div>
+                        }
+                        else
+                        {
+                                <div class="alert alert-danger alert-dismissible">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <strong>@TempData["ValidationMsg"]</strong>
+                                </div>
+                        }
+                    }
+                    <!-- Modal -->
+                    <div class="modal fade" id="loadermodal" tabindex="-1" role="dialog" aria-labelledby="loadermodalLabel" aria-hidden="true">
+                        <div class="modal-dialog" id="loadermodaldialog" role="document">
+                            <div class="modal-content" style="width: auto;">
+                                <div class="modal-body">
+                                    <i class="fas fa-spinner fa-pulse fa-4x"></i>
+                                    @*<i class="fas fa-circle-notch fa-spin fa-4x"></i>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @RenderBody()
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>All rights reserved - Transcom Electronics Limited @DateTime.Today.Year</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("extra_script", required: false)
+    @RenderSection("Scripts", required: false)
+
+    <script type="text/javascript">
+        function loadermodal() {
+            $('#loadermodal').modal({
+                backdrop: 'static',
+                keyboard: false
+            });
+        };
+        function closeloadermodal() {
+            setTimeout(function () {
+                $('#loadermodal').modal('hide');
+            }, 500);
+        };
+
+        $(window).on('load', function () {
+            //loadermodal();
+        });
+        $(document).ready(function () {
+            //closeloadermodal();
+            var url = window.location;
+            $('.nav-link').filter(function () {
+                return this.href == url;
+            }).addClass('active');
+        });
+    </script> 
+
+
+</body>
+
+
+</html>

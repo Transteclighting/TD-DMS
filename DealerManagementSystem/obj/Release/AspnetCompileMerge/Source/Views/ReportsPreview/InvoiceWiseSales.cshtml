@@ -1,0 +1,132 @@
+﻿@{
+    ViewBag.Title = "DMS | Invoice Wise Sales";
+    Layout = "~/Views/Shared/_ReportPreviewerLayout.cshtml";
+}
+<style>
+    fieldset {
+        margin: 10px;
+        font-family: sans-serif;
+        border: 1px solid #1F497D;
+        background: #ddd;
+        border-radius: 5px;
+        padding: 15px;
+        width: 40%;
+        /*float: left;*/
+        display: block;
+        position: relative;
+    }
+
+        fieldset legend {
+            margin-top: 15px;
+            background: #1F497D;
+            color: #fff;
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 5px;
+            box-shadow: 0 0 0 1px red;
+            margin-left: 20px;
+            width: 225px;
+        }
+
+</style>
+<fieldset>
+    <legend>Search Invoice Wise Sales Report</legend>
+    <form action="">
+        <table>
+            <tr>
+                <td style="float: left; top: 0px; position: relative; padding-right: 5px;">
+                    <div>
+                        @Html.Label("From")
+                        <div class='input-group date' data-provide="datepicker" id='datepicker'>
+                            <input id="startDate" type='text' class="form-control" required="" placeholder="dd-MMM-yyyy" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar">
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </td>
+                <td style="padding-right: 5px;">
+                    <div style="float: left">
+                        @Html.Label("To")
+                        <div class='input-group date' data-provide="datepicker" id='datepicker2'>
+                            <input id="endDate" type='text' required="" placeholder="dd-MMM-yyyy" class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar">
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </td>
+                <td style="position: relative">
+                    <button type="button" id="btnViewReport" class="btn btn-success active" style="position: relative; top: -13px;">
+                        <span class="glyphicon glyphicon-eye-open"></span> View
+                    </button>
+                </td>
+            </tr>
+            <tr class="text-danger">
+                <td><span id="startDateErrorMsg"></span></td>
+                <td><span id="endDateErrorMsg"></span></td>
+            </tr>
+        </table>
+    </form>
+</fieldset>
+
+<div class="embed-responsive embed-responsive-16by9">
+    <iframe id="reportFrame" class="embed-responsive-item" ></iframe>
+</div>
+
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth();
+            var yyyy = today.getFullYear();
+
+            var mNames = new Array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
+
+            if (dd < 10) {
+                dd = '0' + dd;
+            }
+
+            //if (mm < 10) {
+            //    mm = '0' + mm;
+            //}
+
+            today = dd + '-' + mNames[mm] + '-' + yyyy;
+            var url ="@Url.Action("GetInvoiceWiseSalesPdf","ReportsPreview")"+"?sStartDate=" + today + "&sEndDate=" + today;
+            //var url3 = "/ReportsPreview/GetInvoiceWiseSalesPdf?sStartDate=" + today + "&sEndDate=" + today;
+            $('#reportFrame').attr('src', url);
+
+            $("#startDate").val(today);
+            $("#endDate").val(today);
+            $("#btnViewReport").click(function() {
+                var sStartDate = $("#startDate").val();
+                var sEndDate = $("#endDate").val();
+                if (sStartDate !== "" && sEndDate !== "") {
+                    var url = "@Url.Action("GetInvoiceWiseSalesPdf", "ReportsPreview")" + "?sStartDate=" + sStartDate + "&sEndDate=" + sEndDate;
+                    //var url = "/ReportsPreview/GetInvoiceWiseSalesPdf?sStartDate=" + sStartDate + "&sEndDate=" + sEndDate;
+                    $('#reportFrame').attr('src', url);
+                } else {
+                    if (sStartDate === "") {
+                        $("#startDateErrorMsg").text("Please Enter Start Date");
+                    }
+                    if (sEndDate === "") {
+                        $("#endDateErrorMsg").text("Please Enter End Date");
+                    }
+                }
+            });
+            $("#startDate").focus(function() {
+                $("#startDateErrorMsg").empty();
+            });
+            $("#endDate").focus(function () {
+                $("#endDateErrorMsg").empty();
+            });
+
+        });
+    </script>
+
+}

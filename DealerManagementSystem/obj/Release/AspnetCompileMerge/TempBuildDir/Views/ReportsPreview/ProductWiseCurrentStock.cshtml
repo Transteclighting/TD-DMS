@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = "DMS | Product Wise Current Stock";
+    Layout = "~/Views/Shared/_ReportPreviewerLayout.cshtml";
+}
+<style>
+    fieldset {
+        margin: 5px;
+        font-family: sans-serif;
+        border: 1px solid #1F497D;
+        background: #ddd;
+        border-radius: 5px;
+        padding: 5px;
+        width: 36%;
+    }
+
+        fieldset legend {
+            background: #1F497D;
+            color: #fff;
+            padding: 2px 10px;
+            font-size: 14px;
+            border-radius: 5px;
+            box-shadow: 0 0 0 1px red;
+            margin-left: 20px;
+            width: 250px;
+        }
+    #ProductGroupId,#BrandId {
+        margin-bottom: 4px;
+    }
+    #BrandId, #ProductName {
+        margin-left: 4px;
+    }
+
+
+</style>
+
+<form>
+    <fieldset>
+        <legend>Product Wise Current Stock Filter</legend>
+        <table id="productSearchFilter" style="float: left;">
+            <tr>
+                <td>
+                    @Html.DropDownList("ProductGroupId", (SelectList)ViewBag.MAGList, "<MAG-ALL>", htmlAttributes: new { @class = "form-control", })
+                </td>
+
+                <td>
+                    @Html.DropDownList("BrandId", (SelectList)ViewBag.BradList, "<Brand-ALL>", htmlAttributes: new { @class = "form-control" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.TextBox("ProductCode", "", new { @class = "form-control", placeholder = "Product Code" })
+                </td>
+
+                <td>
+
+                    @Html.TextBox("ProductName", "", new { @class = "form-control", placeholder = "Product Name", })
+                </td>
+            </tr>
+        </table>
+        <button type="button" id="btnGet" class="btn btn-success active" style="position: relative; top: 15px; left: 10px;">
+            <span class="glyphicon glyphicon-eye-open"></span> Get
+        </button>
+    </fieldset>
+
+</form>
+
+
+<div class="embed-responsive embed-responsive-16by9">
+    <iframe  id="reportFrame" class="embed-responsive-item"></iframe>
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var url = "@Url.Action("GetProductWiseCurrentStock", "ReportsPreview")" + "?sProductCode=&sProductName=&sPdtGroupName=&sBrandName=";
+            //var url = "/ReportsPreview/GetProductWiseCurrentStock?sProductCode=&sProductName=&sPdtGroupName=&sBrandName=";
+            $('#reportFrame').attr('src', url);
+
+            $("#btnGet").click(function () {
+                var nPdtGroupId = $("#ProductGroupId").val();
+                var nBrandId = $("#BrandId").val();
+                if (nPdtGroupId !== "" && nBrandId !== "") {
+                    var sProductCode = $("#ProductCode").val();
+                    var sProductName = $("#ProductName").val();
+                    var sPdtGroupName = $("#ProductGroupId option:selected").text();
+                    var sBrandName = $("#BrandId option:selected").text();
+                    var url ="@Url.Action("GetProductWiseCurrentStock", "ReportsPreview")" +"?/ReportsPreview/GetProductWiseCurrentStock?sProductCode=" + sProductCode + "&sProductName=" + sProductName + "&sPdtGroupName=" + sPdtGroupName + "&sBrandName=" + sBrandName +" ";
+                    //var url = "/ReportsPreview/GetProductWiseCurrentStock?/ReportsPreview/GetProductWiseCurrentStock?sProductCode=" + sProductCode + "&sProductName=" + sProductName + "&sPdtGroupName=" + sPdtGroupName + "&sBrandName=" + sBrandName +" ";
+                    $('#reportFrame').attr('src', url);
+                }
+
+
+            });
+
+
+        });
+    </script>
+}
