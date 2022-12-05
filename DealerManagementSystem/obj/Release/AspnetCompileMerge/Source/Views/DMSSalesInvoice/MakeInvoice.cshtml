@@ -130,6 +130,10 @@
                 @*@if (ViewBag.UserType == "DB")
                     {*@
                 <tr>
+                    <td hidden>
+                        @Html.TextBox("ConsumerId", new { @class = "form-control", autocomplete = "off", placeholder = "Customer Id", id = "ConsumerId" })
+
+                    </td>
                     <td>
                         @Html.TextBoxFor(a => a.Consumer.ConsumerName, new { @class = "form-control", autocomplete = "off", placeholder = "Customer Name", id = "Consumer" })
                         @Html.ValidationMessageFor(a => a.Consumer.ConsumerName)
@@ -601,11 +605,13 @@
             var statesAvailable= @Html.Raw(Json.Encode(@ViewBag.RetailDetail));
             $.each(statesAvailable, function (index,data)
             {
-                debugger;
+                $('#ConsumerId').val(data.RetailID);
                 $('#Consumer').val(data.RetailName);
                 $('#Address').val(data.RetailAddress);
                 $('#ContactNo').val(data.Mobile01);
                 $('#Email').val(data.Email);
+                $('#ConsumerId').attr("readonly", true);
+                $('#ConsumerId').attr("visible", false);
                 $('#Consumer').attr("readonly", true);
                 $('#Address').attr("readonly", false);
                 $('#ContactNo').attr("readonly", false);

@@ -18,16 +18,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/26/2022 12:58:54</publishTime>
     </File>
     <File Include="bin/App_Code.compiled">
-      <publishTime>12/04/2022 12:29:56</publishTime>
+      <publishTime>12/05/2022 14:00:27</publishTime>
     </File>
     <File Include="bin/App_Code.dll">
-      <publishTime>12/04/2022 12:29:56</publishTime>
+      <publishTime>12/05/2022 14:00:27</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>12/04/2022 12:29:56</publishTime>
+      <publishTime>12/05/2022 14:00:27</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>12/04/2022 12:29:56</publishTime>
+      <publishTime>12/05/2022 14:00:27</publishTime>
     </File>
     <File Include="bin/CJ.QRCode.dll">
       <publishTime>05/26/2022 12:58:52</publishTime>
@@ -102,7 +102,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="bin/DealerManagementSystem.dll">
-      <publishTime>12/04/2022 12:29:37</publishTime>
+      <publishTime>12/05/2022 14:00:21</publishTime>
     </File>
     <File Include="bin/en/CrystalDecisions.CrystalReports.Engine.resources.dll">
       <publishTime>01/01/0001 00:00:00</publishTime>
@@ -6591,7 +6591,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/19/2022 15:01:19</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>12/04/2022 12:29:52</publishTime>
+      <publishTime>12/05/2022 14:00:24</publishTime>
     </File>
     <File Include="Reports/rptBarcodeWiseCurrentStock.rpt">
       <publishTime>10/16/2022 10:34:52</publishTime>
@@ -7152,7 +7152,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/26/2022 12:58:52</publishTime>
     </File>
     <File Include="Views/DMSSalesInvoice/MakeInvoice.cshtml">
-      <publishTime>11/29/2022 10:41:11</publishTime>
+      <publishTime>12/05/2022 13:57:17</publishTime>
     </File>
     <File Include="Views/GoodReceive/index.cshtml">
       <publishTime>10/14/2022 22:09:03</publishTime>
@@ -7239,7 +7239,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/26/2022 12:58:52</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>12/04/2022 12:29:51</publishTime>
+      <publishTime>12/05/2022 14:00:23</publishTime>
     </File>
   </ItemGroup>
 </Project>
