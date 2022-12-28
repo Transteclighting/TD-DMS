@@ -255,6 +255,7 @@ namespace DealerManagementSystem.CrystalReportToPdf
             {
                 DmsOutlet aDmsOutlet = _db.DmsOutlet.FirstOrDefault(a => a.CustomerId == customerId);
                 Consumer aConsumer = _db.Consumers.FirstOrDefault(a => a.ConsumerId == consumerId);
+                //  Customer acustomerCode = _db.Customers.FirstOrDefault(a => a.CustomerId == consumerId);
                 DmsSalesInvoice aDmsSalesInvoice = _db.DmsSalesInvoices.FirstOrDefault(a => a.InvoiceId == invoiceId);
                 var dmsSalesInvoiceDetails =
                     _db.DmsSalesInvoiceDetail.Where(a => a.InvoiceId == invoiceId);
@@ -406,25 +407,19 @@ namespace DealerManagementSystem.CrystalReportToPdf
                 reportDocument.SetParameterValue("Outlet", aDmsOutlet != null && aDmsOutlet.OutletName != string.Empty ? aDmsOutlet.OutletName : string.Empty);
                 reportDocument.SetParameterValue("Address", aDmsOutlet != null && aDmsOutlet.Address != string.Empty ? aDmsOutlet.Address : string.Empty);
                 reportDocument.SetParameterValue("Mobile", aDmsOutlet != null && aDmsOutlet.ContactNo != string.Empty ? aDmsOutlet.ContactNo : string.Empty);
-
                 reportDocument.SetParameterValue("HC", "16212 or 09613700700, e-mail:homecare@transcombd.com");
-
                 reportDocument.SetParameterValue("CustomerCode", aConsumer.ConsumerCode);
                 reportDocument.SetParameterValue("CustomerName", aConsumer.ConsumerName);
                 reportDocument.SetParameterValue("CustomerEmail", aConsumer.Email);
                 reportDocument.SetParameterValue("CustomerAddress", aConsumer.Address);
                 reportDocument.SetParameterValue("CustomerCellNo", aConsumer.ContactNo);
                 reportDocument.SetParameterValue("CustomerPhoneNo", aConsumer.PhoneNo);
-
-
                 reportDocument.SetParameterValue("InvoiceNo", aDmsSalesInvoice.InvoiceNo);
                 reportDocument.SetParameterValue("InvoiceDate", aDmsSalesInvoice.InvoiceDate.ToShortDateString());
                 reportDocument.SetParameterValue("W/H", aDmsOutlet.OutletName);
                 reportDocument.SetParameterValue("DeliveryW/H", aDmsOutlet.OutletName);
 
-
                 reportDocument.SetParameterValue("RefInvoice", "No");
-
                 reportDocument.SetParameterValue("SPDiscount", aDmsSalesInvoice.DiscountAmount);
                 reportDocument.SetParameterValue("smsDiscount", 0);
                 reportDocument.SetParameterValue("SDiscount", 0);
@@ -460,7 +455,6 @@ namespace DealerManagementSystem.CrystalReportToPdf
                 reportDocument.SetParameterValue("CBalance", true);
                 reportDocument.SetParameterValue("IsTML", true);
                 reportDocument.SetParameterValue("IsCLP", false);
-
                 reportDocument.SetParameterValue("DiscountDetails", discountDetails);
 
 

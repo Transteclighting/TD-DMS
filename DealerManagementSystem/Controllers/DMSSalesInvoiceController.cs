@@ -479,9 +479,14 @@ namespace DealerManagementSystem.Controllers
             aConsumer.ConsumerId = _db.Consumers.DefaultIfEmpty().Max(r => r == null ? 1 : r.ConsumerId + 1);
             if (Session["UserType"].ToString() == "DB")
             {
-                //int id = Convert.ToInt32(Request.Form["Consumenr.ReffID"].ToString());
-                //int id2 = Convert.ToInt32(Request.Form["ConsumerId"].ToString());
-                aConsumer.ReffID = Convert.ToInt32(Request.Form["ConsumerId"].ToString());
+                try
+                {
+                    aConsumer.ReffID = Convert.ToInt32(Request.Form["ConsumerId"].ToString());
+                }
+                catch
+                {
+                    aConsumer.ReffID = 0;
+                }
             }
             else
             {

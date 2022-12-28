@@ -13,7 +13,6 @@ namespace DealerManagementSystem.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int CustomerId { get; set; }
-
         public string OutletName { get; set; }
         public string Address { get; set; }
         public string ContactPerson { get; set; }

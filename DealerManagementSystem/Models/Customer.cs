@@ -14,9 +14,10 @@ namespace DealerManagementSystem.Models
         [Display(Name = "Customer Name")]
         public string CustomerName { get; set; }
         public int? ParentCustomerId { get; set; }
+
         //public ICollection<DmsSalesInvoice> DmsSalesInvoces { get; set; }
 
     }
-    
+
 }
 

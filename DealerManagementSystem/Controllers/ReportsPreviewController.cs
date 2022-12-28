@@ -11,7 +11,6 @@ namespace DealerManagementSystem.Controllers
     {
         // GET: /ReportsPreview/
         private ProjectDb db = new ProjectDb();
-
         public ActionResult InvoiceWiseSales()
         {
             if (Session["LoggedUserName"] != null && Session["LogedUserPassword"] != null)
@@ -23,7 +22,6 @@ namespace DealerManagementSystem.Controllers
                 return RedirectToAction("Login", "User");
             }
         }
-
         public ActionResult ProductWiseSales()
         {
             if (Session["LoggedUserName"] != null && Session["LogedUserPassword"] != null)
@@ -43,7 +41,6 @@ namespace DealerManagementSystem.Controllers
                 return RedirectToAction("Login", "User");
             }
         }
-
         public ActionResult BarcodeWiseSale()
         {
             if (Session["LoggedUserName"] != null && Session["LogedUserPassword"] != null)
@@ -67,7 +64,6 @@ namespace DealerManagementSystem.Controllers
                 return RedirectToAction("Login", "User");
             }
         }
-
         public ActionResult ProductWiseCurrentStock()
         {
             if (Session["LoggedUserName"] != null && Session["LogedUserPassword"] != null)
@@ -89,7 +85,6 @@ namespace DealerManagementSystem.Controllers
             }
             return RedirectToAction("Login", "User");
         }
-
         public ActionResult BarcodeWiseCurrentStock()
         {
             if (Session["LoggedUserName"] != null && Session["LogedUserPassword"] != null)
@@ -110,7 +105,6 @@ namespace DealerManagementSystem.Controllers
             }
             return RedirectToAction("Login", "User");
         }
-
         public ActionResult Invoice(int? invoiceId)
         {
             if (Session["LoggedUserName"] != null && Session["LogedUserPassword"] != null && invoiceId != null)
@@ -120,7 +114,6 @@ namespace DealerManagementSystem.Controllers
             }
             return RedirectToAction("Login", "User");
         }
-
         public ActionResult WarrantyCard(int? invoiceId)
         {
             if (Session["LoggedUserName"] != null && Session["LogedUserPassword"] != null && invoiceId != null)
@@ -131,7 +124,6 @@ namespace DealerManagementSystem.Controllers
             }
             return RedirectToAction("Login", "User");
         }
-
         public CrystalReportPdfResult GetInvoicePdf()
         {
             int invoiceId = (int)Session["InvoiceId"];
@@ -170,7 +162,6 @@ namespace DealerManagementSystem.Controllers
 
             }
         }
-
         public CrystalReportPdfResult GetInvoiceWiseSalesPdf(string sStartDate, string sEndDate)
         {
             var dtStartDate = DateTime.Parse(sStartDate.Trim()).Date;
@@ -179,14 +170,12 @@ namespace DealerManagementSystem.Controllers
             string reportPath = Path.Combine(Server.MapPath("~/Reports"), "rptInvoiceWiseSales.rpt");
             return new CrystalReportPdfResult(reportPath, nCustomerId, dtStartDate, dtEndDate);
         }
-
         public CrystalReportPdfResult GetProductWiseSlaes(string sStartDate, string sEndDate, string productCode, string productName, string asgName)
         {
             var nCustomerId = (int)Session["CustomerId"];
             string reportPath = Path.Combine(Server.MapPath("~/Reports"), "rptProductWiseSales.rpt");
             return new CrystalReportPdfResult(nCustomerId, reportPath, sStartDate.Trim(), sEndDate.Trim(), productCode, productName, asgName);
         }
-
         public CrystalReportPdfResult GetBarcodeWiseSlaes(string sStartDate, string sEndDate, string sProductCode, string sProductName, string sBrandName, string sPdtGroupName)
         {
             var dtStartDate = DateTime.Parse(sStartDate.Trim()).Date;
@@ -195,14 +184,12 @@ namespace DealerManagementSystem.Controllers
             string reportPath = Path.Combine(Server.MapPath("~/Reports"), "rptBarcodeWiseSlaes.rpt");
             return new CrystalReportPdfResult(nCustomerId, reportPath, dtStartDate, dtEndDate, sProductCode.Trim(), sProductName.Trim(), sBrandName, sPdtGroupName);
         }
-
         public ProductWiseCurrentStock GetProductWiseCurrentStock(string sProductCode, string sProductName, string sPdtGroupName, string sBrandName)
         {
             var nCustomerId = (int)Session["CustomerId"];
             string reportPath = Path.Combine(Server.MapPath("~/Reports"), "rptProductWiseCurrentStock.rpt");
             return new ProductWiseCurrentStock(reportPath, nCustomerId, sProductCode, sProductName, sPdtGroupName, sBrandName);
         }
-
         public BarcodeWiseCurrentStock GetBarcodeWiseCurrentStock(int? pdtGroupId, string pdtGroupName, int? brandId, string brandName, string productCode, string productName)
         {
             var nCustomerId = (int)Session["CustomerId"];
