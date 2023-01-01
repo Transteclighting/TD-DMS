@@ -642,7 +642,6 @@ namespace DealerManagementSystem.Controllers
         {
             int nCustomerId = (int)Session["CustomerID"];
             var date = db.DmsOutlet.FirstOrDefault(i => i.CustomerId == nCustomerId).OperationDate.ToShortDateString();
-
             DateTime dt = new DateTime();
             dt = Convert.ToDateTime(date);
             //var DMS = new DmsOutlet();

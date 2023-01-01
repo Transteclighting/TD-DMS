@@ -18,16 +18,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/26/2022 12:58:54</publishTime>
     </File>
     <File Include="bin/App_Code.compiled">
-      <publishTime>12/05/2022 14:00:27</publishTime>
+      <publishTime>12/29/2022 18:24:47</publishTime>
     </File>
     <File Include="bin/App_Code.dll">
-      <publishTime>12/05/2022 14:00:27</publishTime>
+      <publishTime>12/29/2022 18:24:47</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>12/05/2022 14:00:27</publishTime>
+      <publishTime>12/29/2022 18:24:47</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>12/05/2022 14:00:27</publishTime>
+      <publishTime>12/29/2022 18:24:47</publishTime>
     </File>
     <File Include="bin/CJ.QRCode.dll">
       <publishTime>05/26/2022 12:58:52</publishTime>
@@ -102,7 +102,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="bin/DealerManagementSystem.dll">
-      <publishTime>12/05/2022 14:00:21</publishTime>
+      <publishTime>12/29/2022 18:24:41</publishTime>
     </File>
     <File Include="bin/en/CrystalDecisions.CrystalReports.Engine.resources.dll">
       <publishTime>01/01/0001 00:00:00</publishTime>
@@ -195,7 +195,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="bin/Reports/rptWarrantyCardRowa.rpt">
-      <publishTime>11/23/2022 12:04:21</publishTime>
+      <publishTime>12/29/2022 18:24:38</publishTime>
     </File>
     <File Include="bin/ru/CrystalDecisions.CrystalReports.Engine.resources.dll">
       <publishTime>01/01/0001 00:00:00</publishTime>
@@ -6591,31 +6591,31 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/19/2022 15:01:19</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>12/05/2022 14:00:24</publishTime>
+      <publishTime>12/29/2022 18:24:44</publishTime>
     </File>
     <File Include="Reports/rptBarcodeWiseCurrentStock.rpt">
-      <publishTime>10/16/2022 10:34:52</publishTime>
+      <publishTime>12/29/2022 18:24:38</publishTime>
     </File>
     <File Include="Reports/rptBarcodeWiseSlaes.rpt">
-      <publishTime>05/26/2022 12:58:52</publishTime>
+      <publishTime>12/29/2022 18:24:38</publishTime>
     </File>
     <File Include="Reports/rptInvoiceWiseSales.rpt">
-      <publishTime>12/04/2022 12:29:34</publishTime>
+      <publishTime>12/29/2022 18:24:38</publishTime>
     </File>
     <File Include="Reports/rptProductWiseCurrentStock.rpt">
-      <publishTime>05/26/2022 12:58:52</publishTime>
+      <publishTime>12/28/2022 18:15:19</publishTime>
     </File>
     <File Include="Reports/rptProductWiseSales.rpt">
-      <publishTime>11/25/2022 19:29:54</publishTime>
+      <publishTime>12/27/2022 17:50:42</publishTime>
     </File>
     <File Include="Reports/rptRetailInvoice.rpt">
-      <publishTime>11/25/2022 19:29:54</publishTime>
+      <publishTime>12/28/2022 18:21:53</publishTime>
     </File>
     <File Include="Reports/rptWarrantyCard.rpt">
-      <publishTime>11/23/2022 12:04:24</publishTime>
+      <publishTime>12/29/2022 18:24:38</publishTime>
     </File>
     <File Include="Reports/rptWarrantyCardRowa.rpt">
-      <publishTime>11/23/2022 12:04:21</publishTime>
+      <publishTime>12/29/2022 18:24:38</publishTime>
     </File>
     <File Include="Scripts/a.js">
       <publishTime>05/26/2022 12:58:52</publishTime>
@@ -7152,7 +7152,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/26/2022 12:58:52</publishTime>
     </File>
     <File Include="Views/DMSSalesInvoice/MakeInvoice.cshtml">
-      <publishTime>12/05/2022 13:57:17</publishTime>
+      <publishTime>12/06/2022 17:19:40</publishTime>
     </File>
     <File Include="Views/GoodReceive/index.cshtml">
       <publishTime>10/14/2022 22:09:03</publishTime>
@@ -7194,7 +7194,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/26/2022 12:58:52</publishTime>
     </File>
     <File Include="Views/SalesPerformance/Index.cshtml">
-      <publishTime>11/21/2022 11:22:05</publishTime>
+      <publishTime>12/07/2022 14:26:45</publishTime>
     </File>
     <File Include="Views/SecOrder/AddEditOrder.cshtml">
       <publishTime>11/29/2022 16:32:22</publishTime>
@@ -7203,7 +7203,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/04/2022 20:30:02</publishTime>
     </File>
     <File Include="Views/SecOrder/SecOrder.cshtml">
-      <publishTime>09/19/2022 16:22:41</publishTime>
+      <publishTime>12/06/2022 17:04:46</publishTime>
     </File>
     <File Include="Views/Shared/DashboardLayout.cshtml">
       <publishTime>10/26/2022 13:37:25</publishTime>
@@ -7239,7 +7239,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/26/2022 12:58:52</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>12/05/2022 14:00:23</publishTime>
+      <publishTime>12/07/2022 15:04:54</publishTime>
     </File>
   </ItemGroup>
 </Project>

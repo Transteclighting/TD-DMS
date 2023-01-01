@@ -129,7 +129,7 @@
                             <thead style="height: 40px;">
                                 <tr>
                                     @*<th>@Html.Hidden("TranID")</th>
-                                    <th>@Html.Hidden("Beat ID")</th>*@
+                                        <th>@Html.Hidden("Beat ID")</th>*@
                                     <th>@Html.DisplayNameFor(model => model.RouteName)</th>
                                     @*<th>@Html.DisplayNameFor(model => model.RetailID)</th>*@
                                     <th>@Html.DisplayNameFor(model => model.RetailName)</th>
@@ -138,30 +138,30 @@
                                     <th>Manage</th>
                                 </tr>
                             </thead>
-                           
+
                             <tbody>
                                 @foreach (var aDmsOrder in Model)
                                 {
                                     <tr>
                                         @*<td>
-                                            @Html.HiddenFor(modelItem => aDmsOrder.TranID)
-                                        </td>
-                                        <td>
-                                            @Html.HiddenFor(modelItem => aDmsOrder.BeatID)
-                                        </td>*@
+                                                @Html.HiddenFor(modelItem => aDmsOrder.TranID)
+                                            </td>
+                                            <td>
+                                                @Html.HiddenFor(modelItem => aDmsOrder.BeatID)
+                                            </td>*@
                                         <td>
                                             @Html.DisplayFor(modelItem => aDmsOrder.RouteName)
                                         </td>
                                         @*<td>
-                                            @Html.DisplayFor(modelItem => aDmsOrder.RetailID)
-                                        </td>*@
+                                                @Html.DisplayFor(modelItem => aDmsOrder.RetailID)
+                                            </td>*@
                                         <td>
                                             @Html.DisplayFor(modelItem => aDmsOrder.RetailName)
                                         </td>
                                         <td>
                                             @{
                                                 //string createDate = aDmsOrder.TranDate.ToString("dd-MMM-yyyy");
-                                               string createDate = aDmsOrder.TranDate;
+                                                string createDate = aDmsOrder.TranDate;
 
                                             }
                                             @Html.DisplayFor(modelItem => createDate)
@@ -184,7 +184,7 @@
         </div>
     </div>
 
-                            }
+                                                }
 
 
 
@@ -194,20 +194,20 @@
     <script>
         $(document).ready(function () {
 
-           var table = $('#example').dataTable({
-                "columns":            [
+            var table = $('#example').dataTable({
+                "columns": [
                     { "width": "150px" },
                     { "width": "150px" },
                     { "width": "100px" },
                     { className: "dt-body-right", "width": "100px" },
                     { className: "dt-body-center", "width": "120px" }
-            ],
+                ],
                 'language':
             {
-                Search : '<div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>',
-     
+                Search: '<div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>',
+
             }
-           });
+            });
 
 
             $('#btnGetOrders').click(function () {
@@ -230,7 +230,7 @@
                             }
                             $.each(data, function (i) {
                                 var d = new Date(data[i].TranDate);
-                                var d_formatted = d.getDate() + "-" + (d.getMonth()+1) +"-" + d.getFullYear();
+                                var d_formatted = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear();
                                 $('#example').DataTable().row.add([
                                     data[i].RouteName,
                                     data[i].RetailName,
@@ -252,7 +252,7 @@
                 return false;
             });
 
-            });
+        });
     </script>
 }
 

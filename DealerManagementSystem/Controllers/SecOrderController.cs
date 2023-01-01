@@ -59,10 +59,10 @@ namespace DealerManagementSystem.Controllers
                 {
                     var nEmpId = (int)Session["EmpId"];
                     var sCustomers = _db.Database.SqlQuery<Dropdown>(@"SELECT CustomerId as Id,CustomerName+' ('+CustomerCode+')' as Text
-                                FROM t_MarketGroup a,t_Customer b Where
-                                a.MarketGroupID = b.MarketGroupID
-                                AND a.EmployeeId =" + nEmpId + @" and b.IsActive=1
-                                Order BY CustomerName ASC").ToList();
+                    FROM t_MarketGroup a,t_Customer b Where
+                    a.MarketGroupID = b.MarketGroupID
+                    AND a.EmployeeId =" + nEmpId + @" and b.IsActive=1
+                    Order BY CustomerName ASC").ToList();
                     ViewBag.CustomersList = sCustomers;
                 }
                 var nCustomerId = (int)Session["CustomerID"];
